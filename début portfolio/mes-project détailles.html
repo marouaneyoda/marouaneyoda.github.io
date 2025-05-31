@@ -14,24 +14,24 @@
       padding: 20px 15px;
     }
     header {
-      background: #3383ff;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
       color: white;
-      padding: 30px 15px;
+      padding: 40px 15px;
       text-align: center;
-      border-radius: 10px;
+      border-radius: 12px;
       margin-bottom: 40px;
-      box-shadow: 0 4px 12px rgba(51, 131, 255, 0.5);
+      box-shadow: 0 6px 20px rgba(51, 131, 255, 0.5);
     }
     header h1 {
       margin: 0;
-      font-weight: 700;
-      font-size: 2.5rem;
+      font-weight: 800;
+      font-size: 2.8rem;
     }
     .btn-home {
       display: inline-block;
-      margin-top: 15px;
-      padding: 10px 25px;
-      background: #2563eb;
+      margin-top: 20px;
+      padding: 12px 28px;
+      background: #1e40af;
       color: white;
       border-radius: 50px;
       font-weight: 600;
@@ -39,45 +39,74 @@
       transition: background-color 0.3s ease;
     }
     .btn-home:hover {
-      background: #1e40af;
+      background: #1e3a8a;
+    }
+    .toc {
+      background: #eef4ff;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 40px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .toc h2 {
+      font-size: 1.5rem;
+      color: #2563eb;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .toc ul {
+      list-style: none;
+      padding-left: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+    }
+    .toc li {
+      margin: 0;
+    }
+    .toc a {
+      color: #1d4ed8;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .toc a:hover {
+      text-decoration: underline;
     }
     main {
       max-width: 1400px;
       margin: 0 auto;
     }
     .project-card {
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+      border-radius: 14px;
       background: white;
-      padding: 20px;
+      padding: 25px;
       height: 100%;
       display: flex;
       flex-direction: column;
       transition: transform 0.3s ease-in-out;
     }
     .project-card:hover {
-      transform: scale(1.02);
+      transform: translateY(-4px);
     }
     .project-card h2 {
       color: #2563eb;
       margin-bottom: 15px;
       font-weight: 700;
       font-size: 1.5rem;
-      border-bottom: 3px solid #2563eb;
-      padding-bottom: 6px;
+      border-bottom: 2px solid #2563eb;
+      padding-bottom: 8px;
     }
     .project-card p {
       font-size: 1rem;
       line-height: 1.6;
       margin-bottom: 15px;
-      flex-grow: 1;
     }
     .images-gallery {
       display: flex;
       flex-wrap: wrap;
       gap: 15px;
       justify-content: flex-start;
-      margin-top: auto;
     }
     .images-gallery figure {
       flex: 1 1 140px;
@@ -100,14 +129,17 @@
       font-size: 0.85rem;
       color: #555;
     }
-    @media (max-width: 768px) {
-      .images-gallery {
-        justify-content: center;
-      }
-      .images-gallery figure {
-        max-width: 45%;
-        flex-basis: 45%;
-      }
+    .back-to-top {
+      margin-top: 20px;
+      text-align: right;
+    }
+    .back-to-top a {
+      font-size: 0.9rem;
+      text-decoration: none;
+      color: #2563eb;
+    }
+    .back-to-top a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -115,73 +147,67 @@
 
 <header>
   <h1>Détails complets des Projets SAE</h1>
-  <a href="Portfolio%20de%20d%C3%A9part.html" class="btn-home">← Retour à l'accueil</a>
+  <a href="Portfolio de départ.html" class="btn-home">← Retour à l'accueil</a>
 </header>
 
 <main class="container">
+  <section class="toc">
+    <h2>Sommaire des SAÉ</h2>
+    <ul>
+      <script>
+        const saeTitlesToc = [
+          "Création d’un reporting",
+          "Écriture et lecture de fichiers de données",
+          "Préparation et synthèse d’un tableau de données",
+          "Production de données en entreprise",
+          "Présentation en anglais d’un territoire",
+          "Mise en œuvre d'une enquête",
+          "Conception d'une base de données",
+          "Estimation par échantillonnage",
+          "Régression sur données réelles",
+          "Datavisualisation (concours)",
+          "Indicateurs de performance",
+          "Analyse et datavisualisation",
+          "Portfolio"
+        ];
+        document.write(saeTitlesToc.map((title, i) => `
+          <li><a href="#sae-${i+1}">${title}</a></li>
+        `).join(""));
+      </script>
+    </ul>
+  </section>
+
   <div class="row g-4">
-
-    <!-- Projet 1 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="project-card">
-        <h2>Saé : Création d'un reporting EXCEL VBA 📊</h2>
-        <p>Ce projet consistait à automatiser les processus métiers avec Excel/VBA pour créer des rapports dynamiques et interactifs.</p>
-        <p>Objectif : gain de temps, précision, convivialité. Utilisation de macros, filtres, graphiques et interface utilisateur simplifiée.</p>
-        <div class="images-gallery">
-          <figure><img src="images/excel-reporting1.png" alt="Tableau de bord automatisé"><figcaption>Tableau de bord</figcaption></figure>
-          <figure><img src="images/excel-reporting2.png" alt="Code VBA"><figcaption>Code VBA</figcaption></figure>
+    <script>
+      const saeTitles = [
+        "Création d’un reporting",
+        "Écriture et lecture de fichiers de données",
+        "Préparation et synthèse d’un tableau de données en vue d’une analyse exploratoire simple",
+        "Apprendre en situation la production de données en entreprise",
+        "Présentation en anglais d’un territoire économique et culturel",
+        "Mise en œuvre d'une enquête",
+        "Conception et implémentation d'une base de données",
+        "Estimation par échantillonnage",
+        "Régression sur des données réelles",
+        "Dataviz (concours)",
+        "Construction et présentation d’indicateurs de performance",
+        "Analyse de données, reporting et datavisualisation",
+        "Portfolio"
+      ];
+      document.write(saeTitles.map((title, i) => `
+        <div class='col-md-6 col-lg-4'>
+          <div class='project-card' id='sae-${i+1}'>
+            <h2>SAÉ : ${title}</h2>
+            <p>Description du projet ici.</p>
+            <div class='images-gallery'>
+              <figure><img src='images/placeholder1.png' alt='Image 1'><figcaption>Image 1</figcaption></figure>
+              <figure><img src='images/placeholder2.png' alt='Image 2'><figcaption>Image 2</figcaption></figure>
+            </div>
+            <div class='back-to-top'><a href="#">↑ Retour en haut</a></div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Projet 2 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="project-card">
-        <h2>Saé : Base de données relationnelle 💾</h2>
-        <p>Conception d'une base SQL : modélisation, relations, requêtes, interface utilisateur. Gestion fiable des données.</p>
-        <div class="images-gallery">
-          <figure><img src="images/database-schema.png" alt="Schéma BDD"><figcaption>Modèle conceptuel</figcaption></figure>
-          <figure><img src="images/database-interface.png" alt="Interface BDD"><figcaption>Interface utilisateur</figcaption></figure>
-        </div>
-      </div>
-    </div>
-
-    <!-- Projet 3 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="project-card">
-        <h2>Saé : Enquêtes avec Sphinx et Excel 📊</h2>
-        <p>Analyse de la satisfaction étudiante à l’aide d’enquêtes. Nettoyage, traitement et visualisation des données pour recommandations.</p>
-        <div class="images-gallery">
-          <figure><img src="images/sphinx-report.png" alt="Rapport Sphinx"><figcaption>Rapport Sphinx</figcaption></figure>
-          <figure><img src="images/excel-charts.png" alt="Graphiques Excel"><figcaption>Graphiques Excel</figcaption></figure>
-        </div>
-      </div>
-    </div>
-
-    <!-- Projet 4 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="project-card">
-        <h2>Saé : Gestion de fichiers Python 🐍</h2>
-        <p>Script Python pour automatiser le tri, l’archivage et le rangement de fichiers. Gain de temps et organisation optimale.</p>
-        <div class="images-gallery">
-          <figure><img src="images/python-script.png" alt="Script Python"><figcaption>Script Python</figcaption></figure>
-          <figure><img src="images/file-organization.png" alt="Organisation"><figcaption>Organisation automatique</figcaption></figure>
-        </div>
-      </div>
-    </div>
-
-    <!-- Projet 5 -->
-    <div class="col-md-6 col-lg-4">
-      <div class="project-card">
-        <h2>Saé : Régression sur données immobilières 📈</h2>
-        <p>Étude de la variation des prix immobiliers selon divers critères. Méthodes statistiques appliquées aux données des Deux-Sèvres.</p>
-        <div class="images-gallery">
-          <figure><img src="images/regression-plot.png" alt="Régression"><figcaption>Courbe de régression</figcaption></figure>
-          <figure><img src="images/data-analysis.png" alt="Analyse"><figcaption>Analyse des données</figcaption></figure>
-        </div>
-      </div>
-    </div>
-
+      `).join(""));
+    </script>
   </div>
 </main>
 
