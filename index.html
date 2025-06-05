@@ -11,127 +11,455 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
+    :root {
+      --primary-color: #0f172a;
+      --secondary-color: #1e3a8a;
+      --accent-color: #33e3ff;
+      --text-color: #1e293b;
+      --light-bg: #f8fafc;
+      --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f8fafc, #dbeafe);
-      margin: 0;
-      color: #1e293b;
+      background: linear-gradient(135deg, var(--light-bg), #dbeafe);
+      color: var(--text-color);
       scroll-behavior: smooth;
+      line-height: 1.6;
     }
 
+    /* Header Hero Section */
     header {
-      background: linear-gradient(120deg, #0f172a, #1e3a8a);
-      color: #33e3ff;
-      padding: 60px 20px 40px;
-      text-align: center;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, #2563eb 100%);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
       position: relative;
+      overflow: hidden;
     }
 
-    header::after {
-      content: "";
+    header::before {
+      content: '';
       position: absolute;
-      bottom: 0;
+      top: 0;
       left: 0;
-      width: 100%;
-      height: 30px;
-      background: linear-gradient(to top, #f8fafc, transparent);
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(51, 227, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.15) 0%, transparent 50%);
+      pointer-events: none;
     }
 
-    header img.banner {
-      width: 100%;
-      max-height: 300px;
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, white, var(--accent-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    .social-icons {
+      margin: 2rem 0;
+      animation: fadeInUp 1s ease-out 0.4s both;
+    }
+
+    .social-icons a {
+      color: var(--accent-color);
+      font-size: 2rem;
+      margin: 0 15px;
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .social-icons a:hover {
+      color: white;
+      transform: translateY(-5px) scale(1.1);
+    }
+
+    .hero-image {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
       object-fit: cover;
-      margin-top: 20px;
-      border-radius: 15px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      border: 4px solid var(--accent-color);
+      box-shadow: 0 10px 30px rgba(51, 227, 255, 0.3);
+      animation: fadeInUp 1s ease-out 0.6s both;
+      transition: var(--transition);
     }
 
-    nav {
-      background: #1e3a8a;
+    .hero-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 40px rgba(51, 227, 255, 0.4);
     }
 
-    nav a {
-      color: #ffffff !important;
-      padding: 14px 20px;
-      font-weight: 600;
-      text-transform: uppercase;
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--accent-color);
+      animation: bounce 2s infinite;
     }
 
-    nav a:hover,
-    nav a:focus {
-      background: #1e293b;
-      color: #33e3ff !important;
-      border-radius: 6px;
+    /* Navigation */
+    .navbar {
+      background: rgba(15, 23, 42, 0.95) !important;
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--accent-color) !important;
+    }
+
+    .navbar-nav .nav-link {
+      color: white !important;
+      font-weight: 500;
+      margin: 0 10px;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 50%;
+      background: var(--accent-color);
+      transition: var(--transition);
+      transform: translateX(-50%);
+    }
+
+    .navbar-nav .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: var(--accent-color) !important;
+    }
+
+    /* Sections */
+    section {
+      padding: 100px 0;
+      position: relative;
     }
 
     .section-title {
       text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-      color: #0f172a;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 60px;
+      color: var(--primary-color);
       position: relative;
     }
 
     .section-title::after {
       content: '';
-      width: 60px;
+      width: 80px;
       height: 4px;
-      background: #2563eb;
+      background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
       display: block;
-      margin: 10px auto 0;
+      margin: 20px auto 0;
       border-radius: 2px;
     }
 
-    .card {
+    /* About Section */
+    #about {
+      background: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #about::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 85% 15%, rgba(37, 99, 235, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .about-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: var(--text-color);
+    }
+
+    /* Activities Section */
+    #activites {
+      background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+    }
+
+    .activity-card {
+      background: white;
       border: none;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
+      border-radius: 20px;
+      padding: 40px 30px;
+      height: 100%;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
     }
 
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    .activity-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
     }
 
-    .btn-animated {
-      transition: all 0.3s ease-in-out;
+    .activity-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     }
 
-    .btn-animated:hover,
-    .btn-animated:focus {
-      transform: scale(1.05);
+    .activity-card h5 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+
+    .activity-card p {
+      color: #64748b;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    /* Contact Section */
+    #contact {
+      background: white;
+      position: relative;
     }
 
     .contact-form {
       max-width: 600px;
       margin: 0 auto;
+      background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: var(--card-shadow);
     }
 
-    .social-icons a {
-      color: #33e3ff;
-      font-size: 1.5rem;
-      margin: 0 10px;
-      transition: color 0.3s;
+    .form-control {
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 15px 20px;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      transition: var(--transition);
     }
 
-    .social-icons a:hover {
-      color: #ffffff;
+    .form-control:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 0.2rem rgba(51, 227, 255, 0.25);
     }
 
+    .btn-send {
+      background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+      border: none;
+      color: white;
+      padding: 15px 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    .btn-send:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(51, 227, 255, 0.3);
+    }
+
+    /* Explorer Section */
+    #explorer {
+      background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #explorer::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(circle, rgba(51, 227, 255, 0.1) 0%, transparent 70%);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .explorer-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn-explorer {
+      margin: 10px;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: var(--transition);
+      border: 2px solid transparent;
+    }
+
+    .btn-primary.btn-explorer {
+      background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+      border: none;
+    }
+
+    .btn-outline-dark.btn-explorer {
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+      background: white;
+    }
+
+    .btn-explorer:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Footer */
     footer {
-      background: #0f172a;
+      background: var(--primary-color);
       color: #cbd5e1;
       text-align: center;
-      padding: 25px 10px;
+      padding: 40px 20px;
+      position: relative;
     }
 
-    @media (max-width: 768px) {
-      .section-title {
-        font-size: 2rem;
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(45deg, transparent, var(--accent-color), transparent);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
       }
-      nav a {
-        font-size: 0.95rem;
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      40% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+      60% {
+        transform: translateX(-50%) translateY(-5px);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(180deg);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        min-height: 80vh;
+        padding: 40px 0;
+      }
+
+      .hero-image {
+        width: 150px;
+        height: 150px;
+        margin: 20px 0;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      .contact-form {
+        padding: 30px 20px;
+        margin: 0 15px;
+      }
+
+      .activity-card {
+        margin-bottom: 30px;
+      }
+
+      .btn-explorer {
+        margin: 5px;
+        padding: 12px 20px;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .social-icons a {
+        font-size: 1.5rem;
+        margin: 0 10px;
+      }
+
+      .section-title {
+        margin-bottom: 40px;
       }
     }
   </style>
@@ -139,13 +467,25 @@
 <body>
 
 <header>
-  <h1>Marouane Yoda</h1>
-  <p class="lead">Étudiant en Science des Données & Développeur passionné</p>
-  <div class="social-icons">
-    <a href="https://www.linkedin.com/in/marouane-yoda" target="_blank"><i class="bi bi-linkedin"></i></a>
-    <a href="https://github.com/marouaneyoda" target="_blank"><i class="bi bi-github"></i></a>
+  <div class="hero-content">
+    <h1 class="hero-title">Marouane Yoda</h1>
+    <p class="hero-subtitle">Étudiant en Science des Données & Développeur passionné</p>
+    
+    <div class="social-icons">
+      <a href="https://www.linkedin.com/in/marouane-yoda" target="_blank" aria-label="LinkedIn">
+        <i class="bi bi-linkedin"></i>
+      </a>
+      <a href="https://github.com/marouaneyoda" target="_blank" aria-label="GitHub">
+        <i class="bi bi-github"></i>
+      </a>
+    </div>
+    
+    <img src="votre-image.jpg" alt="Photo de Marouane Yoda" class="hero-image" />
   </div>
-  <img src="votre-image.jpg" alt="Photo de Marouane Yoda" class="banner" />
+  
+  <div class="scroll-indicator">
+    <i class="bi bi-chevron-down" style="font-size: 2rem;"></i>
+  </div>
 </header>
 
 <nav class="navbar navbar-expand-lg navbar-dark">
@@ -159,6 +499,7 @@
         <li class="nav-item"><a class="nav-link" href="#about">À propos</a></li>
         <li class="nav-item"><a class="nav-link" href="#activites">Activités</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="#explorer">Explorer</a></li>
       </ul>
     </div>
   </div>
@@ -166,32 +507,43 @@
 
 <main>
   <section id="about" data-aos="fade-up">
-    <h2 class="section-title">À propos de moi</h2>
-    <div class="container text-center">
-      <p>Étudiant en BUT Science des Données, passionné par l’analyse, l’intelligence artificielle et le développement. Je suis curieux, rigoureux et toujours motivé pour apprendre et relever de nouveaux défis techniques.</p>
+    <div class="container">
+      <h2 class="section-title">À propos de moi</h2>
+      <div class="about-content">
+        <p>Étudiant en BUT Science des Données, passionné par l'analyse, l'intelligence artificielle et le développement. Je suis curieux, rigoureux et toujours motivé pour apprendre et relever de nouveaux défis techniques.</p>
+      </div>
     </div>
   </section>
 
-  <section id="activites" class="bg-light" data-aos="fade-up">
-    <h2 class="section-title">Mes Activités</h2>
+  <section id="activites" data-aos="fade-up">
     <div class="container">
+      <h2 class="section-title">Mes Activités</h2>
       <div class="row g-4">
-        <div class="col-md-4">
-          <div class="card p-4">
-            <h5 class="card-title">Bénévolat - Forum Étudiant</h5>
-            <p class="card-text">Organisation d’un salon d’orientation pour guider les lycéens vers les études supérieures.</p>
+        <div class="col-lg-4 col-md-6">
+          <div class="activity-card">
+            <div class="text-center mb-3">
+              <i class="bi bi-people-fill" style="font-size: 3rem; color: var(--secondary-color);"></i>
+            </div>
+            <h5>Bénévolat - Forum Étudiant</h5>
+            <p>Organisation d'un salon d'orientation pour guider les lycéens vers les études supérieures.</p>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="card p-4">
-            <h5 class="card-title">Éthique du Numérique</h5>
-            <p class="card-text">Participation à des conférences sur les enjeux du numérique, IA, vie privée et cybersécurité.</p>
+        <div class="col-lg-4 col-md-6">
+          <div class="activity-card">
+            <div class="text-center mb-3">
+              <i class="bi bi-shield-check" style="font-size: 3rem; color: var(--secondary-color);"></i>
+            </div>
+            <h5>Éthique du Numérique</h5>
+            <p>Participation à des conférences sur les enjeux du numérique, IA, vie privée et cybersécurité.</p>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="card p-4">
-            <h5 class="card-title">Compétences Transversales</h5>
-            <p class="card-text">Esprit critique, gestion du temps, travail collaboratif et autonomie dans les projets.</p>
+        <div class="col-lg-4 col-md-6">
+          <div class="activity-card">
+            <div class="text-center mb-3">
+              <i class="bi bi-lightbulb-fill" style="font-size: 3rem; color: var(--secondary-color);"></i>
+            </div>
+            <h5>Compétences Transversales</h5>
+            <p>Esprit critique, gestion du temps, travail collaboratif et autonomie dans les projets.</p>
           </div>
         </div>
       </div>
@@ -199,51 +551,118 @@
   </section>
 
   <section id="contact" data-aos="fade-up">
-    <h2 class="section-title">Me Contacter</h2>
-    <div class="contact-form">
-      <form id="contact-form">
-        <input type="text" name="name" class="form-control mb-3" placeholder="Votre nom" required>
-        <input type="email" name="email" class="form-control mb-3" placeholder="Votre email" required>
-        <textarea name="message" class="form-control mb-3" rows="4" placeholder="Votre message" required></textarea>
-        <button type="submit" class="btn btn-dark btn-animated"><i class="bi bi-send"></i> Envoyer</button>
-      </form>
+    <div class="container">
+      <h2 class="section-title">Me Contacter</h2>
+      <div class="contact-form">
+        <form id="contact-form">
+          <div class="row">
+            <div class="col-md-6">
+              <input type="text" name="name" class="form-control" placeholder="Votre nom" required>
+            </div>
+            <div class="col-md-6">
+              <input type="email" name="email" class="form-control" placeholder="Votre email" required>
+            </div>
+          </div>
+          <textarea name="message" class="form-control" rows="5" placeholder="Votre message" required></textarea>
+          <button type="submit" class="btn btn-send">
+            <i class="bi bi-send me-2"></i>Envoyer le message
+          </button>
+        </form>
+      </div>
     </div>
   </section>
 
-  <section id="explorer" style="background-color: #e0e7ff;" data-aos="fade-up">
-    <div class="container text-center py-5">
-      <h2 class="section-title">Explorer davantage</h2>
-      <p class="mb-4">Découvre plus sur mon parcours, mes projets et mes compétences :</p>
-      <div class="d-flex flex-wrap justify-content-center gap-3">
-        <a href="moi.html" class="btn btn-primary btn-lg btn-animated"><i class="bi bi-person-fill"></i> En savoir plus</a>
-        <a href="moncv.html" target="_blank" class="btn btn-outline-dark btn-lg btn-animated"><i class="bi bi-file-earmark-text"></i> Voir mon CV</a>
-        <a href="Mes projects.html" class="btn btn-outline-dark btn-lg btn-animated"><i class="bi bi-code-slash"></i> Projets</a>
-        <a href="competence.html" class="btn btn-outline-dark btn-lg btn-animated"><i class="bi bi-bar-chart"></i> Compétences</a>
+  <section id="explorer" data-aos="fade-up">
+    <div class="container">
+      <div class="explorer-content text-center py-5">
+        <h2 class="section-title">Explorer davantage</h2>
+        <p class="mb-5" style="font-size: 1.2rem; max-width: 600px; margin: 0 auto 3rem;">
+          Découvrez plus sur mon parcours, mes projets et mes compétences
+        </p>
+        <div class="d-flex flex-wrap justify-content-center">
+          <a href="moi.html" class="btn btn-primary btn-explorer">
+            <i class="bi bi-person-fill me-2"></i>En savoir plus
+          </a>
+          <a href="moncv.html" target="_blank" class="btn btn-outline-dark btn-explorer">
+            <i class="bi bi-file-earmark-text me-2"></i>Voir mon CV
+          </a>
+          <a href="Mes projects.html" class="btn btn-outline-dark btn-explorer">
+            <i class="bi bi-code-slash me-2"></i>Projets
+          </a>
+          <a href="competence.html" class="btn btn-outline-dark btn-explorer">
+            <i class="bi bi-bar-chart me-2"></i>Compétences
+          </a>
+        </div>
       </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <p>&copy; 2025 Marouane Yoda - Tous droits réservés.</p>
+  <div class="container">
+    <p>&copy; 2025 Marouane Yoda - Tous droits réservés.</p>
+  </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  AOS.init();
+  // Initialize AOS
+  AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 100
+  });
 
+  // Initialize EmailJS
   emailjs.init("x9HgWRuRxocpBZdyj");
 
+  // Contact form handler
   document.getElementById('contact-form').addEventListener('submit', function(event) {
     event.preventDefault();
+    
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    
+    // Show loading state
+    submitBtn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Envoi en cours...';
+    submitBtn.disabled = true;
+    
     emailjs.sendForm('service_01znfkl', 'template_zyai8rx', this)
       .then(() => {
         window.location.href = 'merci.html';
       }, (error) => {
-        alert('Erreur lors de l’envoi : ' + JSON.stringify(error));
+        alert('Erreur lors de l\'envoi : ' + JSON.stringify(error));
+        // Restore button state
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
       });
   });
+
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Navbar background change on scroll
+  window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+      navbar.style.background = 'rgba(15, 23, 42, 0.98)';
+    } else {
+      navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+    }
+  });
 </script>
+
 </body>
 </html>
