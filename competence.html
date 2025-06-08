@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes Compétences - Marouane Yoda</title>
+  <meta name="description" content="Compétences de Marouane Yoda, étudiant en science des données et développement web.">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f8fafc, #dbeafe);
+      margin: 0;
+      color: #1e293b;
+      scroll-behavior: smooth;
+    }
+
+    nav {
+      background: #1e3a8a;
+      animation: slideDown 0.6s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    nav a {
+      color: #ffffff !important;
+      padding: 14px 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      background: #1e293b;
+      color: #33e3ff !important;
+      border-radius: 6px;
+    }
+
+    header {
+      background: linear-gradient(to right, #1e3a8a, #2563eb);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      animation: fadeIn 0.8s ease-out 0.3s both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      animation: fadeInUp 0.8s ease-out 0.5s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .skills-section {
+      padding: 60px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #0f172a;
+      position: relative;
+      animation: fadeInUp 0.6s ease-out 0.7s both;
+    }
+
+    .section-title::after {
+      content: '';
+      width: 60px;
+      height: 4px;
+      background: #2563eb;
+      display: block;
+      margin: 10px auto 0;
+      border-radius: 2px;
+      animation: expandWidth 0.8s ease-out 1s both;
+    }
+
+    @keyframes expandWidth {
+      from { width: 0; }
+      to { width: 60px; }
+    }
+
+    .card {
+      border: none;
+      border-radius: 20px;
+      padding: 30px 20px;
+      background-color: #fff;
+      box-shadow: 0 8px 20px rgba(30, 58, 138, 0.08);
+      text-align: center;
+      transition: all 0.3s ease;
+      animation: slideIn 0.6s ease-out both;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Staggered animation for cards */
+    .card:nth-child(1) { animation-delay: 0.9s; }
+    .card:nth-child(2) { animation-delay: 1.0s; }
+    .card:nth-child(3) { animation-delay: 1.1s; }
+    .card:nth-child(4) { animation-delay: 1.2s; }
+    .card:nth-child(5) { animation-delay: 1.3s; }
+    .card:nth-child(6) { animation-delay: 1.4s; }
+    .card:nth-child(7) { animation-delay: 1.5s; }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(30, 58, 138, 0.15);
+    }
+
+    .card i {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      color: #2563eb;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover i {
+      transform: scale(1.1);
+      animation: iconPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes iconPulse {
+      0%, 100% { transform: scale(1.1); }
+      50% { transform: scale(1.2); }
+    }
+
+    .card h5 {
+      font-weight: bold;
+      margin-top: 10px;
+      font-size: 1.2rem;
+      color: #0f172a;
+      transition: color 0.3s ease;
+    }
+
+    .card:hover h5 {
+      color: #2563eb;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #475569;
+      transition: color 0.3s ease;
+    }
+
+    .card:hover p {
+      color: #1e293b;
+    }
+
+    footer {
+      background: #0f172a;
+      color: white;
+      text-align: center;
+      padding: 25px 10px;
+      animation: fadeInUp 0.6s ease-out 1.6s both;
+    }
+
+    /* Responsive animations */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .card {
+        margin-bottom: 20px;
+      }
+    }
+
+    /* Hover effect for the entire row */
+    .row:hover .card:not(:hover) {
+      opacity: 0.7;
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">← Retour au Portfolio</a>
+  </div>
+</nav>
+
+<header>
+  <h1>Mes Compétences</h1>
+</header>
+
+<section class="container skills-section">
+  <h2 class="section-title">Compétences techniques</h2>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card">
+        <i class="fab fa-python"></i>
+        <h5>Python</h5>
+        <p>Programmation orientée données et scripts efficaces pour l'analyse.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <i class="fas fa-file-excel"></i>
+        <h5>Excel / VBA</h5>
+        <p>Création de macros et automatisation avancée des tâches répétitives.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <i class="fas fa-chart-bar"></i>
+        <h5>Statistiques (Sphinx)</h5>
+        <p>Enquêtes, analyses descriptives et rapports interactifs.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <i class="fab fa-html5"></i>
+        <h5>HTML / CSS / JS</h5>
+        <p>Conception de sites responsives avec animations et interactions.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <i class="fab fa-react"></i>
+        <h5>React</h5>
+        <p>Développement d'applications web dynamiques et interactives.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <i class="fas fa-code"></i>
+        <h5>SAS</h5>
+        <p>Analyse statistique avancée et traitement de données massives.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <i class="fas fa-database"></i>
+        <h5>SQL Developer</h5>
+        <p>Gestion et interrogation de bases de données relationnelles.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <i class="fab fa-github"></i>
+        <h5>Git & GitHub</h5>
+        <p>Collaboration efficace et gestion de versions avec Git.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Marouane Yoda - Tous droits réservés.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
