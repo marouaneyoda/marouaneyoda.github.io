@@ -1,993 +1,718 @@
+bash
+
+cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Détails des Projets SAE - Marouane Yoda</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <title>Projets SAE — Marouane Yoda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --bg:      #111827;
+      --surface: #1a2332;
+      --card:    #1e2d3d;
+      --card-h:  #243447;
+      --em:      #14b8a6;
+      --em2:     #f97316;
+      --em3:     #a78bfa;
+      --text:    #f1f5f9;
+      --muted:   #7d8fa8;
+      --dim:     #4a5c70;
+      --border:  rgba(20,184,166,0.14);
+      --border-h:rgba(20,184,166,0.4);
+      --radius:  16px;
     }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
 
     body {
-      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-      color: #f8fafc;
-      min-height: 100vh;
+      font-family: 'Bricolage Grotesque', sans-serif;
+      background: var(--bg);
+      color: var(--text);
       overflow-x: hidden;
+      line-height: 1.6;
     }
 
-    /* Animated background particles */
-    .bg-animation {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      overflow: hidden;
+    /* subtle dot pattern */
+    body::before {
+      content:"";
+      position:fixed; inset:0;
+      background-image: radial-gradient(rgba(20,184,166,0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+      z-index:0; pointer-events:none;
     }
 
-    .particle {
-      position: absolute;
-      background: rgba(59, 130, 246, 0.3);
-      border-radius: 50%;
-      animation: float 20s infinite linear;
+    /* side gradient wash */
+    body::after {
+      content:"";
+      position:fixed; inset:0;
+      background:
+        radial-gradient(ellipse 60% 50% at 0% 30%, rgba(20,184,166,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 100% 70%, rgba(249,115,22,0.06) 0%, transparent 70%);
+      z-index:0; pointer-events:none;
     }
 
-    @keyframes float {
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-    }
+    /* SCROLL PROGRESS */
+    .progress-bar { position:fixed; top:0; left:0; width:100%; height:3px; z-index:1001; background:rgba(20,184,166,0.1); }
+    .progress-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--em),var(--em2)); transition:width .15s ease; }
 
-    /* Hero Section */
+    /* NAVBAR */
+    .navbar {
+      position:fixed; top:0; width:100%; height:64px;
+      padding:0 6%;
+      display:flex; align-items:center; justify-content:space-between;
+      background:rgba(17,24,39,0.88);
+      backdrop-filter:blur(24px);
+      border-bottom:1px solid rgba(20,184,166,0.1);
+      z-index:1000;
+    }
+    .nav-logo { font-weight:800; font-size:1.05rem; color:var(--text); text-decoration:none; letter-spacing:-.3px; }
+    .nav-logo em { font-style:normal; color:var(--em); }
+    .nav-back {
+      display:inline-flex; align-items:center; gap:7px;
+      padding:7px 16px; border-radius:50px;
+      border:1px solid rgba(20,184,166,0.2);
+      color:var(--muted); font-size:.82rem; font-weight:600;
+      text-decoration:none; background:rgba(20,184,166,0.06);
+      transition:all .2s ease;
+    }
+    .nav-back:hover { color:var(--em); border-color:var(--border-h); transform:translateX(-3px); }
+
+    /* HERO */
     .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.8));
-      backdrop-filter: blur(10px);
+      min-height:100vh;
+      display:flex; align-items:center; justify-content:center;
+      padding:100px 6% 70px;
+      position:relative; z-index:1;
     }
+    .hero-inner { max-width:860px; width:100%; }
 
-    .hero-content {
-      max-width: 800px;
-      padding: 2rem;
-      z-index: 2;
+    .hero-eyebrow {
+      display:inline-flex; align-items:center; gap:10px;
+      font-family:'DM Mono', monospace;
+      font-size:.72rem; letter-spacing:2px; text-transform:uppercase;
+      color:var(--em); margin-bottom:28px;
+      animation:fadeUp .6s ease both;
+    }
+    .hero-eyebrow::before {
+      content:"";
+      display:block; width:28px; height:1px; background:var(--em); opacity:.6;
     }
 
     .hero h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 900;
-      background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 1.5rem;
-      animation: slideInUp 1s ease-out;
+      font-size:clamp(2.8rem,6vw,5rem);
+      font-weight:800; line-height:1.04; letter-spacing:-2px;
+      margin-bottom:24px;
+      animation:fadeUp .7s .1s ease both;
+    }
+    .hero h1 .line-accent {
+      display:block;
+      color:transparent;
+      -webkit-text-stroke:1.5px var(--em);
     }
 
-    .hero p {
-      font-size: 1.25rem;
-      color: #cbd5e1;
-      margin-bottom: 2rem;
-      animation: slideInUp 1s ease-out 0.2s both;
+    .hero-desc {
+      color:var(--muted); font-size:1rem; line-height:1.85;
+      max-width:600px; margin-bottom:44px;
+      animation:fadeUp .7s .2s ease both;
+    }
+    .hero-desc strong { color:var(--text); font-weight:600; }
+
+    /* counter row */
+    .counter-row {
+      display:flex; gap:0; flex-wrap:wrap;
+      border:1px solid rgba(20,184,166,0.15);
+      border-radius:16px; overflow:hidden;
+      margin-bottom:44px;
+      max-width:560px;
+      animation:fadeUp .7s .3s ease both;
+    }
+    .counter-item {
+      flex:1; min-width:120px;
+      padding:20px 24px;
+      border-right:1px solid rgba(20,184,166,0.1);
+      background:rgba(20,184,166,0.04);
+    }
+    .counter-item:last-child { border-right:none; }
+    .counter-item .num {
+      display:block; font-size:1.9rem; font-weight:800;
+      color:var(--em); line-height:1; margin-bottom:4px;
+      font-family:'DM Mono', monospace;
+    }
+    .counter-item .lbl { font-size:.78rem; color:var(--muted); font-weight:500; }
+
+    .hero-actions {
+      display:flex; gap:12px; flex-wrap:wrap;
+      animation:fadeUp .7s .4s ease both;
+    }
+    .btn {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:12px 24px; border-radius:10px; border:none;
+      cursor:pointer; font-weight:700; font-size:.86rem;
+      text-decoration:none; font-family:'Bricolage Grotesque', sans-serif;
+      transition:all .25s ease; letter-spacing:.1px;
+    }
+    .btn-teal { background:var(--em); color:#0f1f1e; box-shadow:0 8px 24px rgba(20,184,166,0.3); }
+    .btn-teal:hover { transform:translateY(-3px); box-shadow:0 14px 30px rgba(20,184,166,0.4); }
+    .btn-outline { background:transparent; border:1px solid rgba(20,184,166,0.25); color:var(--muted); }
+    .btn-outline:hover { border-color:var(--border-h); color:var(--em); transform:translateY(-2px); }
+
+    /* SECTION */
+    .section { padding:90px 6%; position:relative; z-index:1; }
+
+    .section-eyebrow {
+      display:flex; align-items:center; gap:12px;
+      font-family:'DM Mono',monospace;
+      font-size:.7rem; letter-spacing:2px; text-transform:uppercase;
+      color:var(--em); margin-bottom:16px;
+    }
+    .section-eyebrow::after { content:""; flex:1; height:1px; background:rgba(20,184,166,0.2); }
+
+    .section h2 {
+      font-size:clamp(1.7rem,3vw,2.3rem);
+      font-weight:800; letter-spacing:-1px; line-height:1.1;
+      margin-bottom:10px;
+    }
+    .section-sub { color:var(--muted); font-size:.95rem; line-height:1.8; max-width:540px; margin-bottom:56px; }
+
+    /* PROJECT LIST */
+    .project-list { display:flex; flex-direction:column; gap:2px; }
+
+    .project-row {
+      position:relative; overflow:hidden;
+      background:var(--card);
+      border:1px solid rgba(20,184,166,0.08);
+      border-radius:var(--radius);
+      transition:all .3s ease;
+      cursor:default;
+    }
+    .project-row:hover {
+      background:var(--card-h);
+      border-color:var(--border-h);
+      transform:translateX(6px);
     }
 
-    .cta-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      animation: slideInUp 1s ease-out 0.4s both;
+    .project-row-inner {
+      display:grid;
+      grid-template-columns:80px 1fr auto;
+      gap:0; align-items:stretch;
     }
 
-    .btn-primary, .btn-secondary {
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      position: relative;
-      overflow: hidden;
+    /* big number */
+    .proj-num-col {
+      display:flex; align-items:center; justify-content:center;
+      padding:28px 0;
+      border-right:1px solid rgba(20,184,166,0.08);
+      position:relative;
+    }
+    .proj-num {
+      font-family:'DM Mono',monospace;
+      font-size:1.1rem; font-weight:500;
+      color:var(--dim);
+      transition:color .3s ease;
+    }
+    .project-row:hover .proj-num { color:var(--em); }
+
+    /* ghost big number bg */
+    .proj-ghost {
+      position:absolute;
+      font-family:'DM Mono',monospace;
+      font-size:5rem; font-weight:800;
+      color:rgba(20,184,166,0.04);
+      line-height:1;
+      right:-8px; top:50%; transform:translateY(-50%);
+      pointer-events:none; user-select:none;
+      transition:color .3s ease;
+    }
+    .project-row:hover .proj-ghost { color:rgba(20,184,166,0.08); }
+
+    /* content */
+    .proj-content { padding:24px 28px; }
+
+    .proj-header { display:flex; align-items:flex-start; gap:14px; margin-bottom:10px; flex-wrap:wrap; }
+    .proj-cat {
+      display:inline-block;
+      font-family:'DM Mono',monospace;
+      font-size:.65rem; letter-spacing:1.5px; text-transform:uppercase;
+      padding:4px 11px; border-radius:50px;
+      border:1px solid rgba(20,184,166,0.2);
+      color:var(--em); background:rgba(20,184,166,0.07);
+      flex-shrink:0;
+    }
+    .proj-cat.orange { border-color:rgba(249,115,22,0.25); color:var(--em2); background:rgba(249,115,22,0.07); }
+    .proj-cat.violet { border-color:rgba(167,139,250,0.25); color:var(--em3); background:rgba(167,139,250,0.07); }
+
+    .proj-content h3 {
+      font-size:1.05rem; font-weight:700; line-height:1.35;
+      color:var(--text); margin-bottom:8px;
+    }
+    .proj-content p {
+      color:var(--muted); font-size:.87rem; line-height:1.8;
+      margin-bottom:16px; max-width:680px;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-      color: white;
-      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+    .proj-tools { display:flex; flex-wrap:wrap; gap:6px; }
+    .tool {
+      display:inline-flex; align-items:center; gap:5px;
+      padding:3px 10px; border-radius:50px;
+      font-size:.7rem; font-weight:600;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      color:var(--muted);
+      transition:all .2s ease;
+    }
+    .project-row:hover .tool { border-color:rgba(20,184,166,0.15); }
+    .tool i { font-size:.75rem; color:var(--em); }
+
+    /* image side */
+    .proj-img-col {
+      width:180px; flex-shrink:0;
+      border-left:1px solid rgba(20,184,166,0.08);
+      overflow:hidden; display:flex; align-items:center; justify-content:center;
+    }
+    .proj-img-col a { display:block; width:100%; height:100%; }
+    .proj-img-col img {
+      width:100%; height:100%; object-fit:cover;
+      transition:transform .4s ease;
+      filter:brightness(.85) saturate(.9);
+    }
+    .project-row:hover .proj-img-col img { transform:scale(1.06); filter:brightness(.95) saturate(1.05); }
+
+    .proj-img-placeholder {
+      width:100%; height:100%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:2.5rem; color:var(--dim);
+      background:rgba(20,184,166,0.04);
     }
 
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
-      background: linear-gradient(135deg, #2563eb, #1e40af);
-      color: white;
-      text-decoration: none;
+    /* CTA BOTTOM */
+    .bottom-cta {
+      margin-top:60px;
+      border:1px solid rgba(20,184,166,0.18);
+      border-radius:20px;
+      padding:36px 40px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:24px; flex-wrap:wrap;
+      background:rgba(20,184,166,0.04);
+      position:relative; overflow:hidden;
     }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
+    .bottom-cta::before {
+      content:"";
+      position:absolute; top:0; left:0; right:0; height:2px;
+      background:linear-gradient(90deg,var(--em),var(--em2),var(--em3));
     }
+    .bottom-cta h3 { font-size:1.2rem; font-weight:800; margin-bottom:6px; letter-spacing:-.5px; }
+    .bottom-cta p { color:var(--muted); font-size:.88rem; }
 
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.2);
-      border-color: rgba(255, 255, 255, 0.3);
-      color: white;
-      text-decoration: none;
+    /* FOOTER */
+    .divider { width:calc(100% - 12%); margin:0 6%; height:1px; background:rgba(20,184,166,0.1); }
+    footer {
+      padding:32px 6%;
+      display:flex; align-items:center; justify-content:space-between;
+      flex-wrap:wrap; gap:16px; position:relative; z-index:1;
     }
-
-    /* Projects Section */
-    .projects-section {
-      padding: 5rem 0;
-      position: relative;
+    .footer-copy { color:var(--muted); font-size:.82rem; }
+    .footer-copy em { font-style:normal; color:var(--em); font-weight:600; }
+    .socials { display:flex; gap:8px; }
+    .socials a {
+      width:36px; height:36px;
+      display:flex; align-items:center; justify-content:center;
+      border-radius:9px; text-decoration:none;
+      color:var(--dim); background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.07);
+      transition:all .2s ease; font-size:.9rem;
     }
+    .socials a:hover { color:var(--em); border-color:var(--border-h); transform:translateY(-2px); }
 
-    .section-title {
-      text-align: center;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      background: linear-gradient(135deg, #f8fafc, #cbd5e1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 3rem;
+    /* ANIMATIONS */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity .55s ease,transform .55s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      .project-row-inner { grid-template-columns:60px 1fr; }
+      .proj-img-col { display:none; }
     }
-
-    /* Timeline Layout */
-    .timeline {
-      position: relative;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: linear-gradient(180deg, #3b82f6, #8b5cf6, #06b6d4);
-      transform: translateX(-50%);
-      border-radius: 2px;
-    }
-
-    .timeline-item {
-      position: relative;
-      margin: 3rem 0;
-      opacity: 0;
-      animation: fadeInUp 0.6s ease-out forwards;
-    }
-
-    .timeline-item:nth-child(even) {
-      animation-delay: 0.1s;
-    }
-
-    .timeline-item:nth-child(odd) {
-      animation-delay: 0.2s;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      left: 50%;
-      top: 2rem;
-      width: 20px;
-      height: 20px;
-      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-      border-radius: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      box-shadow: 0 0 0 5px rgba(15, 23, 42, 0.8), 0 0 20px rgba(59, 130, 246, 0.5);
-    }
-
-    .timeline-content {
-      width: 45%;
-      background: rgba(30, 41, 59, 0.8);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(59, 130, 246, 0.2);
-      border-radius: 20px;
-      padding: 2rem;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    .timeline-item:nth-child(odd) .timeline-content {
-      margin-left: 55%;
-    }
-
-    .timeline-item:nth-child(even) .timeline-content {
-      margin-right: 55%;
-    }
-
-    .timeline-content:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      border-color: rgba(59, 130, 246, 0.4);
-    }
-
-    .timeline-content::before {
-      content: '';
-      position: absolute;
-      top: 2rem;
-      width: 0;
-      height: 0;
-      border: 15px solid transparent;
-    }
-
-    .timeline-item:nth-child(odd) .timeline-content::before {
-      left: -30px;
-      border-right-color: rgba(30, 41, 59, 0.8);
-    }
-
-    .timeline-item:nth-child(even) .timeline-content::before {
-      right: -30px;
-      border-left-color: rgba(30, 41, 59, 0.8);
-    }
-
-    .project-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #3b82f6;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .project-number {
-      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-      color: white;
-      width: 2rem;
-      height: 2rem;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 0.9rem;
-    }
-
-    .project-description {
-      color: #cbd5e1;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
-
-    /* Image Gallery */
-    .project-gallery {
-      margin-top: 1.5rem;
-    }
-
-    .gallery-image {
-      width: 100%;
-      height: auto;
-      border-radius: 15px;
-      cursor: zoom-in;
-      transition: all 0.3s ease;
-      border: 2px solid rgba(59, 130, 246, 0.2);
-    }
-
-    .gallery-image:hover {
-      transform: scale(1.02);
-      border-color: rgba(59, 130, 246, 0.5);
-      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
-    }
-
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-      .timeline::before {
-        left: 2rem;
-      }
-
-      .timeline-dot {
-        left: 2rem;
-      }
-
-      .timeline-content {
-        width: calc(100% - 5rem);
-        margin-left: 5rem !important;
-        margin-right: 0 !important;
-      }
-
-      .timeline-content::before {
-        left: -30px !important;
-        right: auto !important;
-        border-right-color: rgba(30, 41, 59, 0.8) !important;
-        border-left-color: transparent !important;
-      }
-
-      .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .btn-primary, .btn-secondary {
-        width: 100%;
-        max-width: 300px;
-      }
-
-      .hero {
-        min-height: 80vh;
-      }
-    }
-
-    /* Animations */
-    @keyframes slideInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Lightbox customization */
-    .lightboxOverlay {
-      background: rgba(0, 0, 0, 0.95) !important;
-      backdrop-filter: blur(10px);
-    }
-
-    .lightbox .lb-image {
-      border-radius: 15px !important;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.5) !important;
-    }
-
-    /* Scroll indicator */
-    .scroll-indicator {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: rgba(59, 130, 246, 0.2);
-      z-index: 1000;
-    }
-
-    .scroll-progress {
-      height: 100%;
-      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-      width: 0%;
-      transition: width 0.3s ease;
-    }
-
-    /* Floating action buttons */
-    .fab-container {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      display: none; /* Caché par défaut */
-      flex-direction: column;
-      gap: 1rem;
-      z-index: 1000;
-    }
-
-    .fab {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-decoration: none;
-      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-      font-size: 1.2rem;
-    }
-
-    .fab:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
-      color: white;
-      text-decoration: none;
-    }
-
-    .fab.zoom-out {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
-    }
-
-    .fab.zoom-out:hover {
-      box-shadow: 0 15px 40px rgba(245, 158, 11, 0.4);
-    }
-
-    .fab.zoom-in {
-      background: linear-gradient(135deg, #10b981, #059669);
-      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
-    }
-
-    .fab.zoom-in:hover {
-      box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
-    }
-
-    /* Nouveau bouton Fermer */
-    .fab.close {
-      background: linear-gradient(135deg, #ef4444, #b91c1c);
-      box-shadow: 0 10px 30px rgba(239, 68, 68, 0.3);
-    }
-
-    .fab.close:hover {
-      box-shadow: 0 15px 40px rgba(239, 68, 68, 0.4);
-    }
-
-    /* Zoom functionality */
-    .zoom-container {
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      transform-origin: center center;
-    }
-
-    .zoom-level-indicator {
-      position: fixed;
-      top: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(30, 41, 59, 0.9);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      border-radius: 25px;
-      padding: 0.5rem 1.5rem;
-      color: white;
-      font-weight: 600;
-      z-index: 1001;
-      opacity: 0;
-      transition: all 0.3s ease;
-      pointer-events: none;
-    }
-
-    .zoom-level-indicator.show {
-      opacity: 1;
-    }
-
-    /* Navigation dots */
-    .nav-dots {
-      position: fixed;
-      right: 2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .nav-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .nav-dot.active,
-    .nav-dot:hover {
-      background: #3b82f6;
-      transform: scale(1.2);
-    }
-
-    @media (max-width: 768px) {
-      .nav-dots {
-        display: none;
-      }
+    @media(max-width:600px){
+      .section { padding:70px 5%; }
+      .navbar { padding:0 5%; }
+      .counter-row { border-radius:12px; }
+      .bottom-cta { padding:26px; flex-direction:column; }
     }
   </style>
-
-<style>
-/* Premium enhancements */
-.hero::after{
-content:'';
-position:absolute;
-inset:0;
-background:radial-gradient(circle at 20% 20%, rgba(59,130,246,.25), transparent 40%),
-radial-gradient(circle at 80% 30%, rgba(139,92,246,.20), transparent 35%);
-pointer-events:none;
-}
-
-.hero-content{
-background:rgba(15,23,42,.35);
-border:1px solid rgba(255,255,255,.08);
-border-radius:30px;
-backdrop-filter:blur(18px);
-box-shadow:0 20px 60px rgba(0,0,0,.35);
-}
-
-.section-title{
-letter-spacing:1px;
-}
-
-.timeline-content{
-box-shadow:0 15px 40px rgba(0,0,0,.25);
-}
-
-.timeline-content:hover{
-transform:translateY(-8px) scale(1.01);
-}
-
-.project-title{
-font-size:1.6rem;
-}
-
-.project-description{
-font-size:1rem;
-}
-
-.project-gallery{
-position:relative;
-overflow:hidden;
-border-radius:18px;
-}
-
-.gallery-image{
-filter:brightness(.96);
-}
-
-.gallery-image:hover{
-transform:scale(1.04);
-filter:brightness(1.05);
-}
-
-.project-badge{
-display:inline-block;
-padding:.4rem .9rem;
-border-radius:50px;
-background:rgba(59,130,246,.15);
-border:1px solid rgba(59,130,246,.25);
-color:#93c5fd;
-font-size:.85rem;
-margin-bottom:1rem;
-}
-
-.stats-bar{
-display:flex;
-justify-content:center;
-gap:1rem;
-flex-wrap:wrap;
-margin-top:2rem;
-}
-
-.stat-card{
-padding:1rem 1.4rem;
-background:rgba(255,255,255,.06);
-border:1px solid rgba(255,255,255,.08);
-border-radius:18px;
-min-width:140px;
-backdrop-filter:blur(12px);
-}
-
-.stat-card strong{
-display:block;
-font-size:1.4rem;
-color:#60a5fa;
-}
-</style>
-
 </head>
 <body>
-  <!-- Scroll progress indicator -->
-  <div class="scroll-indicator">
-    <div class="scroll-progress" id="scroll-progress"></div>
-  </div>
 
-  <!-- Navigation dots -->
-  <div class="nav-dots" id="nav-dots">
-    <!-- Dots générés par JS -->
-  </div>
+  <div class="progress-bar"><div class="progress-fill" id="pf"></div></div>
 
-  <div class="zoom-container" id="zoom-container">
-    <!-- Background animation -->
-    <div class="bg-animation" id="bg-animation">
-      <!-- Particles générés par JS -->
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">Marouane <em>Yoda</em></a>
+    <a href="index.html" class="nav-back"><i class="bi bi-arrow-left"></i> Portfolio</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Parcours académique — BUT STID</div>
+
+      <h1>
+        Projets
+        <span class="line-accent">SAE</span>
+      </h1>
+
+      <p class="hero-desc">
+        10 <strong>Situations d'Apprentissage et d'Évaluation</strong> réalisées durant mon BUT Statistique et Informatique Décisionnelle.
+        Chaque projet confronte théorie et réalité du terrain — de l'enquête statistique à la conception de base de données.
+      </p>
+
+      <div class="counter-row">
+        <div class="counter-item">
+          <span class="num">10</span>
+          <span class="lbl">projets SAE</span>
+        </div>
+        <div class="counter-item">
+          <span class="num">5+</span>
+          <span class="lbl">outils maîtrisés</span>
+        </div>
+        <div class="counter-item">
+          <span class="num">BUT</span>
+          <span class="lbl">STID — Data</span>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#projets" class="btn btn-teal">
+          <i class="bi bi-arrow-down-circle"></i> Voir les projets
+        </a>
+        <a href="index.html" class="btn btn-outline">
+          <i class="bi bi-house"></i> Retour à l'accueil
+        </a>
+      </div>
     </div>
+  </section>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-      <div class="hero-content">
-        <h1>Portfolio SAE</h1>
-        <p>Découvrez mes 10 projets académiques qui illustrent mon parcours d'apprentissage en data science et développement.</p>
-        
-<div class="stats-bar">
-<div class="stat-card"><strong>10</strong>SAE</div>
-<div class="stat-card"><strong>Data</strong>Analyse</div>
-<div class="stat-card"><strong>Web</strong>Développement</div>
-</div>
-<div class="cta-buttons">
+  <!-- PROJECTS -->
+  <section class="section" id="projets">
+    <div class="section-eyebrow">SAE — 10 projets</div>
+    <h2 class="reveal">Situations d'apprentissage</h2>
+    <p class="section-sub reveal">Du reporting à la modélisation statistique, en passant par SQL, l'enquête de terrain et la datavisualisation.</p>
 
-          <a href="#projects" class="btn-primary">
-            <i class="fas fa-rocket"></i> Explorer les projets
-          </a>
-          <a href="index.html" class="btn-secondary">
-            <i class="fas fa-arrow-left"></i> Retour à l'accueil
-          </a>
-        </div>
-      </div>
-    </section>
+    <div class="project-list">
 
-    <!-- Projects Section -->
-    <section class="projects-section" id="projects">
-      <div class="container">
-        <h2 class="section-title">Mes Projets SAE</h2>
-        <div class="timeline" id="timeline">
-          <!-- Timeline items générés par JS -->
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- Zoom Level Indicator -->
-  <div class="zoom-level-indicator" id="zoom-indicator">
-    Zoom: <span id="zoom-percentage">100%</span>
-  </div>
-
-  <!-- Floating Action Buttons (caché par défaut) -->
-  <div class="fab-container">
-    <button class="fab zoom-in" id="zoom-in-btn" title="Zoom avant (molette haut / +)">
-      <i class="fas fa-search-plus"></i>
-    </button>
-    <button class="fab zoom-out" id="zoom-out-btn" title="Zoom arrière (molette bas / -)">
-      <i class="fas fa-search-minus"></i>
-    </button>
-    <button class="fab close" id="close-btn" title="Fermer l'image">
-      <i class="fas fa-times"></i>
-    </button>
-    <a href="#hero" class="fab" title="Retour en haut (Accueil)">
-      <i class="fas fa-arrow-up"></i>
-    </a>
-  </div>
-
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Project data
-      const projects = [
-        {
-          title: "Création d'un reporting",
-          description: "Ce projet a permis de développer des compétences pratiques autour de la thématique suivante : création d'un reporting."
-        },
-        {
-          title: "Écriture et lecture de fichiers de données",
-          description: "Ce projet a permis de développer des compétences pratiques autour de la thématique suivante : écriture et lecture de fichiers de données."
-        },
-        
-        {
-          title: "Apprendre en situation la production de données en entreprise",
-          description: "Ce projet a permis de développer des compétences pratiques autour de la thématique suivante : apprendre en situation la production de données en entreprise."
-        },
-        {
-          title: "Présentation en anglais d'un territoire économique et culturel",
-          description: "Ce projet a permis de développer des compétences pratiques autour de la thématique suivante : présentation en anglais d'un territoire économique et culturel."
-        },
-        {
-          title: "Mise en œuvre d'une enquête",
-          description: "Ce projet a permis de développer des compétences pratiques autour de la thématique suivante : mise en œuvre d'une enquête."
-        },
-        {
-          title: "Conception et implémentation d'une base de données",
-          description: "Ce projet a permis de développer des compétences pratiques autour de la thématique suivante : conception et implémentation d'une base de données."
-        },
-        {
-          title: "Estimation par échantillonnage",
-          description: "Ce projet a permis de développer des compétences pratiques autour de la thématique suivante : estimation par échantillonnage."
-        },
-        {
-          title: "Régression sur des données réelles",
-          description: "Ce projet a permis de développer des compétences pratiques autour de la thématique suivante : régression sur des données réelles."
-        },
-        {
-          title: "Construction et présentation d'indicateurs de performance",
-          description: "Ce projet a permis de développer des compétences pratiques autour de la thématique suivante : construction et présentation d'indicateurs de performance."
-        },
-        {
-          title: "Analyse de données, reporting et datavisualisation",
-          description: "Ce projet a permis de développer des compétences pratiques autour de la thématique suivante : analyse de données, reporting et datavisualisation."
-        }
-      ];
-
-      // Génère la timeline
-      const timeline = document.getElementById('timeline');
-      projects.forEach((project, index) => {
-        const timelineItem = document.createElement('div');
-        timelineItem.className = 'timeline-item';
-        timelineItem.id = `project-${index + 1}`;
-        timelineItem.style.animationDelay = `${index * 0.1}s`;
-
-        timelineItem.innerHTML = `
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <div class="project-title">
-              <div class="project-number">${index + 1}</div>
-              SAE : ${project.title}
+      <!-- 01 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">01</span>
+            <span class="proj-ghost">01</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat">Reporting</span>
             </div>
-            <div class="project-badge"><i class="fas fa-layer-group"></i> Projet académique SAE</div><div class="project-description">
-              ${project.description}
-            </div>
-            <div class="project-gallery">
-              <a href="images/sae-${index + 1}-1.jpg" data-lightbox="project-${index + 1}" data-title="SAE : ${project.title}">
-                <img src="images/sae-${index + 1}-1.jpg"
-                     alt="Image SAE ${index + 1}"
-                     class="gallery-image img-fluid">
-              </a>
+            <h3>Création d'un reporting</h3>
+            <p>Conception d'un rapport de données structuré, lisible et orienté prise de décision. Sélection des indicateurs pertinents, mise en forme professionnelle et présentation des résultats à un public non technique.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
+              <span class="tool"><i class="bi bi-bar-chart-line"></i> Power BI</span>
             </div>
           </div>
-        `;
+          <div class="proj-img-col">
+            <a href="images/sae-1-1.jpg" data-lightbox="sae-1" data-title="SAE 1 — Création d'un reporting">
+              <img src="images/sae-1-1.jpg" alt="SAE 1" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-file-earmark-bar-graph></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
 
-        timeline.appendChild(timelineItem);
-      });
+      <!-- 02 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">02</span>
+            <span class="proj-ghost">02</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat">Données</span>
+            </div>
+            <h3>Écriture et lecture de fichiers de données</h3>
+            <p>Manipulation de fichiers aux formats variés — CSV, JSON, Excel, TXT. Import, export, nettoyage et transformation de données brutes afin de les rendre exploitables dans une chaîne d'analyse complète.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-filetype-py"></i> Python</span>
+              <span class="tool"><i class="bi bi-file-earmark-code"></i> CSV / JSON</span>
+              <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-2-1.jpg" data-lightbox="sae-2" data-title="SAE 2 — Fichiers de données">
+              <img src="images/sae-2-1.jpg" alt="SAE 2" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-file-earmark-code></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
 
-      // Génère les nav-dots
-      const navDots = document.getElementById('nav-dots');
-      const heroSection = document.getElementById('hero');
-      const projectsSection = document.getElementById('projects');
-      
-      // Dot pour le Hero
-      const heroDot = document.createElement('div');
-      heroDot.className = 'nav-dot active';
-      heroDot.addEventListener('click', () => {
-        heroSection.scrollIntoView({ behavior: 'smooth' });
-      });
-      navDots.appendChild(heroDot);
+      <!-- 03 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">03</span>
+            <span class="proj-ghost">03</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat orange">Entreprise</span>
+            </div>
+            <h3>Production de données en entreprise</h3>
+            <p>Apprentissage en situation réelle des flux de production de données dans un contexte professionnel : collecte terrain, saisie, contrôle qualité, structuration et stockage des informations métiers.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-database"></i> SQL</span>
+              <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-3-1.jpg" data-lightbox="sae-3" data-title="SAE 3 — Production de données">
+              <img src="images/sae-3-1.jpg" alt="SAE 3" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-building></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
 
-      // Dot pour la section Projets
-      const projectsDot = document.createElement('div');
-      projectsDot.className = 'nav-dot';
-      projectsDot.addEventListener('click', () => {
-        projectsSection.scrollIntoView({ behavior: 'smooth' });
-      });
-      navDots.appendChild(projectsDot);
+      <!-- 04 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">04</span>
+            <span class="proj-ghost">04</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat violet">Anglais</span>
+            </div>
+            <h3>Présentation d'un territoire économique</h3>
+            <p>Présentation orale en anglais d'un territoire économique et culturel. Travail sur la recherche documentaire, la structuration d'un discours clair et la communication professionnelle en langue étrangère.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-mic"></i> Oral</span>
+              <span class="tool"><i class="bi bi-globe2"></i> Anglais</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-4-1.jpg" data-lightbox="sae-4" data-title="SAE 4 — Présentation en anglais">
+              <img src="images/sae-4-1.jpg" alt="SAE 4" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-translate></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
 
-      // Génère les particules d'arrière-plan
-      const bgAnimation = document.getElementById('bg-animation');
-      for (let i = 0; i < 15; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.width = particle.style.height = Math.random() * 6 + 2 + 'px';
-        particle.style.animationDuration = Math.random() * 10 + 15 + 's';
-        particle.style.animationDelay = Math.random() * 20 + 's';
-        bgAnimation.appendChild(particle);
-      }
+      <!-- 05 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">05</span>
+            <span class="proj-ghost">05</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat">Enquête</span>
+            </div>
+            <h3>Mise en œuvre d'une enquête</h3>
+            <p>Conception du questionnaire, définition de la population cible et du plan de sondage, collecte sur le terrain, puis traitement statistique des réponses. Présentation des résultats sous forme d'un rapport synthétique illustré.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-filetype-py"></i> Python</span>
+              <span class="tool"><i class="bi bi-activity"></i> SAS</span>
+              <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-5-1.jpg" data-lightbox="sae-5" data-title="SAE 5 — Enquête">
+              <img src="images/sae-5-1.jpg" alt="SAE 5" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-clipboard-data></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
 
-      // Scroll progress indicator
-      const scrollProgress = document.getElementById('scroll-progress');
-      window.addEventListener('scroll', () => {
-        const scrollTop = window.pageYOffset;
-        const docHeight = document.body.scrollHeight - window.innerHeight;
-        const scrollPercent = (scrollTop / docHeight) * 100;
-        scrollProgress.style.width = scrollPercent + '%';
+      <!-- 06 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">06</span>
+            <span class="proj-ghost">06</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat orange">Base de données</span>
+            </div>
+            <h3>Conception et implémentation d'une base de données</h3>
+            <p>Modélisation d'une base relationnelle complète : rédaction du MCD et du MLD, création des tables en SQL, définition des contraintes d'intégrité (clés primaires, étrangères) et requêtage avancé sur données réelles.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-database"></i> SQL</span>
+              <span class="tool"><i class="bi bi-diagram-2"></i> MCD / MLD</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-6-1.jpg" data-lightbox="sae-6" data-title="SAE 6 — Base de données">
+              <img src="images/sae-6-1.jpg" alt="SAE 6" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-diagram-3></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
 
-        // Met à jour les nav-dots
-        const dots = navDots.querySelectorAll('.nav-dot');
-        const heroOffset = heroSection.offsetTop;
-        const projectsOffset = projectsSection.offsetTop;
+      <!-- 07 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">07</span>
+            <span class="proj-ghost">07</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat violet">Statistiques</span>
+            </div>
+            <h3>Estimation par échantillonnage</h3>
+            <p>Application des méthodes d'échantillonnage probabiliste — aléatoire simple, stratifié, par grappes — pour produire des estimations fiables sur une population à partir d'un sous-ensemble de données collectées.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-activity"></i> SAS</span>
+              <span class="tool"><i class="bi bi-filetype-py"></i> Python</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-7-1.jpg" data-lightbox="sae-7" data-title="SAE 7 — Échantillonnage">
+              <img src="images/sae-7-1.jpg" alt="SAE 7" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-distribute-vertical></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
 
-        dots.forEach(dot => dot.classList.remove('active'));
+      <!-- 08 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">08</span>
+            <span class="proj-ghost">08</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat">Modélisation</span>
+            </div>
+            <h3>Régression sur des données réelles</h3>
+            <p>Mise en œuvre de modèles de régression linéaire simple et multiple sur un jeu de données réel. Vérification des hypothèses, interprétation des coefficients, évaluation de la qualité prédictive et visualisation des résidus.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-filetype-py"></i> Python</span>
+              <span class="tool"><i class="bi bi-activity"></i> SAS</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-8-1.jpg" data-lightbox="sae-8" data-title="SAE 8 — Régression">
+              <img src="images/sae-8-1.jpg" alt="SAE 8" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-graph-up-arrow></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
 
-        if (scrollTop < projectsOffset - 200) {
-          dots[0].classList.add('active');
-        } else {
-          dots[1].classList.add('active');
-        }
-      });
+      <!-- 09 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">09</span>
+            <span class="proj-ghost">09</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat orange">Performance</span>
+            </div>
+            <h3>Construction d'indicateurs de performance</h3>
+            <p>Sélection, calcul et mise en forme d'indicateurs clés (KPIs) pour piloter une activité. Construction d'un tableau de bord décisionnel permettant un suivi clair, synthétique et actionnable des données.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-bar-chart-line"></i> Power BI</span>
+              <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-9-1.jpg" data-lightbox="sae-9" data-title="SAE 9 — KPIs">
+              <img src="images/sae-9-1.jpg" alt="SAE 9" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-speedometer2></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
 
-      // Défilement fluide pour les liens ancrés
-      document.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A' && e.target.getAttribute('href') && e.target.getAttribute('href').startsWith('#')) {
-          e.preventDefault();
-          const targetId = e.target.getAttribute('href').substring(1);
-          const targetElement = document.getElementById(targetId);
-          if (targetElement) {
-            targetElement.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-        }
-      });
+      <!-- 10 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">10</span>
+            <span class="proj-ghost">10</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat violet">Datavisualisation</span>
+            </div>
+            <h3>Analyse, reporting et datavisualisation</h3>
+            <p>Projet intégrateur : exploration complète d'un dataset réel, nettoyage des données, analyse statistique descriptive, élaboration d'un rapport structuré et création de visualisations adaptées au public cible et aux enjeux métiers.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-filetype-py"></i> Python</span>
+              <span class="tool"><i class="bi bi-bar-chart-line"></i> Power BI</span>
+              <span class="tool"><i class="bi bi-activity"></i> SAS</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-10-1.jpg" data-lightbox="sae-10" data-title="SAE 10 — Datavisualisation">
+              <img src="images/sae-10-1.jpg" alt="SAE 10" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-pie-chart></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
 
-      // Configure Lightbox
-      if (typeof lightbox !== 'undefined') {
-        lightbox.option({
-          'resizeDuration': 300,
-          'imageFadeDuration': 300,
-          'wrapAround': true,
-          'fitImagesInViewport': true,
-          'maxWidth': 1200,
-          'maxHeight': 800,
-          'showImageNumberLabel': true,
-          'alwaysShowNavOnTouchDevices': false,
-          'albumLabel': "Image %1 sur %2",
-          'disableScrolling': true
-        });
-      }
+    </div>
 
-      // *************************
-      // Afficher/masquer les boutons de zoom et Fermer
-      // *************************
-      const fabContainer = document.querySelector('.fab-container');
-      const closeBtn = document.getElementById('close-btn');
+    <!-- CTA -->
+    <div class="bottom-cta reveal">
+      <div>
+        <h3>Voir mon portfolio complet</h3>
+        <p>Compétences, projets personnels, outils et informations de contact.</p>
+      </div>
+      <a href="index.html" class="btn btn-teal">
+        <i class="bi bi-arrow-right-circle"></i> Retour au portfolio
+      </a>
+    </div>
+  </section>
 
-      // Lorsque Lightbox s'ouvre, on affiche les boutons
-      document.addEventListener('lightbox:opened', () => {
-        fabContainer.style.display = 'flex';
-      });
+  <div class="divider"></div>
+  <footer>
+    <p class="footer-copy">© 2026 — <em>Marouane Yoda</em></p>
+    <div class="socials">
+      <a href="https://github.com/marouaneyoda" target="_blank"><i class="bi bi-github"></i></a>
+      <a href="https://linkedin.com/in/marouane-yoda" target="_blank"><i class="bi bi-linkedin"></i></a>
+      <a href="mailto:yoda.marouane@gmail.com"><i class="bi bi-envelope"></i></a>
+    </div>
+  </footer>
 
-      // Lorsque Lightbox se ferme, on cache les boutons
-      document.addEventListener('lightbox:closed', () => {
-        fabContainer.style.display = 'none';
-      });
-
-      // Quand on clique sur « Fermer », on termine la Lightbox
-      closeBtn.addEventListener('click', () => {
-        if (typeof lightbox !== 'undefined') {
-          lightbox.end();
-        }
-      });
-
-      // Zoom functionality globale (pour le contenu sous la Lightbox)
-      let currentZoom = 1;
-      const minZoom = 0.5;
-      const maxZoom = 2;
-      const zoomStep = 0.1;
-      
-      const zoomContainer = document.getElementById('zoom-container');
-      const zoomIndicator = document.getElementById('zoom-indicator');
-      const zoomPercentage = document.getElementById('zoom-percentage');
-      const zoomInBtn = document.getElementById('zoom-in-btn');
-      const zoomOutBtn = document.getElementById('zoom-out-btn');
-
-      function updateZoom(newZoom) {
-        currentZoom = Math.max(minZoom, Math.min(maxZoom, newZoom));
-        zoomContainer.style.transform = `scale(${currentZoom})`;
-        zoomPercentage.textContent = Math.round(currentZoom * 100) + '%';
-        
-        // Affiche l'indicateur de zoom
-        zoomIndicator.classList.add('show');
-        clearTimeout(window.zoomIndicatorTimeout);
-        window.zoomIndicatorTimeout = setTimeout(() => {
-          zoomIndicator.classList.remove('show');
-        }, 2000);
-
-        // Met à jour l'état des boutons
-        zoomInBtn.style.opacity = currentZoom >= maxZoom ? '0.5' : '1';
-        zoomOutBtn.style.opacity = currentZoom <= minZoom ? '0.5' : '1';
-        zoomInBtn.disabled = currentZoom >= maxZoom;
-        zoomOutBtn.disabled = currentZoom <= minZoom;
-      }
-
-      function zoomIn() {
-        updateZoom(currentZoom + zoomStep);
-      }
-
-      function zoomOut() {
-        updateZoom(currentZoom - zoomStep);
-      }
-
-      function resetZoom() {
-        updateZoom(1);
-      }
-
-      // Événements sur les boutons
-      zoomInBtn.addEventListener('click', zoomIn);
-      zoomOutBtn.addEventListener('click', zoomOut);
-
-      // Raccourcis clavier (Ctrl/+ / Ctrl/- / Ctrl+0)
-      document.addEventListener('keydown', (e) => {
-        if (e.ctrlKey || e.metaKey) {
-          switch(e.key) {
-            case '=':
-            case '+':
-              e.preventDefault();
-              zoomIn();
-              break;
-            case '-':
-              e.preventDefault();
-              zoomOut();
-              break;
-            case '0':
-              e.preventDefault();
-              resetZoom();
-              break;
-          }
-        }
-      });
-
-      // Zoom à la molette (Ctrl + molette)
-      document.addEventListener('wheel', (e) => {
-        if (e.ctrlKey || e.metaKey) {
-          e.preventDefault();
-          const delta = e.deltaY > 0 ? -zoomStep : zoomStep;
-          updateZoom(currentZoom + delta);
-        }
-      }, { passive: false });
-
-      // Touch gestures pour zoom
-      let touchStartDistance = 0;
-      let touchStartZoom = 1;
-
-      document.addEventListener('touchstart', (e) => {
-        if (e.touches.length === 2) {
-          const touch1 = e.touches[0];
-          const touch2 = e.touches[1];
-          touchStartDistance = Math.hypot(
-            touch1.clientX - touch2.clientX,
-            touch1.clientY - touch2.clientY
-          );
-          touchStartZoom = currentZoom;
-        }
-      });
-
-      document.addEventListener('touchmove', (e) => {
-        if (e.touches.length === 2) {
-          e.preventDefault();
-          const touch1 = e.touches[0];
-          const touch2 = e.touches[1];
-          const currentDistance = Math.hypot(
-            touch1.clientX - touch2.clientX,
-            touch1.clientY - touch2.clientY
-          );
-          
-          if (touchStartDistance > 0) {
-            const scale = currentDistance / touchStartDistance;
-            updateZoom(touchStartZoom * scale);
-          }
-        }
-      }, { passive: false });
-
-      document.addEventListener('touchend', (e) => {
-        if (e.touches.length < 2) {
-          touchStartDistance = 0;
-        }
-      });
-
-      // Double tap pour réinitialiser le zoom
-      let lastTouchTime = 0;
-      document.addEventListener('touchend', (e) => {
-        const currentTime = new Date().getTime();
-        const tapLength = currentTime - lastTouchTime;
-        if (tapLength < 500 && tapLength > 0 && e.touches.length === 0) {
-          resetZoom();
-        }
-        lastTouchTime = currentTime;
-      });
-
-      // Initialise le zoom par défaut
-      updateZoom(1);
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+  <script>
+    if (typeof lightbox !== 'undefined') {
+      lightbox.option({ resizeDuration:300, wrapAround:true, fitImagesInViewport:true, albumLabel:"Image %1 sur %2" });
+    }
+    window.addEventListener('scroll', () => {
+      const pf = document.getElementById('pf');
+      pf.style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100) + '%';
     });
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 70); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
   </script>
 </body>
 </html>
+ENDOFFILE
+
+13:30
