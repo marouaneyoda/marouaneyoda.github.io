@@ -1,0 +1,718 @@
+bash
+
+cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projets SAE — Marouane Yoda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:      #111827;
+      --surface: #1a2332;
+      --card:    #1e2d3d;
+      --card-h:  #243447;
+      --em:      #14b8a6;
+      --em2:     #f97316;
+      --em3:     #a78bfa;
+      --text:    #f1f5f9;
+      --muted:   #7d8fa8;
+      --dim:     #4a5c70;
+      --border:  rgba(20,184,166,0.14);
+      --border-h:rgba(20,184,166,0.4);
+      --radius:  16px;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
+
+    body {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* subtle dot pattern */
+    body::before {
+      content:"";
+      position:fixed; inset:0;
+      background-image: radial-gradient(rgba(20,184,166,0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+      z-index:0; pointer-events:none;
+    }
+
+    /* side gradient wash */
+    body::after {
+      content:"";
+      position:fixed; inset:0;
+      background:
+        radial-gradient(ellipse 60% 50% at 0% 30%, rgba(20,184,166,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 100% 70%, rgba(249,115,22,0.06) 0%, transparent 70%);
+      z-index:0; pointer-events:none;
+    }
+
+    /* SCROLL PROGRESS */
+    .progress-bar { position:fixed; top:0; left:0; width:100%; height:3px; z-index:1001; background:rgba(20,184,166,0.1); }
+    .progress-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--em),var(--em2)); transition:width .15s ease; }
+
+    /* NAVBAR */
+    .navbar {
+      position:fixed; top:0; width:100%; height:64px;
+      padding:0 6%;
+      display:flex; align-items:center; justify-content:space-between;
+      background:rgba(17,24,39,0.88);
+      backdrop-filter:blur(24px);
+      border-bottom:1px solid rgba(20,184,166,0.1);
+      z-index:1000;
+    }
+    .nav-logo { font-weight:800; font-size:1.05rem; color:var(--text); text-decoration:none; letter-spacing:-.3px; }
+    .nav-logo em { font-style:normal; color:var(--em); }
+    .nav-back {
+      display:inline-flex; align-items:center; gap:7px;
+      padding:7px 16px; border-radius:50px;
+      border:1px solid rgba(20,184,166,0.2);
+      color:var(--muted); font-size:.82rem; font-weight:600;
+      text-decoration:none; background:rgba(20,184,166,0.06);
+      transition:all .2s ease;
+    }
+    .nav-back:hover { color:var(--em); border-color:var(--border-h); transform:translateX(-3px); }
+
+    /* HERO */
+    .hero {
+      min-height:100vh;
+      display:flex; align-items:center; justify-content:center;
+      padding:100px 6% 70px;
+      position:relative; z-index:1;
+    }
+    .hero-inner { max-width:860px; width:100%; }
+
+    .hero-eyebrow {
+      display:inline-flex; align-items:center; gap:10px;
+      font-family:'DM Mono', monospace;
+      font-size:.72rem; letter-spacing:2px; text-transform:uppercase;
+      color:var(--em); margin-bottom:28px;
+      animation:fadeUp .6s ease both;
+    }
+    .hero-eyebrow::before {
+      content:"";
+      display:block; width:28px; height:1px; background:var(--em); opacity:.6;
+    }
+
+    .hero h1 {
+      font-size:clamp(2.8rem,6vw,5rem);
+      font-weight:800; line-height:1.04; letter-spacing:-2px;
+      margin-bottom:24px;
+      animation:fadeUp .7s .1s ease both;
+    }
+    .hero h1 .line-accent {
+      display:block;
+      color:transparent;
+      -webkit-text-stroke:1.5px var(--em);
+    }
+
+    .hero-desc {
+      color:var(--muted); font-size:1rem; line-height:1.85;
+      max-width:600px; margin-bottom:44px;
+      animation:fadeUp .7s .2s ease both;
+    }
+    .hero-desc strong { color:var(--text); font-weight:600; }
+
+    /* counter row */
+    .counter-row {
+      display:flex; gap:0; flex-wrap:wrap;
+      border:1px solid rgba(20,184,166,0.15);
+      border-radius:16px; overflow:hidden;
+      margin-bottom:44px;
+      max-width:560px;
+      animation:fadeUp .7s .3s ease both;
+    }
+    .counter-item {
+      flex:1; min-width:120px;
+      padding:20px 24px;
+      border-right:1px solid rgba(20,184,166,0.1);
+      background:rgba(20,184,166,0.04);
+    }
+    .counter-item:last-child { border-right:none; }
+    .counter-item .num {
+      display:block; font-size:1.9rem; font-weight:800;
+      color:var(--em); line-height:1; margin-bottom:4px;
+      font-family:'DM Mono', monospace;
+    }
+    .counter-item .lbl { font-size:.78rem; color:var(--muted); font-weight:500; }
+
+    .hero-actions {
+      display:flex; gap:12px; flex-wrap:wrap;
+      animation:fadeUp .7s .4s ease both;
+    }
+    .btn {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:12px 24px; border-radius:10px; border:none;
+      cursor:pointer; font-weight:700; font-size:.86rem;
+      text-decoration:none; font-family:'Bricolage Grotesque', sans-serif;
+      transition:all .25s ease; letter-spacing:.1px;
+    }
+    .btn-teal { background:var(--em); color:#0f1f1e; box-shadow:0 8px 24px rgba(20,184,166,0.3); }
+    .btn-teal:hover { transform:translateY(-3px); box-shadow:0 14px 30px rgba(20,184,166,0.4); }
+    .btn-outline { background:transparent; border:1px solid rgba(20,184,166,0.25); color:var(--muted); }
+    .btn-outline:hover { border-color:var(--border-h); color:var(--em); transform:translateY(-2px); }
+
+    /* SECTION */
+    .section { padding:90px 6%; position:relative; z-index:1; }
+
+    .section-eyebrow {
+      display:flex; align-items:center; gap:12px;
+      font-family:'DM Mono',monospace;
+      font-size:.7rem; letter-spacing:2px; text-transform:uppercase;
+      color:var(--em); margin-bottom:16px;
+    }
+    .section-eyebrow::after { content:""; flex:1; height:1px; background:rgba(20,184,166,0.2); }
+
+    .section h2 {
+      font-size:clamp(1.7rem,3vw,2.3rem);
+      font-weight:800; letter-spacing:-1px; line-height:1.1;
+      margin-bottom:10px;
+    }
+    .section-sub { color:var(--muted); font-size:.95rem; line-height:1.8; max-width:540px; margin-bottom:56px; }
+
+    /* PROJECT LIST */
+    .project-list { display:flex; flex-direction:column; gap:2px; }
+
+    .project-row {
+      position:relative; overflow:hidden;
+      background:var(--card);
+      border:1px solid rgba(20,184,166,0.08);
+      border-radius:var(--radius);
+      transition:all .3s ease;
+      cursor:default;
+    }
+    .project-row:hover {
+      background:var(--card-h);
+      border-color:var(--border-h);
+      transform:translateX(6px);
+    }
+
+    .project-row-inner {
+      display:grid;
+      grid-template-columns:80px 1fr auto;
+      gap:0; align-items:stretch;
+    }
+
+    /* big number */
+    .proj-num-col {
+      display:flex; align-items:center; justify-content:center;
+      padding:28px 0;
+      border-right:1px solid rgba(20,184,166,0.08);
+      position:relative;
+    }
+    .proj-num {
+      font-family:'DM Mono',monospace;
+      font-size:1.1rem; font-weight:500;
+      color:var(--dim);
+      transition:color .3s ease;
+    }
+    .project-row:hover .proj-num { color:var(--em); }
+
+    /* ghost big number bg */
+    .proj-ghost {
+      position:absolute;
+      font-family:'DM Mono',monospace;
+      font-size:5rem; font-weight:800;
+      color:rgba(20,184,166,0.04);
+      line-height:1;
+      right:-8px; top:50%; transform:translateY(-50%);
+      pointer-events:none; user-select:none;
+      transition:color .3s ease;
+    }
+    .project-row:hover .proj-ghost { color:rgba(20,184,166,0.08); }
+
+    /* content */
+    .proj-content { padding:24px 28px; }
+
+    .proj-header { display:flex; align-items:flex-start; gap:14px; margin-bottom:10px; flex-wrap:wrap; }
+    .proj-cat {
+      display:inline-block;
+      font-family:'DM Mono',monospace;
+      font-size:.65rem; letter-spacing:1.5px; text-transform:uppercase;
+      padding:4px 11px; border-radius:50px;
+      border:1px solid rgba(20,184,166,0.2);
+      color:var(--em); background:rgba(20,184,166,0.07);
+      flex-shrink:0;
+    }
+    .proj-cat.orange { border-color:rgba(249,115,22,0.25); color:var(--em2); background:rgba(249,115,22,0.07); }
+    .proj-cat.violet { border-color:rgba(167,139,250,0.25); color:var(--em3); background:rgba(167,139,250,0.07); }
+
+    .proj-content h3 {
+      font-size:1.05rem; font-weight:700; line-height:1.35;
+      color:var(--text); margin-bottom:8px;
+    }
+    .proj-content p {
+      color:var(--muted); font-size:.87rem; line-height:1.8;
+      margin-bottom:16px; max-width:680px;
+    }
+
+    .proj-tools { display:flex; flex-wrap:wrap; gap:6px; }
+    .tool {
+      display:inline-flex; align-items:center; gap:5px;
+      padding:3px 10px; border-radius:50px;
+      font-size:.7rem; font-weight:600;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+      color:var(--muted);
+      transition:all .2s ease;
+    }
+    .project-row:hover .tool { border-color:rgba(20,184,166,0.15); }
+    .tool i { font-size:.75rem; color:var(--em); }
+
+    /* image side */
+    .proj-img-col {
+      width:180px; flex-shrink:0;
+      border-left:1px solid rgba(20,184,166,0.08);
+      overflow:hidden; display:flex; align-items:center; justify-content:center;
+    }
+    .proj-img-col a { display:block; width:100%; height:100%; }
+    .proj-img-col img {
+      width:100%; height:100%; object-fit:cover;
+      transition:transform .4s ease;
+      filter:brightness(.85) saturate(.9);
+    }
+    .project-row:hover .proj-img-col img { transform:scale(1.06); filter:brightness(.95) saturate(1.05); }
+
+    .proj-img-placeholder {
+      width:100%; height:100%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:2.5rem; color:var(--dim);
+      background:rgba(20,184,166,0.04);
+    }
+
+    /* CTA BOTTOM */
+    .bottom-cta {
+      margin-top:60px;
+      border:1px solid rgba(20,184,166,0.18);
+      border-radius:20px;
+      padding:36px 40px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:24px; flex-wrap:wrap;
+      background:rgba(20,184,166,0.04);
+      position:relative; overflow:hidden;
+    }
+    .bottom-cta::before {
+      content:"";
+      position:absolute; top:0; left:0; right:0; height:2px;
+      background:linear-gradient(90deg,var(--em),var(--em2),var(--em3));
+    }
+    .bottom-cta h3 { font-size:1.2rem; font-weight:800; margin-bottom:6px; letter-spacing:-.5px; }
+    .bottom-cta p { color:var(--muted); font-size:.88rem; }
+
+    /* FOOTER */
+    .divider { width:calc(100% - 12%); margin:0 6%; height:1px; background:rgba(20,184,166,0.1); }
+    footer {
+      padding:32px 6%;
+      display:flex; align-items:center; justify-content:space-between;
+      flex-wrap:wrap; gap:16px; position:relative; z-index:1;
+    }
+    .footer-copy { color:var(--muted); font-size:.82rem; }
+    .footer-copy em { font-style:normal; color:var(--em); font-weight:600; }
+    .socials { display:flex; gap:8px; }
+    .socials a {
+      width:36px; height:36px;
+      display:flex; align-items:center; justify-content:center;
+      border-radius:9px; text-decoration:none;
+      color:var(--dim); background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.07);
+      transition:all .2s ease; font-size:.9rem;
+    }
+    .socials a:hover { color:var(--em); border-color:var(--border-h); transform:translateY(-2px); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    .reveal { opacity:0; transform:translateY(20px); transition:opacity .55s ease,transform .55s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      .project-row-inner { grid-template-columns:60px 1fr; }
+      .proj-img-col { display:none; }
+    }
+    @media(max-width:600px){
+      .section { padding:70px 5%; }
+      .navbar { padding:0 5%; }
+      .counter-row { border-radius:12px; }
+      .bottom-cta { padding:26px; flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="progress-bar"><div class="progress-fill" id="pf"></div></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">Marouane <em>Yoda</em></a>
+    <a href="index.html" class="nav-back"><i class="bi bi-arrow-left"></i> Portfolio</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Parcours académique — BUT STID</div>
+
+      <h1>
+        Projets
+        <span class="line-accent">SAE</span>
+      </h1>
+
+      <p class="hero-desc">
+        10 <strong>Situations d'Apprentissage et d'Évaluation</strong> réalisées durant mon BUT Statistique et Informatique Décisionnelle.
+        Chaque projet confronte théorie et réalité du terrain — de l'enquête statistique à la conception de base de données.
+      </p>
+
+      <div class="counter-row">
+        <div class="counter-item">
+          <span class="num">10</span>
+          <span class="lbl">projets SAE</span>
+        </div>
+        <div class="counter-item">
+          <span class="num">5+</span>
+          <span class="lbl">outils maîtrisés</span>
+        </div>
+        <div class="counter-item">
+          <span class="num">BUT</span>
+          <span class="lbl">STID — Data</span>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#projets" class="btn btn-teal">
+          <i class="bi bi-arrow-down-circle"></i> Voir les projets
+        </a>
+        <a href="index.html" class="btn btn-outline">
+          <i class="bi bi-house"></i> Retour à l'accueil
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projets">
+    <div class="section-eyebrow">SAE — 10 projets</div>
+    <h2 class="reveal">Situations d'apprentissage</h2>
+    <p class="section-sub reveal">Du reporting à la modélisation statistique, en passant par SQL, l'enquête de terrain et la datavisualisation.</p>
+
+    <div class="project-list">
+
+      <!-- 01 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">01</span>
+            <span class="proj-ghost">01</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat">Reporting</span>
+            </div>
+            <h3>Création d'un reporting</h3>
+            <p>Conception d'un rapport de données structuré, lisible et orienté prise de décision. Sélection des indicateurs pertinents, mise en forme professionnelle et présentation des résultats à un public non technique.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
+              <span class="tool"><i class="bi bi-bar-chart-line"></i> Power BI</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-1-1.jpg" data-lightbox="sae-1" data-title="SAE 1 — Création d'un reporting">
+              <img src="images/sae-1-1.jpg" alt="SAE 1" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-file-earmark-bar-graph></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">02</span>
+            <span class="proj-ghost">02</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat">Données</span>
+            </div>
+            <h3>Écriture et lecture de fichiers de données</h3>
+            <p>Manipulation de fichiers aux formats variés — CSV, JSON, Excel, TXT. Import, export, nettoyage et transformation de données brutes afin de les rendre exploitables dans une chaîne d'analyse complète.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-filetype-py"></i> Python</span>
+              <span class="tool"><i class="bi bi-file-earmark-code"></i> CSV / JSON</span>
+              <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-2-1.jpg" data-lightbox="sae-2" data-title="SAE 2 — Fichiers de données">
+              <img src="images/sae-2-1.jpg" alt="SAE 2" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-file-earmark-code></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">03</span>
+            <span class="proj-ghost">03</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat orange">Entreprise</span>
+            </div>
+            <h3>Production de données en entreprise</h3>
+            <p>Apprentissage en situation réelle des flux de production de données dans un contexte professionnel : collecte terrain, saisie, contrôle qualité, structuration et stockage des informations métiers.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-database"></i> SQL</span>
+              <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-3-1.jpg" data-lightbox="sae-3" data-title="SAE 3 — Production de données">
+              <img src="images/sae-3-1.jpg" alt="SAE 3" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-building></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">04</span>
+            <span class="proj-ghost">04</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat violet">Anglais</span>
+            </div>
+            <h3>Présentation d'un territoire économique</h3>
+            <p>Présentation orale en anglais d'un territoire économique et culturel. Travail sur la recherche documentaire, la structuration d'un discours clair et la communication professionnelle en langue étrangère.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-mic"></i> Oral</span>
+              <span class="tool"><i class="bi bi-globe2"></i> Anglais</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-4-1.jpg" data-lightbox="sae-4" data-title="SAE 4 — Présentation en anglais">
+              <img src="images/sae-4-1.jpg" alt="SAE 4" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-translate></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 05 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">05</span>
+            <span class="proj-ghost">05</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat">Enquête</span>
+            </div>
+            <h3>Mise en œuvre d'une enquête</h3>
+            <p>Conception du questionnaire, définition de la population cible et du plan de sondage, collecte sur le terrain, puis traitement statistique des réponses. Présentation des résultats sous forme d'un rapport synthétique illustré.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-filetype-py"></i> Python</span>
+              <span class="tool"><i class="bi bi-activity"></i> SAS</span>
+              <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-5-1.jpg" data-lightbox="sae-5" data-title="SAE 5 — Enquête">
+              <img src="images/sae-5-1.jpg" alt="SAE 5" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-clipboard-data></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 06 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">06</span>
+            <span class="proj-ghost">06</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat orange">Base de données</span>
+            </div>
+            <h3>Conception et implémentation d'une base de données</h3>
+            <p>Modélisation d'une base relationnelle complète : rédaction du MCD et du MLD, création des tables en SQL, définition des contraintes d'intégrité (clés primaires, étrangères) et requêtage avancé sur données réelles.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-database"></i> SQL</span>
+              <span class="tool"><i class="bi bi-diagram-2"></i> MCD / MLD</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-6-1.jpg" data-lightbox="sae-6" data-title="SAE 6 — Base de données">
+              <img src="images/sae-6-1.jpg" alt="SAE 6" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-diagram-3></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 07 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">07</span>
+            <span class="proj-ghost">07</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat violet">Statistiques</span>
+            </div>
+            <h3>Estimation par échantillonnage</h3>
+            <p>Application des méthodes d'échantillonnage probabiliste — aléatoire simple, stratifié, par grappes — pour produire des estimations fiables sur une population à partir d'un sous-ensemble de données collectées.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-activity"></i> SAS</span>
+              <span class="tool"><i class="bi bi-filetype-py"></i> Python</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-7-1.jpg" data-lightbox="sae-7" data-title="SAE 7 — Échantillonnage">
+              <img src="images/sae-7-1.jpg" alt="SAE 7" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-distribute-vertical></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 08 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">08</span>
+            <span class="proj-ghost">08</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat">Modélisation</span>
+            </div>
+            <h3>Régression sur des données réelles</h3>
+            <p>Mise en œuvre de modèles de régression linéaire simple et multiple sur un jeu de données réel. Vérification des hypothèses, interprétation des coefficients, évaluation de la qualité prédictive et visualisation des résidus.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-filetype-py"></i> Python</span>
+              <span class="tool"><i class="bi bi-activity"></i> SAS</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-8-1.jpg" data-lightbox="sae-8" data-title="SAE 8 — Régression">
+              <img src="images/sae-8-1.jpg" alt="SAE 8" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-graph-up-arrow></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 09 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">09</span>
+            <span class="proj-ghost">09</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat orange">Performance</span>
+            </div>
+            <h3>Construction d'indicateurs de performance</h3>
+            <p>Sélection, calcul et mise en forme d'indicateurs clés (KPIs) pour piloter une activité. Construction d'un tableau de bord décisionnel permettant un suivi clair, synthétique et actionnable des données.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-bar-chart-line"></i> Power BI</span>
+              <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-9-1.jpg" data-lightbox="sae-9" data-title="SAE 9 — KPIs">
+              <img src="images/sae-9-1.jpg" alt="SAE 9" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-speedometer2></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="project-row reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col">
+            <span class="proj-num">10</span>
+            <span class="proj-ghost">10</span>
+          </div>
+          <div class="proj-content">
+            <div class="proj-header">
+              <span class="proj-cat violet">Datavisualisation</span>
+            </div>
+            <h3>Analyse, reporting et datavisualisation</h3>
+            <p>Projet intégrateur : exploration complète d'un dataset réel, nettoyage des données, analyse statistique descriptive, élaboration d'un rapport structuré et création de visualisations adaptées au public cible et aux enjeux métiers.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-filetype-py"></i> Python</span>
+              <span class="tool"><i class="bi bi-bar-chart-line"></i> Power BI</span>
+              <span class="tool"><i class="bi bi-activity"></i> SAS</span>
+            </div>
+          </div>
+          <div class="proj-img-col">
+            <a href="images/sae-10-1.jpg" data-lightbox="sae-10" data-title="SAE 10 — Datavisualisation">
+              <img src="images/sae-10-1.jpg" alt="SAE 10" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-pie-chart></i></div>'">
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="bottom-cta reveal">
+      <div>
+        <h3>Voir mon portfolio complet</h3>
+        <p>Compétences, projets personnels, outils et informations de contact.</p>
+      </div>
+      <a href="index.html" class="btn btn-teal">
+        <i class="bi bi-arrow-right-circle"></i> Retour au portfolio
+      </a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+  <footer>
+    <p class="footer-copy">© 2026 — <em>Marouane Yoda</em></p>
+    <div class="socials">
+      <a href="https://github.com/marouaneyoda" target="_blank"><i class="bi bi-github"></i></a>
+      <a href="https://linkedin.com/in/marouane-yoda" target="_blank"><i class="bi bi-linkedin"></i></a>
+      <a href="mailto:yoda.marouane@gmail.com"><i class="bi bi-envelope"></i></a>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+  <script>
+    if (typeof lightbox !== 'undefined') {
+      lightbox.option({ resizeDuration:300, wrapAround:true, fitImagesInViewport:true, albumLabel:"Image %1 sur %2" });
+    }
+    window.addEventListener('scroll', () => {
+      const pf = document.getElementById('pf');
+      pf.style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100) + '%';
+    });
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 70); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
+ENDOFFILE
+
+13:30
