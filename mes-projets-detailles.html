@@ -1,6 +1,3 @@
-bash
-
-cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,7 +7,6 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
   <style>
@@ -40,35 +36,32 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
       line-height: 1.6;
     }
 
-    /* subtle dot pattern */
     body::before {
       content:"";
       position:fixed; inset:0;
-      background-image: radial-gradient(rgba(20,184,166,0.08) 1px, transparent 1px);
+      background-image: radial-gradient(rgba(20,184,166,0.07) 1px, transparent 1px);
       background-size: 28px 28px;
       z-index:0; pointer-events:none;
     }
-
-    /* side gradient wash */
     body::after {
       content:"";
       position:fixed; inset:0;
       background:
         radial-gradient(ellipse 60% 50% at 0% 30%, rgba(20,184,166,0.07) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 40% at 100% 70%, rgba(249,115,22,0.06) 0%, transparent 70%);
+        radial-gradient(ellipse 50% 40% at 100% 70%, rgba(249,115,22,0.05) 0%, transparent 70%);
       z-index:0; pointer-events:none;
     }
 
     /* SCROLL PROGRESS */
     .progress-bar { position:fixed; top:0; left:0; width:100%; height:3px; z-index:1001; background:rgba(20,184,166,0.1); }
-    .progress-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--em),var(--em2)); transition:width .15s ease; }
+    .progress-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--em),var(--em2)); transition:width .1s linear; }
 
     /* NAVBAR */
     .navbar {
-      position:fixed; top:0; width:100%; height:64px;
+      position:fixed; top:3px; width:100%; height:64px;
       padding:0 6%;
       display:flex; align-items:center; justify-content:space-between;
-      background:rgba(17,24,39,0.88);
+      background:rgba(17,24,39,0.9);
       backdrop-filter:blur(24px);
       border-bottom:1px solid rgba(20,184,166,0.1);
       z-index:1000;
@@ -89,7 +82,7 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
     .hero {
       min-height:100vh;
       display:flex; align-items:center; justify-content:center;
-      padding:100px 6% 70px;
+      padding:110px 6% 70px;
       position:relative; z-index:1;
     }
     .hero-inner { max-width:860px; width:100%; }
@@ -125,13 +118,11 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
     }
     .hero-desc strong { color:var(--text); font-weight:600; }
 
-    /* counter row */
     .counter-row {
       display:flex; gap:0; flex-wrap:wrap;
       border:1px solid rgba(20,184,166,0.15);
       border-radius:16px; overflow:hidden;
-      margin-bottom:44px;
-      max-width:560px;
+      margin-bottom:44px; max-width:560px;
       animation:fadeUp .7s .3s ease both;
     }
     .counter-item {
@@ -148,10 +139,7 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
     }
     .counter-item .lbl { font-size:.78rem; color:var(--muted); font-weight:500; }
 
-    .hero-actions {
-      display:flex; gap:12px; flex-wrap:wrap;
-      animation:fadeUp .7s .4s ease both;
-    }
+    .hero-actions { display:flex; gap:12px; flex-wrap:wrap; animation:fadeUp .7s .4s ease both; }
     .btn {
       display:inline-flex; align-items:center; gap:8px;
       padding:12px 24px; border-radius:10px; border:none;
@@ -166,7 +154,6 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
 
     /* SECTION */
     .section { padding:90px 6%; position:relative; z-index:1; }
-
     .section-eyebrow {
       display:flex; align-items:center; gap:12px;
       font-family:'DM Mono',monospace;
@@ -174,16 +161,14 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
       color:var(--em); margin-bottom:16px;
     }
     .section-eyebrow::after { content:""; flex:1; height:1px; background:rgba(20,184,166,0.2); }
-
     .section h2 {
       font-size:clamp(1.7rem,3vw,2.3rem);
-      font-weight:800; letter-spacing:-1px; line-height:1.1;
-      margin-bottom:10px;
+      font-weight:800; letter-spacing:-1px; line-height:1.1; margin-bottom:10px;
     }
     .section-sub { color:var(--muted); font-size:.95rem; line-height:1.8; max-width:540px; margin-bottom:56px; }
 
     /* PROJECT LIST */
-    .project-list { display:flex; flex-direction:column; gap:2px; }
+    .project-list { display:flex; flex-direction:column; gap:3px; }
 
     .project-row {
       position:relative; overflow:hidden;
@@ -191,21 +176,20 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
       border:1px solid rgba(20,184,166,0.08);
       border-radius:var(--radius);
       transition:all .3s ease;
-      cursor:default;
     }
     .project-row:hover {
       background:var(--card-h);
       border-color:var(--border-h);
-      transform:translateX(6px);
+      transform:translateX(4px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     }
 
     .project-row-inner {
       display:grid;
-      grid-template-columns:80px 1fr auto;
-      gap:0; align-items:stretch;
+      grid-template-columns:80px 1fr 220px;
+      align-items:stretch;
     }
 
-    /* big number */
     .proj-num-col {
       display:flex; align-items:center; justify-content:center;
       padding:28px 0;
@@ -219,8 +203,6 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
       transition:color .3s ease;
     }
     .project-row:hover .proj-num { color:var(--em); }
-
-    /* ghost big number bg */
     .proj-ghost {
       position:absolute;
       font-family:'DM Mono',monospace;
@@ -231,16 +213,14 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
       pointer-events:none; user-select:none;
       transition:color .3s ease;
     }
-    .project-row:hover .proj-ghost { color:rgba(20,184,166,0.08); }
+    .project-row:hover .proj-ghost { color:rgba(20,184,166,0.09); }
 
-    /* content */
     .proj-content { padding:24px 28px; }
-
-    .proj-header { display:flex; align-items:flex-start; gap:14px; margin-bottom:10px; flex-wrap:wrap; }
+    .proj-header { display:flex; align-items:flex-start; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
     .proj-cat {
       display:inline-block;
       font-family:'DM Mono',monospace;
-      font-size:.65rem; letter-spacing:1.5px; text-transform:uppercase;
+      font-size:.63rem; letter-spacing:1.5px; text-transform:uppercase;
       padding:4px 11px; border-radius:50px;
       border:1px solid rgba(20,184,166,0.2);
       color:var(--em); background:rgba(20,184,166,0.07);
@@ -249,14 +229,8 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
     .proj-cat.orange { border-color:rgba(249,115,22,0.25); color:var(--em2); background:rgba(249,115,22,0.07); }
     .proj-cat.violet { border-color:rgba(167,139,250,0.25); color:var(--em3); background:rgba(167,139,250,0.07); }
 
-    .proj-content h3 {
-      font-size:1.05rem; font-weight:700; line-height:1.35;
-      color:var(--text); margin-bottom:8px;
-    }
-    .proj-content p {
-      color:var(--muted); font-size:.87rem; line-height:1.8;
-      margin-bottom:16px; max-width:680px;
-    }
+    .proj-content h3 { font-size:1.05rem; font-weight:700; line-height:1.35; color:var(--text); margin-bottom:8px; }
+    .proj-content p { color:var(--muted); font-size:.87rem; line-height:1.8; margin-bottom:16px; max-width:640px; }
 
     .proj-tools { display:flex; flex-wrap:wrap; gap:6px; }
     .tool {
@@ -271,28 +245,63 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
     .project-row:hover .tool { border-color:rgba(20,184,166,0.15); }
     .tool i { font-size:.75rem; color:var(--em); }
 
-    /* image side */
+    /* IMAGE COLUMN — cliquable avec lightbox maison */
     .proj-img-col {
-      width:180px; flex-shrink:0;
       border-left:1px solid rgba(20,184,166,0.08);
-      overflow:hidden; display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
+      display:flex; align-items:stretch;
+      cursor:pointer;
+      position:relative;
     }
-    .proj-img-col a { display:block; width:100%; height:100%; }
+    .proj-img-col:hover .img-overlay { opacity:1; }
+    .img-overlay {
+      position:absolute; inset:0;
+      background:rgba(20,184,166,0.15);
+      display:flex; align-items:center; justify-content:center;
+      opacity:0; transition:opacity .25s ease;
+      font-size:1.8rem; color:var(--em);
+    }
     .proj-img-col img {
       width:100%; height:100%; object-fit:cover;
-      transition:transform .4s ease;
-      filter:brightness(.85) saturate(.9);
+      transition:transform .4s ease, filter .4s ease;
+      filter:brightness(.8) saturate(.85);
+      display:block;
     }
-    .project-row:hover .proj-img-col img { transform:scale(1.06); filter:brightness(.95) saturate(1.05); }
+    .project-row:hover .proj-img-col img { transform:scale(1.07); filter:brightness(.95) saturate(1.1); }
 
-    .proj-img-placeholder {
+    /* SVG placeholder visuels */
+    .proj-img-col svg {
       width:100%; height:100%;
-      display:flex; align-items:center; justify-content:center;
-      font-size:2.5rem; color:var(--dim);
-      background:rgba(20,184,166,0.04);
+      min-height:160px;
     }
 
-    /* CTA BOTTOM */
+    /* LIGHTBOX MODAL */
+    .lb-modal {
+      display:none; position:fixed; inset:0; z-index:9999;
+      background:rgba(10,15,25,0.95);
+      align-items:center; justify-content:center;
+      backdrop-filter:blur(12px);
+    }
+    .lb-modal.active { display:flex; animation:fadeIn .2s ease; }
+    .lb-inner { position:relative; max-width:90vw; max-height:90vh; }
+    .lb-inner img { max-width:90vw; max-height:85vh; border-radius:12px; box-shadow:0 40px 100px rgba(0,0,0,0.6); object-fit:contain; }
+    .lb-inner svg { max-width:90vw; max-height:85vh; border-radius:12px; }
+    .lb-close {
+      position:fixed; top:24px; right:28px;
+      width:44px; height:44px; border-radius:50%;
+      background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15);
+      color:#fff; font-size:1.3rem;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; transition:all .2s ease;
+    }
+    .lb-close:hover { background:rgba(20,184,166,0.2); border-color:var(--em); color:var(--em); }
+    .lb-caption {
+      position:absolute; bottom:-40px; left:0; right:0;
+      text-align:center; color:var(--muted); font-size:.82rem;
+      font-family:'DM Mono',monospace;
+    }
+
+    /* CTA */
     .bottom-cta {
       margin-top:60px;
       border:1px solid rgba(20,184,166,0.18);
@@ -331,12 +340,11 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
     }
     .socials a:hover { color:var(--em); border-color:var(--border-h); transform:translateY(-2px); }
 
-    /* ANIMATIONS */
     @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
     .reveal { opacity:0; transform:translateY(20px); transition:opacity .55s ease,transform .55s ease; }
     .reveal.visible { opacity:1; transform:translateY(0); }
 
-    /* RESPONSIVE */
     @media(max-width:900px){
       .project-row-inner { grid-template-columns:60px 1fr; }
       .proj-img-col { display:none; }
@@ -344,7 +352,6 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
     @media(max-width:600px){
       .section { padding:70px 5%; }
       .navbar { padding:0 5%; }
-      .counter-row { border-radius:12px; }
       .bottom-cta { padding:26px; flex-direction:column; }
     }
   </style>
@@ -353,62 +360,50 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
 
   <div class="progress-bar"><div class="progress-fill" id="pf"></div></div>
 
-  <!-- NAVBAR -->
+  <!-- LIGHTBOX MODAL -->
+  <div class="lb-modal" id="lbModal">
+    <button class="lb-close" id="lbClose"><i class="bi bi-x-lg"></i></button>
+    <div class="lb-inner" id="lbInner">
+      <div class="lb-caption" id="lbCaption"></div>
+    </div>
+  </div>
+
   <nav class="navbar">
     <a href="index.html" class="nav-logo">Marouane <em>Yoda</em></a>
     <a href="index.html" class="nav-back"><i class="bi bi-arrow-left"></i> Portfolio</a>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-eyebrow">Parcours académique — BUT STID</div>
-
       <h1>
         Projets
         <span class="line-accent">SAE</span>
       </h1>
-
       <p class="hero-desc">
         10 <strong>Situations d'Apprentissage et d'Évaluation</strong> réalisées durant mon BUT Statistique et Informatique Décisionnelle.
-        Chaque projet confronte théorie et réalité du terrain — de l'enquête statistique à la conception de base de données.
+        Chaque projet confronte théorie et réalité du terrain — de l'enquête statistique à la datavisualisation Power BI.
       </p>
-
       <div class="counter-row">
-        <div class="counter-item">
-          <span class="num">10</span>
-          <span class="lbl">projets SAE</span>
-        </div>
-        <div class="counter-item">
-          <span class="num">5+</span>
-          <span class="lbl">outils maîtrisés</span>
-        </div>
-        <div class="counter-item">
-          <span class="num">BUT</span>
-          <span class="lbl">STID — Data</span>
-        </div>
+        <div class="counter-item"><span class="num">10</span><span class="lbl">projets SAE</span></div>
+        <div class="counter-item"><span class="num">6+</span><span class="lbl">outils maîtrisés</span></div>
+        <div class="counter-item"><span class="num">BUT</span><span class="lbl">STID — Data</span></div>
       </div>
-
       <div class="hero-actions">
-        <a href="#projets" class="btn btn-teal">
-          <i class="bi bi-arrow-down-circle"></i> Voir les projets
-        </a>
-        <a href="index.html" class="btn btn-outline">
-          <i class="bi bi-house"></i> Retour à l'accueil
-        </a>
+        <a href="#projets" class="btn btn-teal"><i class="bi bi-arrow-down-circle"></i> Voir les projets</a>
+        <a href="index.html" class="btn btn-outline"><i class="bi bi-house"></i> Retour à l'accueil</a>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
   <section class="section" id="projets">
     <div class="section-eyebrow">SAE — 10 projets</div>
     <h2 class="reveal">Situations d'apprentissage</h2>
-    <p class="section-sub reveal">Du reporting à la modélisation statistique, en passant par SQL, l'enquête de terrain et la datavisualisation.</p>
+    <p class="section-sub reveal">Du reporting à la modélisation statistique, en passant par SQL, l'enquête de terrain et la datavisualisation Power BI. Cliquez sur les aperçus pour les agrandir.</p>
 
     <div class="project-list">
 
-      <!-- 01 -->
+      <!-- SAE 01 -->
       <div class="project-row reveal">
         <div class="project-row-inner">
           <div class="proj-num-col">
@@ -416,9 +411,7 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
             <span class="proj-ghost">01</span>
           </div>
           <div class="proj-content">
-            <div class="proj-header">
-              <span class="proj-cat">Reporting</span>
-            </div>
+            <div class="proj-header"><span class="proj-cat">Reporting</span></div>
             <h3>Création d'un reporting</h3>
             <p>Conception d'un rapport de données structuré, lisible et orienté prise de décision. Sélection des indicateurs pertinents, mise en forme professionnelle et présentation des résultats à un public non technique.</p>
             <div class="proj-tools">
@@ -426,15 +419,14 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
               <span class="tool"><i class="bi bi-bar-chart-line"></i> Power BI</span>
             </div>
           </div>
-          <div class="proj-img-col">
-            <a href="images/sae-1-1.jpg" data-lightbox="sae-1" data-title="SAE 1 — Création d'un reporting">
-              <img src="images/sae-1-1.jpg" alt="SAE 1" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-file-earmark-bar-graph></i></div>'">
-            </a>
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 01 — Création d'un reporting">
+            <img src="sae-1-1.jpg" alt="SAE 1 — Reporting" loading="lazy">
+            <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- 02 -->
+      <!-- SAE 02 -->
       <div class="project-row reveal">
         <div class="project-row-inner">
           <div class="proj-num-col">
@@ -442,9 +434,7 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
             <span class="proj-ghost">02</span>
           </div>
           <div class="proj-content">
-            <div class="proj-header">
-              <span class="proj-cat">Données</span>
-            </div>
+            <div class="proj-header"><span class="proj-cat">Données</span></div>
             <h3>Écriture et lecture de fichiers de données</h3>
             <p>Manipulation de fichiers aux formats variés — CSV, JSON, Excel, TXT. Import, export, nettoyage et transformation de données brutes afin de les rendre exploitables dans une chaîne d'analyse complète.</p>
             <div class="proj-tools">
@@ -453,15 +443,14 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
               <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
             </div>
           </div>
-          <div class="proj-img-col">
-            <a href="images/sae-2-1.jpg" data-lightbox="sae-2" data-title="SAE 2 — Fichiers de données">
-              <img src="images/sae-2-1.jpg" alt="SAE 2" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-file-earmark-code></i></div>'">
-            </a>
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 02 — Fichiers de données">
+            <img src="sae-2-1.jpg" alt="SAE 2" loading="lazy">
+            <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- 03 -->
+      <!-- SAE 03 -->
       <div class="project-row reveal">
         <div class="project-row-inner">
           <div class="proj-num-col">
@@ -469,9 +458,7 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
             <span class="proj-ghost">03</span>
           </div>
           <div class="proj-content">
-            <div class="proj-header">
-              <span class="proj-cat orange">Entreprise</span>
-            </div>
+            <div class="proj-header"><span class="proj-cat orange">Entreprise</span></div>
             <h3>Production de données en entreprise</h3>
             <p>Apprentissage en situation réelle des flux de production de données dans un contexte professionnel : collecte terrain, saisie, contrôle qualité, structuration et stockage des informations métiers.</p>
             <div class="proj-tools">
@@ -479,15 +466,14 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
               <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
             </div>
           </div>
-          <div class="proj-img-col">
-            <a href="images/sae-3-1.jpg" data-lightbox="sae-3" data-title="SAE 3 — Production de données">
-              <img src="images/sae-3-1.jpg" alt="SAE 3" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-building></i></div>'">
-            </a>
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 03 — Production de données en entreprise">
+            <img src="sae-3-1.jpg" alt="SAE 3" loading="lazy">
+            <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- 04 -->
+      <!-- SAE 04 -->
       <div class="project-row reveal">
         <div class="project-row-inner">
           <div class="proj-num-col">
@@ -495,9 +481,7 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
             <span class="proj-ghost">04</span>
           </div>
           <div class="proj-content">
-            <div class="proj-header">
-              <span class="proj-cat violet">Anglais</span>
-            </div>
+            <div class="proj-header"><span class="proj-cat violet">Anglais</span></div>
             <h3>Présentation d'un territoire économique</h3>
             <p>Présentation orale en anglais d'un territoire économique et culturel. Travail sur la recherche documentaire, la structuration d'un discours clair et la communication professionnelle en langue étrangère.</p>
             <div class="proj-tools">
@@ -505,15 +489,14 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
               <span class="tool"><i class="bi bi-globe2"></i> Anglais</span>
             </div>
           </div>
-          <div class="proj-img-col">
-            <a href="images/sae-4-1.jpg" data-lightbox="sae-4" data-title="SAE 4 — Présentation en anglais">
-              <img src="images/sae-4-1.jpg" alt="SAE 4" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-translate></i></div>'">
-            </a>
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 04 — Présentation en anglais">
+            <img src="sae-4-1.jpg" alt="SAE 4" loading="lazy">
+            <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- 05 -->
+      <!-- SAE 05 -->
       <div class="project-row reveal">
         <div class="project-row-inner">
           <div class="proj-num-col">
@@ -521,10 +504,8 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
             <span class="proj-ghost">05</span>
           </div>
           <div class="proj-content">
-            <div class="proj-header">
-              <span class="proj-cat">Enquête</span>
-            </div>
-            <h3>Mise en œuvre d'une enquête</h3>
+            <div class="proj-header"><span class="proj-cat">Enquête</span></div>
+            <h3>Mise en œuvre d'une enquête statistique</h3>
             <p>Conception du questionnaire, définition de la population cible et du plan de sondage, collecte sur le terrain, puis traitement statistique des réponses. Présentation des résultats sous forme d'un rapport synthétique illustré.</p>
             <div class="proj-tools">
               <span class="tool"><i class="bi bi-filetype-py"></i> Python</span>
@@ -532,15 +513,14 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
               <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
             </div>
           </div>
-          <div class="proj-img-col">
-            <a href="images/sae-5-1.jpg" data-lightbox="sae-5" data-title="SAE 5 — Enquête">
-              <img src="images/sae-5-1.jpg" alt="SAE 5" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-clipboard-data></i></div>'">
-            </a>
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 05 — Enquête statistique">
+            <img src="sae-5-1.jpg" alt="SAE 5" loading="lazy">
+            <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- 06 -->
+      <!-- SAE 06 -->
       <div class="project-row reveal">
         <div class="project-row-inner">
           <div class="proj-num-col">
@@ -548,9 +528,7 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
             <span class="proj-ghost">06</span>
           </div>
           <div class="proj-content">
-            <div class="proj-header">
-              <span class="proj-cat orange">Base de données</span>
-            </div>
+            <div class="proj-header"><span class="proj-cat orange">Base de données</span></div>
             <h3>Conception et implémentation d'une base de données</h3>
             <p>Modélisation d'une base relationnelle complète : rédaction du MCD et du MLD, création des tables en SQL, définition des contraintes d'intégrité (clés primaires, étrangères) et requêtage avancé sur données réelles.</p>
             <div class="proj-tools">
@@ -558,15 +536,14 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
               <span class="tool"><i class="bi bi-diagram-2"></i> MCD / MLD</span>
             </div>
           </div>
-          <div class="proj-img-col">
-            <a href="images/sae-6-1.jpg" data-lightbox="sae-6" data-title="SAE 6 — Base de données">
-              <img src="images/sae-6-1.jpg" alt="SAE 6" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-diagram-3></i></div>'">
-            </a>
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 06 — Base de données SQL">
+            <img src="sae-6-1.jpg" alt="SAE 6" loading="lazy">
+            <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- 07 -->
+      <!-- SAE 07 -->
       <div class="project-row reveal">
         <div class="project-row-inner">
           <div class="proj-num-col">
@@ -574,9 +551,7 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
             <span class="proj-ghost">07</span>
           </div>
           <div class="proj-content">
-            <div class="proj-header">
-              <span class="proj-cat violet">Statistiques</span>
-            </div>
+            <div class="proj-header"><span class="proj-cat violet">Statistiques</span></div>
             <h3>Estimation par échantillonnage</h3>
             <p>Application des méthodes d'échantillonnage probabiliste — aléatoire simple, stratifié, par grappes — pour produire des estimations fiables sur une population à partir d'un sous-ensemble de données collectées.</p>
             <div class="proj-tools">
@@ -584,15 +559,14 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
               <span class="tool"><i class="bi bi-filetype-py"></i> Python</span>
             </div>
           </div>
-          <div class="proj-img-col">
-            <a href="images/sae-7-1.jpg" data-lightbox="sae-7" data-title="SAE 7 — Échantillonnage">
-              <img src="images/sae-7-1.jpg" alt="SAE 7" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-distribute-vertical></i></div>'">
-            </a>
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 07 — Échantillonnage statistique">
+            <img src="sae-7-1.jpg" alt="SAE 7" loading="lazy">
+            <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- 08 -->
+      <!-- SAE 08 -->
       <div class="project-row reveal">
         <div class="project-row-inner">
           <div class="proj-num-col">
@@ -600,9 +574,7 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
             <span class="proj-ghost">08</span>
           </div>
           <div class="proj-content">
-            <div class="proj-header">
-              <span class="proj-cat">Modélisation</span>
-            </div>
+            <div class="proj-header"><span class="proj-cat">Modélisation</span></div>
             <h3>Régression sur des données réelles</h3>
             <p>Mise en œuvre de modèles de régression linéaire simple et multiple sur un jeu de données réel. Vérification des hypothèses, interprétation des coefficients, évaluation de la qualité prédictive et visualisation des résidus.</p>
             <div class="proj-tools">
@@ -610,15 +582,14 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
               <span class="tool"><i class="bi bi-activity"></i> SAS</span>
             </div>
           </div>
-          <div class="proj-img-col">
-            <a href="images/sae-8-1.jpg" data-lightbox="sae-8" data-title="SAE 8 — Régression">
-              <img src="images/sae-8-1.jpg" alt="SAE 8" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-graph-up-arrow></i></div>'">
-            </a>
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 08 — Régression linéaire">
+            <img src="sae-8-1.jpg" alt="SAE 8" loading="lazy">
+            <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- 09 -->
+      <!-- SAE 09 — Power BI Dashboard (image réelle + visuel SVG bonus) -->
       <div class="project-row reveal">
         <div class="project-row-inner">
           <div class="proj-num-col">
@@ -626,25 +597,23 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
             <span class="proj-ghost">09</span>
           </div>
           <div class="proj-content">
-            <div class="proj-header">
-              <span class="proj-cat orange">Performance</span>
-            </div>
-            <h3>Construction d'indicateurs de performance</h3>
-            <p>Sélection, calcul et mise en forme d'indicateurs clés (KPIs) pour piloter une activité. Construction d'un tableau de bord décisionnel permettant un suivi clair, synthétique et actionnable des données.</p>
+            <div class="proj-header"><span class="proj-cat orange">Power BI · KPIs</span></div>
+            <h3>Construction d'indicateurs de performance (KPIs)</h3>
+            <p>Sélection, calcul et mise en forme d'indicateurs clés pour piloter une activité. Création d'un tableau de bord Power BI interactif avec mesures DAX, graphiques dynamiques, filtres croisés et mise en page orientée décision.</p>
             <div class="proj-tools">
               <span class="tool"><i class="bi bi-bar-chart-line"></i> Power BI</span>
               <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
+              <span class="tool"><i class="bi bi-calculator"></i> DAX</span>
             </div>
           </div>
-          <div class="proj-img-col">
-            <a href="images/sae-9-1.jpg" data-lightbox="sae-9" data-title="SAE 9 — KPIs">
-              <img src="images/sae-9-1.jpg" alt="SAE 9" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-speedometer2></i></div>'">
-            </a>
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 09 — Dashboard Power BI KPIs">
+            <img src="sae-9-1.jpg" alt="SAE 9 — Power BI" loading="lazy">
+            <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- 10 -->
+      <!-- SAE 10 — Datavisualisation (visuel SVG car pas d'image) -->
       <div class="project-row reveal">
         <div class="project-row-inner">
           <div class="proj-num-col">
@@ -652,26 +621,78 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
             <span class="proj-ghost">10</span>
           </div>
           <div class="proj-content">
-            <div class="proj-header">
-              <span class="proj-cat violet">Datavisualisation</span>
-            </div>
+            <div class="proj-header"><span class="proj-cat violet">Datavisualisation</span></div>
             <h3>Analyse, reporting et datavisualisation</h3>
-            <p>Projet intégrateur : exploration complète d'un dataset réel, nettoyage des données, analyse statistique descriptive, élaboration d'un rapport structuré et création de visualisations adaptées au public cible et aux enjeux métiers.</p>
+            <p>Projet intégrateur : exploration complète d'un dataset réel, nettoyage des données, analyse statistique descriptive, élaboration d'un rapport structuré et création de visualisations Power BI adaptées aux enjeux métiers.</p>
             <div class="proj-tools">
               <span class="tool"><i class="bi bi-filetype-py"></i> Python</span>
               <span class="tool"><i class="bi bi-bar-chart-line"></i> Power BI</span>
               <span class="tool"><i class="bi bi-activity"></i> SAS</span>
             </div>
           </div>
-          <div class="proj-img-col">
-            <a href="images/sae-10-1.jpg" data-lightbox="sae-10" data-title="SAE 10 — Datavisualisation">
-              <img src="images/sae-10-1.jpg" alt="SAE 10" onerror="this.parentElement.outerHTML='<div class=proj-img-placeholder><i class=bi-pie-chart></i></div>'">
-            </a>
+          <!-- SVG inline simulating a Power BI dashboard -->
+          <div class="proj-img-col" onclick="openLbSvg('sae10svg','SAE 10 — Datavisualisation &amp; Reporting Power BI')">
+            <svg id="sae10svg-thumb" viewBox="0 0 220 160" xmlns="http://www.w3.org/2000/svg" style="background:#1a2332;">
+              <!-- bg -->
+              <rect width="220" height="160" fill="#1a2332"/>
+              <!-- header bar -->
+              <rect x="0" y="0" width="220" height="22" fill="#14243a"/>
+              <text x="8" y="14" font-family="monospace" font-size="7" fill="#14b8a6" font-weight="bold">SAE 10 · Datavisualisation</text>
+              <circle cx="205" cy="11" r="4" fill="#14b8a6" opacity=".5"/>
+              <circle cx="194" cy="11" r="4" fill="#f97316" opacity=".4"/>
+              <!-- KPI cards -->
+              <rect x="8" y="28" width="44" height="26" rx="3" fill="#243447"/>
+              <text x="12" y="38" font-family="monospace" font-size="5" fill="#7d8fa8">CA Total</text>
+              <text x="12" y="48" font-family="monospace" font-size="8" fill="#14b8a6" font-weight="bold">284K</text>
+              <rect x="58" y="28" width="44" height="26" rx="3" fill="#243447"/>
+              <text x="62" y="38" font-family="monospace" font-size="5" fill="#7d8fa8">Clients</text>
+              <text x="62" y="48" font-family="monospace" font-size="8" fill="#a78bfa" font-weight="bold">1 432</text>
+              <rect x="108" y="28" width="44" height="26" rx="3" fill="#243447"/>
+              <text x="112" y="38" font-family="monospace" font-size="5" fill="#7d8fa8">Marge %</text>
+              <text x="112" y="48" font-family="monospace" font-size="8" fill="#f97316" font-weight="bold">23.4%</text>
+              <rect x="158" y="28" width="54" height="26" rx="3" fill="#243447"/>
+              <text x="162" y="38" font-family="monospace" font-size="5" fill="#7d8fa8">Satisfaction</text>
+              <text x="162" y="48" font-family="monospace" font-size="8" fill="#14b8a6" font-weight="bold">4.7 / 5</text>
+              <!-- Bar chart -->
+              <rect x="8" y="62" width="120" height="72" rx="3" fill="#162030"/>
+              <text x="12" y="72" font-family="monospace" font-size="5" fill="#7d8fa8">Ventes par mois</text>
+              <!-- bars -->
+              <rect x="14" y="100" width="8" height="26" rx="1" fill="#14b8a6" opacity=".7"/>
+              <rect x="26" y="93" width="8" height="33" rx="1" fill="#14b8a6" opacity=".7"/>
+              <rect x="38" y="88" width="8" height="38" rx="1" fill="#14b8a6" opacity=".8"/>
+              <rect x="50" y="96" width="8" height="30" rx="1" fill="#14b8a6" opacity=".7"/>
+              <rect x="62" y="84" width="8" height="42" rx="1" fill="#f97316" opacity=".8"/>
+              <rect x="74" y="78" width="8" height="48" rx="1" fill="#f97316" opacity=".9"/>
+              <rect x="86" y="90" width="8" height="36" rx="1" fill="#14b8a6" opacity=".7"/>
+              <rect x="98" y="82" width="8" height="44" rx="1" fill="#14b8a6"/>
+              <rect x="110" y="76" width="8" height="50" rx="1" fill="#a78bfa"/>
+              <line x1="14" y1="126" x2="120" y2="126" stroke="#4a5c70" stroke-width=".5"/>
+              <text x="14" y="133" font-family="monospace" font-size="4" fill="#4a5c70">Jan Fév Mar Avr Mai Jun Jul Aoû Sep</text>
+              <!-- Donut chart -->
+              <rect x="136" y="62" width="76" height="72" rx="3" fill="#162030"/>
+              <text x="140" y="72" font-family="monospace" font-size="5" fill="#7d8fa8">Répartition</text>
+              <circle cx="174" cy="103" r="22" fill="none" stroke="#243447" stroke-width="10"/>
+              <circle cx="174" cy="103" r="22" fill="none" stroke="#14b8a6" stroke-width="10"
+                stroke-dasharray="49 89" stroke-dashoffset="0" opacity=".9"/>
+              <circle cx="174" cy="103" r="22" fill="none" stroke="#f97316" stroke-width="10"
+                stroke-dasharray="26 89" stroke-dashoffset="-49" opacity=".85"/>
+              <circle cx="174" cy="103" r="22" fill="none" stroke="#a78bfa" stroke-width="10"
+                stroke-dasharray="14 89" stroke-dashoffset="-75" opacity=".8"/>
+              <text x="170" y="106" font-family="monospace" font-size="6" fill="#f1f5f9" font-weight="bold">55%</text>
+              <!-- legend -->
+              <rect x="140" y="124" width="5" height="5" rx="1" fill="#14b8a6"/>
+              <text x="147" y="129" font-family="monospace" font-size="4" fill="#7d8fa8">Région A</text>
+              <rect x="168" y="124" width="5" height="5" rx="1" fill="#f97316"/>
+              <text x="175" y="129" font-family="monospace" font-size="4" fill="#7d8fa8">Région B</text>
+              <!-- line chart bottom -->
+              <rect x="8" y="140" width="204" height="2" rx="1" fill="#14b8a6" opacity=".15"/>
+            </svg>
+            <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-    </div>
+    </div><!-- end project-list -->
 
     <!-- CTA -->
     <div class="bottom-cta reveal">
@@ -683,6 +704,7 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
         <i class="bi bi-arrow-right-circle"></i> Retour au portfolio
       </a>
     </div>
+
   </section>
 
   <div class="divider"></div>
@@ -695,24 +717,194 @@ cat > /mnt/user-data/outputs/mes-projets-detailles.html << 'ENDOFFILE'
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
   <script>
-    if (typeof lightbox !== 'undefined') {
-      lightbox.option({ resizeDuration:300, wrapAround:true, fitImagesInViewport:true, albumLabel:"Image %1 sur %2" });
-    }
+    // Scroll progress
     window.addEventListener('scroll', () => {
-      const pf = document.getElementById('pf');
-      pf.style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100) + '%';
+      document.getElementById('pf').style.width =
+        (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100) + '%';
     });
+
+    // Reveal on scroll
     const obs = new IntersectionObserver((entries) => {
       entries.forEach((e, i) => {
-        if (e.isIntersecting) { setTimeout(() => e.target.classList.add('visible'), i * 70); obs.unobserve(e.target); }
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 70);
+          obs.unobserve(e.target);
+        }
       });
     }, { threshold: 0.07 });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Lightbox pour images réelles
+    function openLb(col) {
+      const img = col.querySelector('img');
+      if (!img) return;
+      const caption = col.getAttribute('data-caption') || '';
+      const modal = document.getElementById('lbModal');
+      const inner = document.getElementById('lbInner');
+      // clear
+      inner.querySelectorAll('img').forEach(e => e.remove());
+      inner.querySelectorAll('svg').forEach(e => e.remove());
+      // create img
+      const bigImg = document.createElement('img');
+      bigImg.src = img.src;
+      bigImg.alt = img.alt;
+      inner.insertBefore(bigImg, document.getElementById('lbCaption'));
+      document.getElementById('lbCaption').textContent = caption;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Lightbox pour SVG SAE 10
+    function openLbSvg(svgId, caption) {
+      const modal = document.getElementById('lbModal');
+      const inner = document.getElementById('lbInner');
+      inner.querySelectorAll('img').forEach(e => e.remove());
+      inner.querySelectorAll('svg').forEach(e => e.remove());
+
+      // Build large version of the SVG
+      const bigSvg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      bigSvg.setAttribute('viewBox','0 0 800 520');
+      bigSvg.setAttribute('xmlns','http://www.w3.org/2000/svg');
+      bigSvg.style.cssText = 'max-width:88vw;max-height:80vh;border-radius:12px;background:#1a2332;';
+      bigSvg.innerHTML = `
+        <defs>
+          <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#14b8a6;stop-opacity:1"/>
+            <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1"/>
+          </linearGradient>
+        </defs>
+        <!-- bg -->
+        <rect width="800" height="520" fill="#111827"/>
+        <!-- header -->
+        <rect width="800" height="58" fill="#14243a"/>
+        <text x="24" y="26" font-family="monospace" font-size="11" fill="#14b8a6" font-weight="bold">SAE 10 · Analyse, Reporting &amp; Datavisualisation</text>
+        <text x="24" y="44" font-family="monospace" font-size="9" fill="#4a5c70">BUT STID — Projet intégrateur · Power BI · Python · SAS</text>
+        <rect x="660" y="16" width="120" height="26" rx="5" fill="#243447"/>
+        <text x="676" y="33" font-family="monospace" font-size="9" fill="#14b8a6">Période : 2024</text>
+
+        <!-- KPI cards row -->
+        <rect x="16" y="72" width="170" height="78" rx="6" fill="#1e2d3d" stroke="#14b8a6" stroke-width=".5" stroke-opacity=".2"/>
+        <text x="28" y="92" font-family="monospace" font-size="9" fill="#7d8fa8">Chiffre d'affaires</text>
+        <text x="28" y="122" font-family="monospace" font-size="26" fill="#14b8a6" font-weight="bold">284K€</text>
+        <text x="28" y="140" font-family="monospace" font-size="8" fill="#14b8a6">▲ +12.3% vs N-1</text>
+
+        <rect x="200" y="72" width="170" height="78" rx="6" fill="#1e2d3d" stroke="#a78bfa" stroke-width=".5" stroke-opacity=".2"/>
+        <text x="212" y="92" font-family="monospace" font-size="9" fill="#7d8fa8">Nb. clients actifs</text>
+        <text x="212" y="122" font-family="monospace" font-size="26" fill="#a78bfa" font-weight="bold">1 432</text>
+        <text x="212" y="140" font-family="monospace" font-size="8" fill="#a78bfa">▲ +8.7%</text>
+
+        <rect x="384" y="72" width="170" height="78" rx="6" fill="#1e2d3d" stroke="#f97316" stroke-width=".5" stroke-opacity=".2"/>
+        <text x="396" y="92" font-family="monospace" font-size="9" fill="#7d8fa8">Marge nette</text>
+        <text x="396" y="122" font-family="monospace" font-size="26" fill="#f97316" font-weight="bold">23.4%</text>
+        <text x="396" y="140" font-family="monospace" font-size="8" fill="#f97316">▼ -1.2pts</text>
+
+        <rect x="568" y="72" width="216" height="78" rx="6" fill="#1e2d3d" stroke="#14b8a6" stroke-width=".5" stroke-opacity=".2"/>
+        <text x="580" y="92" font-family="monospace" font-size="9" fill="#7d8fa8">Satisfaction client</text>
+        <text x="580" y="122" font-family="monospace" font-size="26" fill="#14b8a6" font-weight="bold">4.7 / 5</text>
+        <text x="580" y="140" font-family="monospace" font-size="8" fill="#14b8a6">★★★★★ 98% reco.</text>
+
+        <!-- Bar chart — Ventes mensuelles -->
+        <rect x="16" y="166" width="450" height="200" rx="6" fill="#1a2332" stroke="#243447" stroke-width="1"/>
+        <text x="30" y="185" font-family="monospace" font-size="10" fill="#f1f5f9" font-weight="bold">Ventes mensuelles (€)</text>
+        <text x="30" y="198" font-family="monospace" font-size="8" fill="#4a5c70">Exercice 2024</text>
+        <!-- gridlines -->
+        <line x1="30" y1="340" x2="450" y2="340" stroke="#243447" stroke-width="1"/>
+        <line x1="30" y1="310" x2="450" y2="310" stroke="#243447" stroke-width=".5" stroke-dasharray="4,4"/>
+        <line x1="30" y1="280" x2="450" y2="280" stroke="#243447" stroke-width=".5" stroke-dasharray="4,4"/>
+        <line x1="30" y1="250" x2="450" y2="250" stroke="#243447" stroke-width=".5" stroke-dasharray="4,4"/>
+        <line x1="30" y1="220" x2="450" y2="220" stroke="#243447" stroke-width=".5" stroke-dasharray="4,4"/>
+        <!-- bars -->
+        <rect x="45" y="298" width="22" height="42" rx="2" fill="#14b8a6" opacity=".75"/>
+        <rect x="80" y="282" width="22" height="58" rx="2" fill="#14b8a6" opacity=".8"/>
+        <rect x="115" y="265" width="22" height="75" rx="2" fill="#14b8a6" opacity=".85"/>
+        <rect x="150" y="287" width="22" height="53" rx="2" fill="#14b8a6" opacity=".75"/>
+        <rect x="185" y="253" width="22" height="87" rx="2" fill="#f97316" opacity=".85"/>
+        <rect x="220" y="240" width="22" height="100" rx="2" fill="#f97316" opacity=".9"/>
+        <rect x="255" y="270" width="22" height="70" rx="2" fill="#14b8a6" opacity=".8"/>
+        <rect x="290" y="248" width="22" height="92" rx="2" fill="#14b8a6" opacity=".85"/>
+        <rect x="325" y="232" width="22" height="108" rx="2" fill="#a78bfa" opacity=".9"/>
+        <rect x="360" y="258" width="22" height="82" rx="2" fill="#a78bfa" opacity=".8"/>
+        <rect x="395" y="222" width="22" height="118" rx="2" fill="#14b8a6"/>
+        <rect x="430" y="215" width="22" height="125" rx="2" fill="url(#grad1)"/>
+        <!-- x labels -->
+        <text x="48" y="352" font-family="monospace" font-size="7" fill="#4a5c70">Jan</text>
+        <text x="83" y="352" font-family="monospace" font-size="7" fill="#4a5c70">Fév</text>
+        <text x="118" y="352" font-family="monospace" font-size="7" fill="#4a5c70">Mar</text>
+        <text x="153" y="352" font-family="monospace" font-size="7" fill="#4a5c70">Avr</text>
+        <text x="188" y="352" font-family="monospace" font-size="7" fill="#f97316">Mai</text>
+        <text x="223" y="352" font-family="monospace" font-size="7" fill="#f97316">Jun</text>
+        <text x="258" y="352" font-family="monospace" font-size="7" fill="#4a5c70">Jul</text>
+        <text x="293" y="352" font-family="monospace" font-size="7" fill="#4a5c70">Aoû</text>
+        <text x="328" y="352" font-family="monospace" font-size="7" fill="#a78bfa">Sep</text>
+        <text x="363" y="352" font-family="monospace" font-size="7" fill="#a78bfa">Oct</text>
+        <text x="398" y="352" font-family="monospace" font-size="7" fill="#4a5c70">Nov</text>
+        <text x="433" y="352" font-family="monospace" font-size="7" fill="#14b8a6">Déc</text>
+
+        <!-- Donut chart -->
+        <rect x="482" y="166" width="302" height="200" rx="6" fill="#1a2332" stroke="#243447" stroke-width="1"/>
+        <text x="498" y="185" font-family="monospace" font-size="10" fill="#f1f5f9" font-weight="bold">Répartition par région</text>
+        <circle cx="583" cy="290" r="72" fill="none" stroke="#243447" stroke-width="28"/>
+        <circle cx="583" cy="290" r="72" fill="none" stroke="#14b8a6" stroke-width="28"
+          stroke-dasharray="160 289" stroke-dashoffset="0" opacity=".9"/>
+        <circle cx="583" cy="290" r="72" fill="none" stroke="#f97316" stroke-width="28"
+          stroke-dasharray="85 289" stroke-dashoffset="-160" opacity=".85"/>
+        <circle cx="583" cy="290" r="72" fill="none" stroke="#a78bfa" stroke-width="28"
+          stroke-dasharray="44 289" stroke-dashoffset="-245" opacity=".8"/>
+        <text x="569" y="285" font-family="monospace" font-size="14" fill="#f1f5f9" font-weight="bold">55%</text>
+        <text x="566" y="300" font-family="monospace" font-size="8" fill="#7d8fa8">Région A</text>
+        <!-- legend -->
+        <rect x="670" y="240" width="10" height="10" rx="2" fill="#14b8a6"/>
+        <text x="685" y="250" font-family="monospace" font-size="9" fill="#7d8fa8">Région A — 55%</text>
+        <rect x="670" y="260" width="10" height="10" rx="2" fill="#f97316"/>
+        <text x="685" y="270" font-family="monospace" font-size="9" fill="#7d8fa8">Région B — 29%</text>
+        <rect x="670" y="280" width="10" height="10" rx="2" fill="#a78bfa"/>
+        <text x="685" y="290" font-family="monospace" font-size="9" fill="#7d8fa8">Région C — 16%</text>
+
+        <!-- Line chart at bottom -->
+        <rect x="16" y="378" width="768" height="120" rx="6" fill="#1a2332" stroke="#243447" stroke-width="1"/>
+        <text x="30" y="397" font-family="monospace" font-size="10" fill="#f1f5f9" font-weight="bold">Évolution de la satisfaction client (score NPS)</text>
+        <polyline points="40,470 100,455 160,448 220,460 280,440 340,432 400,438 460,422 520,415 580,408 640,395 700,382 760,376"
+          fill="none" stroke="#14b8a6" stroke-width="2" opacity=".8"/>
+        <polyline points="40,480 100,472 160,478 220,468 280,462 340,470 400,460 460,455 520,448 580,445 640,438 700,430 760,422"
+          fill="none" stroke="#f97316" stroke-width="1.5" stroke-dasharray="5,3" opacity=".7"/>
+        <line x1="40" y1="485" x2="760" y2="485" stroke="#243447" stroke-width=".8"/>
+        <circle cx="760" cy="376" r="4" fill="#14b8a6"/>
+        <circle cx="760" cy="422" r="4" fill="#f97316" opacity=".8"/>
+        <text x="40" y="500" font-family="monospace" font-size="7" fill="#4a5c70">Jan</text>
+        <text x="100" y="500" font-family="monospace" font-size="7" fill="#4a5c70">Fév</text>
+        <text x="160" y="500" font-family="monospace" font-size="7" fill="#4a5c70">Mar</text>
+        <text x="220" y="500" font-family="monospace" font-size="7" fill="#4a5c70">Avr</text>
+        <text x="280" y="500" font-family="monospace" font-size="7" fill="#4a5c70">Mai</text>
+        <text x="340" y="500" font-family="monospace" font-size="7" fill="#4a5c70">Jun</text>
+        <text x="400" y="500" font-family="monospace" font-size="7" fill="#4a5c70">Jul</text>
+        <text x="460" y="500" font-family="monospace" font-size="7" fill="#4a5c70">Aoû</text>
+        <text x="520" y="500" font-family="monospace" font-size="7" fill="#4a5c70">Sep</text>
+        <text x="580" y="500" font-family="monospace" font-size="7" fill="#4a5c70">Oct</text>
+        <text x="640" y="500" font-family="monospace" font-size="7" fill="#4a5c70">Nov</text>
+        <text x="700" y="500" font-family="monospace" font-size="7" fill="#14b8a6">Déc</text>
+        <!-- Legend line chart -->
+        <line x1="620" y1="397" x2="638" y2="397" stroke="#14b8a6" stroke-width="2"/>
+        <text x="642" y="401" font-family="monospace" font-size="8" fill="#7d8fa8">2024</text>
+        <line x1="660" y1="397" x2="678" y2="397" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4,2"/>
+        <text x="682" y="401" font-family="monospace" font-size="8" fill="#7d8fa8">2023</text>
+      `;
+      inner.insertBefore(bigSvg, document.getElementById('lbCaption'));
+      document.getElementById('lbCaption').innerHTML = caption;
+      document.getElementById('lbModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Close lightbox
+    document.getElementById('lbClose').addEventListener('click', closeLb);
+    document.getElementById('lbModal').addEventListener('click', function(e) {
+      if (e.target === this) closeLb();
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+    function closeLb() {
+      document.getElementById('lbModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
   </script>
 </body>
 </html>
-ENDOFFILE
-
-13:30
