@@ -1,248 +1,334 @@
 <!DOCTYPE html>
-<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>À propos de Marouane</title>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>À propos — Marouane Yoda</title>
+  <meta name="description" content="En savoir plus sur Marouane Yoda, étudiant en Data Science, handballeur et passionné de nouvelles technologies." />
   <link rel="icon" href="https://marouaneyoda.github.io/favicon.ico" type="image/x-icon">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #eff6ff, #e0f2fe);
-      color: #1e293b;
-      margin: 0;
-      padding: 0;
+    :root {
+      --bg: #f5f7ff; --surface: #eef1fc; --card: rgba(255,255,255,0.82);
+      --glass: rgba(255,255,255,0.95); --primary: #1d4ed8; --accent: #0ea5e9;
+      --violet: #7c3aed; --green: #059669; --amber: #d97706;
+      --text: #0c1128; --muted: #4b5683;
+      --border: rgba(29,78,216,0.10); --border-h: rgba(14,165,233,0.40);
+      --shadow: 0 4px 24px rgba(29,78,216,0.08);
+      --shadow-lg: 0 16px 48px rgba(29,78,216,0.14); --radius: 20px;
     }
-
-    @media (max-width: 768px) {
-      .handball-image, .experience-image {
-        float: none;
-        margin: 20px auto;
-        display: block;
-        max-width: 300px;
-      }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
+    body { font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; line-height:1.65; }
+    body::before {
+      content:""; position:fixed; inset:0;
+      background-image: linear-gradient(rgba(29,78,216,0.045) 1px,transparent 1px), linear-gradient(90deg,rgba(29,78,216,0.045) 1px,transparent 1px);
+      background-size:72px 72px; z-index:0; pointer-events:none;
     }
+    .orb { position:fixed; border-radius:50%; filter:blur(160px); pointer-events:none; z-index:0; }
+    .orb-1 { width:700px; height:700px; background:var(--primary); opacity:0.11; top:-220px; left:-200px; }
+    .orb-2 { width:500px; height:500px; background:var(--accent); opacity:0.10; bottom:0; right:-150px; }
+    .orb-3 { width:380px; height:380px; background:var(--violet); opacity:0.08; top:42%; left:50%; transform:translate(-50%,-50%); }
 
-    header {
-      background: linear-gradient(120deg, #1e3a8a, #2563eb);
-      color: white;
-      padding: 70px 20px;
-      text-align: center;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    /* NAVBAR */
+    .navbar {
+      width:100%; padding:0 8%; height:64px; position:fixed; top:0;
+      display:flex; justify-content:space-between; align-items:center;
+      backdrop-filter:blur(32px) saturate(180%); background:rgba(245,247,255,0.88);
+      border-bottom:1px solid var(--border); z-index:1000;
+      box-shadow:0 1px 0 rgba(29,78,216,0.06);
     }
+    .logo { font-size:1.15rem; font-weight:800; letter-spacing:-0.5px; color:var(--text); text-decoration:none; }
+    .logo span { color:var(--accent); }
+    .nav-links { display:flex; gap:2px; list-style:none; }
+    .nav-links a { color:var(--muted); text-decoration:none; font-size:0.875rem; font-weight:500; padding:6px 14px; border-radius:50px; transition:all 0.18s ease; }
+    .nav-links a:hover, .nav-links a.active { color:var(--text); background:rgba(255,255,255,0.8); }
 
-    header h1 {
-      font-size: 3rem;
-      font-weight: 700;
+    /* HERO */
+    .page-hero {
+      min-height:38vh; display:flex; align-items:center; padding:108px 8% 72px;
+      position:relative; z-index:1;
     }
+    .page-hero-inner { max-width:700px; animation:fadeUp 0.7s 0.08s ease both; }
+    .breadcrumb { display:inline-flex; align-items:center; gap:8px; font-size:0.78rem; color:var(--muted); margin-bottom:20px; }
+    .breadcrumb a { color:var(--accent); text-decoration:none; font-weight:600; }
+    .breadcrumb a:hover { text-decoration:underline; }
+    .page-hero h1 { font-size:clamp(2.4rem,5vw,3.8rem); font-weight:900; letter-spacing:-2px; line-height:1.05; margin-bottom:18px; }
+    .page-hero h1 .gradient { display:block; background:linear-gradient(105deg,var(--accent) 0%,var(--primary) 50%,var(--violet) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .page-hero p { color:var(--muted); font-size:1.02rem; line-height:1.85; max-width:560px; }
 
-    main {
-      max-width: 1000px;
-      margin: 40px auto;
-      padding: 0 20px;
+    /* LAYOUT */
+    .section { padding:80px 8%; position:relative; z-index:1; }
+    .section-label { display:inline-block; font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:2.8px; color:var(--accent); margin-bottom:12px; padding:5px 13px; border-radius:50px; background:rgba(14,165,233,0.07); border:1px solid rgba(14,165,233,0.14); }
+    .section-title { font-size:clamp(1.7rem,3vw,2.3rem); font-weight:800; letter-spacing:-1px; line-height:1.1; margin-bottom:12px; }
+    .section-title span { color:var(--accent); }
+    .section-desc { color:var(--muted); max-width:520px; font-size:0.97rem; line-height:1.82; margin-bottom:42px; }
+
+    /* PROFIL — split layout */
+    .profil-split { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start; }
+    .profil-bio {
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+      padding:36px 32px; position:relative; overflow:hidden; box-shadow:var(--shadow);
     }
+    .profil-bio::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--accent),var(--violet)); border-radius:3px 3px 0 0; }
+    .profil-bio .badge { display:inline-flex; align-items:center; gap:6px; background:rgba(14,165,233,0.08); border:1px solid rgba(14,165,233,0.18); border-radius:50px; padding:5px 13px; font-size:0.77rem; font-weight:600; color:var(--accent); margin-bottom:22px; }
+    .profil-bio p { color:var(--muted); font-size:0.95rem; line-height:1.9; margin-bottom:14px; }
+    .profil-bio strong { color:var(--text); font-weight:650; }
 
-    section {
-      background: white;
-      border-radius: 16px;
-      padding: 35px;
-      margin-bottom: 50px;
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    .profil-stats { display:flex; flex-direction:column; gap:14px; }
+    .stat-block {
+      background:var(--card); border:1px solid var(--border); border-radius:16px;
+      padding:22px 20px; display:flex; align-items:center; gap:17px;
+      transition:all 0.22s ease; box-shadow:var(--shadow);
     }
+    .stat-block:hover { border-color:var(--border-h); transform:translateX(5px); box-shadow:var(--shadow-lg); }
+    .stat-block .sb-icon { width:46px; height:46px; border-radius:13px; display:flex; align-items:center; justify-content:center; font-size:1.35rem; flex-shrink:0; }
+    .sb-icon.blue { background:rgba(29,78,216,0.10); color:var(--primary); }
+    .sb-icon.amber { background:rgba(217,119,6,0.10); color:var(--amber); }
+    .sb-icon.violet { background:rgba(124,58,237,0.10); color:var(--violet); }
+    .sb-icon.green { background:rgba(5,150,105,0.10); color:var(--green); }
+    .stat-block h4 { font-weight:700; font-size:0.98rem; margin-bottom:4px; }
+    .stat-block p { color:var(--muted); font-size:0.84rem; line-height:1.62; }
 
-    section h2 {
-      color: #1d4ed8;
-      margin-bottom: 15px;
-      font-size: 1.9rem;
+    /* SKILLS */
+    .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(152px,1fr)); gap:13px; }
+    .skill-item { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:22px 17px; display:flex; flex-direction:column; gap:9px; transition:all 0.22s ease; box-shadow:var(--shadow); }
+    .skill-item:hover { border-color:var(--border-h); transform:translateY(-5px); box-shadow:var(--shadow-lg); }
+    .skill-item .skill-icon { font-size:1.55rem; color:var(--accent); }
+    .skill-item .skill-name { font-weight:700; font-size:0.92rem; }
+    .skill-item .skill-desc { font-size:0.75rem; color:var(--muted); line-height:1.5; }
+
+    /* HANDBALL */
+    .handball-card {
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+      overflow:hidden; box-shadow:var(--shadow); display:grid; grid-template-columns:1fr 1.1fr; gap:0;
     }
-
-    section p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: #334155;
+    .handball-visual {
+      background:linear-gradient(145deg,rgba(217,119,6,0.18),rgba(124,58,237,0.12));
+      display:flex; align-items:center; justify-content:center; min-height:340px;
+      position:relative; overflow:hidden;
     }
+    .handball-visual img { width:100%; height:100%; object-fit:cover; display:block; }
+    .handball-visual .fallback-icon { font-size:5rem; color:var(--amber); opacity:0.7; }
+    .handball-content { padding:40px 36px; }
+    .handball-content .badge-sport { display:inline-flex; align-items:center; gap:6px; background:rgba(217,119,6,0.09); border:1px solid rgba(217,119,6,0.25); border-radius:50px; padding:5px 14px; font-size:0.75rem; font-weight:700; color:var(--amber); margin-bottom:18px; text-transform:uppercase; letter-spacing:0.8px; }
+    .handball-content h3 { font-size:1.45rem; font-weight:800; margin-bottom:14px; letter-spacing:-0.5px; }
+    .handball-content p { color:var(--muted); font-size:0.93rem; line-height:1.85; margin-bottom:18px; }
+    .trait-list { display:flex; flex-direction:column; gap:10px; margin-top:6px; }
+    .trait { display:flex; align-items:flex-start; gap:11px; }
+    .trait i { color:var(--amber); font-size:1rem; margin-top:2px; flex-shrink:0; }
+    .trait span { font-size:0.88rem; color:var(--muted); line-height:1.6; }
+    .trait strong { color:var(--text); }
 
-    .handball-section {
-      background: linear-gradient(135deg, #fee2e2, #fef3c7);
-      border: 2px solid #f59e0b;
+    /* BTN */
+    .btn { padding:11px 22px; border-radius:11px; border:none; cursor:pointer; font-weight:600; font-size:0.875rem; text-decoration:none; transition:all 0.22s ease; display:inline-flex; align-items:center; gap:7px; font-family:'Outfit',sans-serif; }
+    .btn-primary { background:linear-gradient(135deg,#2563eb,#1e40af); color:white; box-shadow:0 6px 24px rgba(37,99,235,0.32); }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(37,99,235,0.42); }
+    .btn-secondary { background:var(--card); border:1px solid var(--border); color:var(--text); box-shadow:var(--shadow); }
+    .btn-secondary:hover { transform:translateY(-2px); border-color:var(--border-h); background:var(--glass); }
+
+    /* FOOTER */
+    .divider { width:calc(100% - 16%); margin:0 8%; height:1px; background:var(--border); }
+    footer { padding:34px 8%; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; position:relative; z-index:1; }
+    .footer-copy { color:var(--muted); font-size:0.82rem; }
+    .footer-copy span { color:var(--accent); font-weight:600; }
+    .socials { display:flex; gap:8px; }
+    .socials a { width:38px; height:38px; display:flex; align-items:center; justify-content:center; border-radius:10px; text-decoration:none; color:var(--muted); background:var(--card); border:1px solid var(--border); transition:all 0.22s ease; }
+    .socials a:hover { color:var(--text); border-color:var(--border-h); transform:translateY(-2px); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    .reveal { opacity:0; transform:translateY(22px); transition:opacity 0.58s ease,transform 0.58s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width:960px) {
+      .profil-split { grid-template-columns:1fr; }
+      .handball-card { grid-template-columns:1fr; }
+      .handball-visual { min-height:220px; }
     }
-
-    .handball-section h2 {
-      color: #dc2626;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .experience-section {
-      background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
-      border: 2px solid #10b981;
-    }
-
-    .experience-section h2 {
-      color: #059669;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .handball-image-container, .experience-image-container {
-      float: right;
-      max-width: 350px;
-      margin: 0 0 25px 30px;
-    }
-
-    .handball-image, .experience-image {
-      width: 100%;
-      height: auto;
-      border-radius: 15px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
-      border: 3px solid #ffffff;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .handball-image:hover, .experience-image:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-    }
-
-    .highlight {
-      background: linear-gradient(120deg, #dbeafe, #e0f2fe);
-      padding: 20px;
-      border-radius: 12px;
-      border-left: 4px solid #2563eb;
-      margin: 20px 0;
-    }
-
-    .highlight-green {
-      background: linear-gradient(120deg, #dcfce7, #f0fdf4);
-      padding: 20px;
-      border-radius: 12px;
-      border-left: 4px solid #10b981;
-      margin: 20px 0;
-    }
-
-    .empty-section {
-      background: #f8fafc;
-      border: 2px dashed #cbd5e1;
-      color: #64748b;
-      text-align: center;
-      padding: 60px 35px;
-      font-style: italic;
-    }
-
-    .btn-back {
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .btn-back a {
-      font-size: 1.1rem;
-      padding: 12px 30px;
-      border-radius: 30px;
-      border: 2px solid #2563eb;
-      color: #2563eb;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .btn-back a:hover {
-      background: #2563eb;
-      color: white;
-    }
-
-    footer {
-      background: #0f172a;
-      color: white;
-      text-align: center;
-      padding: 25px;
-      margin-top: 60px;
+    @media (max-width:600px) {
+      .navbar { padding:0 5%; }
+      .nav-links a { padding:5px 9px; font-size:0.8rem; }
+      .section { padding:60px 5%; }
+      .page-hero { padding:100px 5% 60px; }
+      .profil-bio { padding:24px 18px; }
+      .handball-content { padding:28px 22px; }
     }
   </style>
 </head>
-<body data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0">
+<body>
 
-<header data-aos="fade-down" class="aos-init aos-animate">
-  <h1>À propos de moi</h1>
-  <p>Étudiant en sciences des données &amp; passionné de handball</p>
-</header>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
 
-<main>
-  <section class="experience-section aos-init aos-animate" data-aos="fade-up" data-aos-delay="150">
-    <h2><i class="bi bi-briefcase"></i> Profil professionnel</h2>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="logo">Marouane <span>Yoda</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">À propos</a></li>
+      <li><a href="index.html#skills">Compétences</a></li>
+      <li><a href="index.html#projects">Projets</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-    <figure class="experience-image-container">
-      <div style="width: 100%; height: 200px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; box-shadow: 0 12px 30px rgba(0,0,0,0.2); border: 3px solid #ffffff;">
-        <i class="bi bi-graph-up-arrow"></i>
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumb">
+        <a href="index.html"><i class="bi bi-house-fill"></i> Portfolio</a>
+        <i class="bi bi-chevron-right"></i>
+        <span>À propos</span>
       </div>
-    </figure>
-
-    <div class="clearfix">
-      <p>Étudiant en sciences des données avec une approche analytique et méthodique, je développe mes compétences à travers des projets concrets et des collaborations enrichissantes. Mon parcours se caractérise par une curiosité constante pour les nouvelles technologies et une capacité d'adaptation aux défis complexes du domaine.</p>
-
-      <div class="highlight-green">
-        <h4><i class="bi bi-gear-fill"></i> Compétences techniques :</h4>
-        <ul>
-          <li><strong>Analyse de données</strong> - Traitement et visualisation de données complexes</li>
-          <li><strong>Machine Learning</strong> - Développement de modèles prédictifs</li>
-          <li><strong>Programmation</strong> - Python, R, SQL</li>
-          <li><strong>Outils de visualisation</strong> - Tableau, Power BI</li>
-        </ul>
-      </div>
-
-      <div class="highlight-green">
-        <h4><i class="bi bi-star-fill"></i> Projets et réalisations :</h4>
-        <ul>
-          <li><strong>Projets académiques</strong> - Application pratique des concepts théoriques sur des datasets réels</li>
-          <li><strong>Collaborations étudiantes</strong> - Travail en équipe multidisciplinaire sur des problématiques data</li>
-          <li><strong>Veille technologique</strong> - Suivi des tendances et innovations du secteur</li>
-          <li><strong>Formation continue</strong> - Participation à des MOOCs et certifications en ligne</li>
-        </ul>
-      </div>
-
-      <p>Mon approche professionnelle allie rigueur analytique et créativité, me permettant d'identifier des insights pertinents et de proposer des solutions innovantes. Je privilégie une méthode collaborative, conscient que les meilleures solutions émergent souvent du travail d'équipe et de la diversité des perspectives.</p>
+      <h1>À propos<br><span class="gradient">de moi</span></h1>
+      <p>Étudiant en Data Science, handballeur et passionné par les nouvelles technologies. Voici qui je suis, d'où je viens et ce qui me motive.</p>
     </div>
-  </section>
-
-  <section class="handball-section aos-init" data-aos="fade-up" data-aos-delay="100">
-    <h2><i class="bi bi-trophy"></i> Engagement sportif</h2>
-
-    <figure class="handball-image-container">
-      <img src="Marouane handball.jpg" alt="Marouane jouant au handball" class="handball-image">
-    </figure>
-
-    <div class="clearfix">
-      <p>La pratique du handball depuis plus de 3 ans m'a permis de développer des compétences transversales essentielles dans le monde professionnel. Ce sport collectif exigeant cultive des qualités directement applicables aux métiers de la data science.</p>
-
-      <div class="highlight">
-        <h4><i class="bi bi-people-fill"></i> Compétences développées :</h4>
-        <ul>
-          <li><strong>Leadership</strong> : Coordination d'équipe et prise de décision sous pression</li>
-          <li><strong>Analyse stratégique</strong> : Évaluation rapide des situations et adaptation tactique</li>
-          <li><strong>Gestion de projet</strong> : Organisation collective vers un objectif commun</li>
-          <li><strong>Résilience</strong> : Capacité à rebondir et maintenir la performance</li>
-        </ul>
-      </div>
-
-      <p>Cette expérience sportive enrichit ma vision professionnelle en apportant une dimension humaine et collaborative essentielle aux projets data. Elle me permet d'aborder les défis techniques avec une mentalité d'équipe et une approche structurée.</p>
-    </div>
-  </section>
-
-  <div class="btn-back aos-init" data-aos="fade-up" data-aos-delay="400">
-    <a href="https://marouaneyoda.github.io/index.html"><i class="bi bi-arrow-left-circle"></i> Retour au portfolio</a>
   </div>
-</main>
 
-<footer>
-  <p>© 2025 Marouane Yoda — Étudiant en sciences des données &amp; handballeur passionné</p>
-</footer>
+  <!-- PROFIL PROFESSIONNEL -->
+  <section class="section" style="padding-top:0;">
+    <div class="reveal" style="margin-bottom:16px;">
+      <span class="section-label">Profil</span>
+      <h2 class="section-title">Profil <span>professionnel</span></h2>
+      <p class="section-desc">Une approche analytique, un goût pour la résolution de problèmes concrets et une curiosité constante pour les données.</p>
+    </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-<script>
-  AOS.init();
-</script>
+    <div class="profil-split">
+      <div class="profil-bio reveal">
+        <div class="badge"><i class="bi bi-mortarboard-fill"></i> Étudiant BUT Science des Données — 1ère année</div>
+        <p>Je m'appelle <strong>Marouane Yoda</strong>, étudiant en <strong>Science des Données</strong> à l'IUT de Poitiers, campus de Niort. Je développe mes compétences à travers des projets concrets mêlant analyse statistique, visualisation de données et programmation.</p>
+        <p>Mon parcours est orienté vers la <strong>transformation des données brutes en informations utiles</strong> : construire un reporting clair, concevoir une base de données cohérente, ou raconter une histoire à travers une visualisation percutante.</p>
+        <p>Rigoureux dans mon travail, je m'applique à comprendre les données en profondeur avant de tirer des conclusions — une habitude cultivée autant en cours que sur le terrain de handball.</p>
+        <div style="margin-top:28px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a href="CV MAROUANE YODA.pdf" class="btn btn-primary" target="_blank"><i class="bi bi-download"></i> Télécharger mon CV</a>
+          <a href="index.html#projects" class="btn btn-secondary"><i class="bi bi-grid-1x2"></i> Voir mes projets</a>
+        </div>
+      </div>
 
-</body></html>
+      <div class="profil-stats">
+        <div class="stat-block reveal">
+          <div class="sb-icon blue"><i class="bi bi-bar-chart-line-fill"></i></div>
+          <div>
+            <h4>Analyse de données</h4>
+            <p>Nettoyage, exploration et visualisation de jeux de données réels dans le cadre de SAÉ académiques.</p>
+          </div>
+        </div>
+        <div class="stat-block reveal">
+          <div class="sb-icon violet"><i class="bi bi-database-fill"></i></div>
+          <div>
+            <h4>Bases de données</h4>
+            <p>Modélisation relationnelle, SQL, conception d'un SGBD et requêtage avancé sur données réelles.</p>
+          </div>
+        </div>
+        <div class="stat-block reveal">
+          <div class="sb-icon green"><i class="bi bi-file-earmark-bar-graph-fill"></i></div>
+          <div>
+            <h4>Reporting & Datavisualisation</h4>
+            <p>Tableaux de bord Excel/VBA et Power BI, indicateurs de performance, restitution professionnelle.</p>
+          </div>
+        </div>
+        <div class="stat-block reveal">
+          <div class="sb-icon amber"><i class="bi bi-activity"></i></div>
+          <div>
+            <h4>Statistiques inférentielles</h4>
+            <p>Tests d'hypothèses, intervalles de confiance, estimation par échantillonnage sur données terrain.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPÉTENCES TECHNIQUES -->
+  <section class="section">
+    <div class="reveal">
+      <span class="section-label">Compétences</span>
+      <h2 class="section-title">Outils &amp; <span>Technologies</span></h2>
+      <p class="section-desc">Les outils maîtrisés au quotidien dans mes études et projets.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-item reveal"><div class="skill-icon"><i class="bi bi-filetype-py"></i></div><div class="skill-name">Python</div><div class="skill-desc">Pandas, NumPy, Matplotlib, Scikit-learn</div></div>
+      <div class="skill-item reveal"><div class="skill-icon"><i class="bi bi-database"></i></div><div class="skill-name">SQL</div><div class="skill-desc">Requêtes, jointures, agrégations, contraintes</div></div>
+      <div class="skill-item reveal"><div class="skill-icon"><i class="bi bi-bar-chart-line-fill"></i></div><div class="skill-name">Power BI</div><div class="skill-desc">DAX, dashboards interactifs, KPIs</div></div>
+      <div class="skill-item reveal"><div class="skill-icon"><i class="bi bi-file-spreadsheet-fill"></i></div><div class="skill-name">Excel / VBA</div><div class="skill-desc">Macros, TCD, reporting automatisé</div></div>
+      <div class="skill-item reveal"><div class="skill-icon"><i class="bi bi-activity"></i></div><div class="skill-name">SAS</div><div class="skill-desc">Analyse statistique, data management</div></div>
+      <div class="skill-item reveal"><div class="skill-icon"><i class="bi bi-git"></i></div><div class="skill-name">GitHub</div><div class="skill-desc">Versioning, collaboration, gestion de projets</div></div>
+      <div class="skill-item reveal"><div class="skill-icon"><i class="bi bi-code-slash"></i></div><div class="skill-name">HTML / CSS / JS</div><div class="skill-desc">Interfaces responsive, animations, UI</div></div>
+    </div>
+  </section>
+
+  <!-- HANDBALL -->
+  <section class="section">
+    <div class="reveal" style="margin-bottom:36px;">
+      <span class="section-label">Engagement sportif</span>
+      <h2 class="section-title">Le handball, <span>une école</span></h2>
+      <p class="section-desc">Plus qu'un loisir, un sport collectif qui forge des qualités directement transposables au monde professionnel.</p>
+    </div>
+
+    <div class="handball-card reveal">
+      <div class="handball-visual">
+        <img src="Marouane handball.jpg" alt="Marouane jouant au handball"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="fallback-icon" style="display:none; width:100%; height:100%; align-items:center; justify-content:center;">
+          <i class="bi bi-trophy-fill"></i>
+        </div>
+      </div>
+      <div class="handball-content">
+        <div class="badge-sport"><i class="bi bi-trophy-fill"></i> Pratique régulière — +3 ans</div>
+        <h3>Discipline, collectif et stratégie</h3>
+        <p>La pratique du handball depuis plus de 3 ans m'a permis de développer des compétences transversales essentielles. Ce sport d'équipe exigeant cultive des qualités directement applicables aux projets data.</p>
+        <div class="trait-list">
+          <div class="trait">
+            <i class="bi bi-people-fill"></i>
+            <span><strong>Travail en équipe</strong> — Coordination collective et prise de décision rapide sous pression.</span>
+          </div>
+          <div class="trait">
+            <i class="bi bi-diagram-3-fill"></i>
+            <span><strong>Analyse stratégique</strong> — Lecture du jeu, anticipation des situations et adaptation tactique en temps réel.</span>
+          </div>
+          <div class="trait">
+            <i class="bi bi-shield-check"></i>
+            <span><strong>Rigueur &amp; discipline</strong> — Entraînements réguliers qui renforcent la constance et l'organisation.</span>
+          </div>
+          <div class="trait">
+            <i class="bi bi-arrow-repeat"></i>
+            <span><strong>Résilience</strong> — Capacité à rebondir après un échec et à maintenir la performance dans la durée.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RETOUR -->
+  <section class="section" style="padding-top:0; padding-bottom:80px; text-align:center;">
+    <a href="index.html" class="btn btn-secondary reveal">
+      <i class="bi bi-arrow-left-circle"></i> Retour au portfolio
+    </a>
+  </section>
+
+  <div class="divider"></div>
+  <footer>
+    <p class="footer-copy">© 2026 — Portfolio de <span>Marouane Yoda</span></p>
+    <div class="socials">
+      <a href="https://linkedin.com/in/marouane-yoda" target="_blank"><i class="bi bi-linkedin"></i></a>
+      <a href="mailto:yoda.marouane@gmail.com"><i class="bi bi-envelope"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 70);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
