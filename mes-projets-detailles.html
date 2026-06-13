@@ -178,6 +178,7 @@
     }
     .proj-cat.orange { border-color:rgba(217,119,6,0.25); color:var(--amber); background:rgba(217,119,6,0.07); }
     .proj-cat.violet { border-color:rgba(124,58,237,0.25); color:var(--violet); background:rgba(124,58,237,0.07); }
+    .proj-cat.green { border-color:rgba(5,150,105,0.25); color:var(--green); background:rgba(5,150,105,0.07); }
 
     .proj-content h3 { font-size:1.05rem; font-weight:700; line-height:1.35; color:var(--text); margin-bottom:8px; }
     .proj-content > p { color:var(--muted); font-size:.87rem; line-height:1.8; margin-bottom:16px; max-width:640px; }
@@ -190,6 +191,7 @@
     .proj-detail.blue { background:rgba(14,165,233,0.06); border-color:rgba(14,165,233,0.4); }
     .proj-detail.orange { background:rgba(217,119,6,0.06); border-color:rgba(217,119,6,0.4); }
     .proj-detail.violet { background:rgba(124,58,237,0.06); border-color:rgba(124,58,237,0.4); }
+    .proj-detail.green { background:rgba(5,150,105,0.06); border-color:rgba(5,150,105,0.4); }
     .proj-detail .detail-title {
       font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:1px;
       margin-bottom:10px;
@@ -197,6 +199,7 @@
     .proj-detail.blue .detail-title { color:var(--accent); }
     .proj-detail.orange .detail-title { color:var(--amber); }
     .proj-detail.violet .detail-title { color:var(--violet); }
+    .proj-detail.green .detail-title { color:var(--green); }
     .proj-detail p { font-size:.84rem; color:var(--muted); line-height:1.75; margin:0 0 4px; }
     .proj-detail p:last-child { margin:0; }
 
@@ -317,15 +320,15 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
-      <div class="hero-eyebrow"><span class="dot"></span> Parcours académique — BUT SD</div>
+      <div class="hero-eyebrow"><span class="dot"></span> Parcours académique — BUT Science des Données, 1ère année</div>
       <h1>Projets <span class="line-accent">SAE</span></h1>
       <p class="hero-desc">
-        10 <strong>Situations d'Apprentissage et d'Évaluation</strong> réalisées durant mon BUT Statistique et Informatique Décisionnelle, auxquelles s'ajoutent <strong>3 projets supplémentaires</strong> de deuxième année. Chaque projet confronte théorie et réalité du terrain — de l'enquête statistique à la datavisualisation Power BI.
+        Les <strong>13 Situations d'Apprentissage et d'Évaluation</strong> réalisées durant ma première année de BUT Science des Données, réparties sur les deux semestres. Chaque projet confronte théorie et réalité du terrain — du reporting à l'enquête statistique, en passant par les bases de données et la datavisualisation.
       </p>
       <div class="counter-row">
         <div class="counter-item"><span class="num">13</span><span class="lbl">projets SAE</span></div>
-        <div class="counter-item"><span class="num">6+</span><span class="lbl">outils maîtrisés</span></div>
-        <div class="counter-item"><span class="num">BUT</span><span class="lbl">SD — Data</span></div>
+        <div class="counter-item"><span class="num">2</span><span class="lbl">semestres</span></div>
+        <div class="counter-item"><span class="num">BUT1</span><span class="lbl">SD — Data</span></div>
       </div>
       <div class="hero-actions">
         <a href="#projets" class="btn btn-primary"><i class="bi bi-arrow-down-circle"></i> Voir les projets</a>
@@ -342,12 +345,12 @@
 
     <div class="project-list">
 
-      <!-- SAE 01 -->
+      <!-- SAE 01 - S1 -->
       <div class="project-row c1 reveal">
         <div class="project-row-inner">
           <div class="proj-num-col"><span class="proj-num">01</span><span class="proj-ghost">01</span></div>
           <div class="proj-content">
-            <div class="proj-header"><span class="proj-cat">Reporting</span></div>
+            <div class="proj-header"><span class="proj-cat">S1 · Reporting</span></div>
             <h3>Création d'un reporting</h3>
             <p>Conception d'un rapport de données structuré, lisible et orienté prise de décision. Sélection des indicateurs pertinents, mise en forme professionnelle et présentation des résultats à un public non technique.</p>
             <div class="proj-detail blue">
@@ -369,12 +372,12 @@
         </div>
       </div>
 
-      <!-- SAE 02 -->
+      <!-- SAE 02 - S1 -->
       <div class="project-row c2 reveal">
         <div class="project-row-inner">
           <div class="proj-num-col"><span class="proj-num">02</span><span class="proj-ghost">02</span></div>
           <div class="proj-content">
-            <div class="proj-header"><span class="proj-cat">Données</span></div>
+            <div class="proj-header"><span class="proj-cat">S1 · Données</span></div>
             <h3>Écriture et lecture de fichiers de données</h3>
             <p>Manipulation de fichiers aux formats variés — CSV, JSON, Excel, TXT. Import, export, nettoyage et transformation de données brutes afin de les rendre exploitables dans une chaîne d'analyse complète.</p>
             <div class="proj-tools">
@@ -390,53 +393,80 @@
         </div>
       </div>
 
-      <!-- SAE 03 -->
+      <!-- SAE 03 - S1 -->
       <div class="project-row c3 reveal">
         <div class="project-row-inner">
           <div class="proj-num-col"><span class="proj-num">03</span><span class="proj-ghost">03</span></div>
           <div class="proj-content">
-            <div class="proj-header"><span class="proj-cat orange">Entreprise</span></div>
-            <h3>Production de données en entreprise</h3>
-            <p>Apprentissage en situation réelle des flux de production de données dans un contexte professionnel : collecte terrain, saisie, contrôle qualité, structuration et stockage des informations métiers.</p>
+            <div class="proj-header"><span class="proj-cat green">S1 · Analyse exploratoire</span></div>
+            <h3>Préparation et synthèse d'un tableau de données en vue d'une analyse exploratoire simple</h3>
+            <p>Nettoyage et mise en forme d'un tableau de données brut afin de le rendre exploitable, puis calcul d'indicateurs de synthèse (effectifs, moyennes, médianes, écarts-types) pour dégager les premières tendances et préparer une analyse exploratoire.</p>
+            <div class="proj-detail green">
+              <p class="detail-title">Ce que j'ai réalisé</p>
+              <p>— Nettoyage et structuration d'un tableau de données brut</p>
+              <p>— Calcul d'indicateurs de synthèse (tendance centrale, dispersion)</p>
+              <p>— Construction de tableaux croisés pour croiser les variables</p>
+              <p>— Mise en évidence des premières tendances exploratoires</p>
+            </div>
             <div class="proj-tools">
-              <span class="tool"><i class="bi bi-database"></i> SQL</span>
               <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
+              <span class="tool"><i class="bi bi-bar-chart"></i> Statistique descriptive</span>
             </div>
           </div>
-          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 03 — Production de données en entreprise">
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 03 — Analyse exploratoire simple">
             <img src="sae-3-1.jpg" alt="SAE 3" loading="lazy">
             <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- SAE 04 -->
+      <!-- SAE 04 - S1 -->
       <div class="project-row c4 reveal">
         <div class="project-row-inner">
           <div class="proj-num-col"><span class="proj-num">04</span><span class="proj-ghost">04</span></div>
           <div class="proj-content">
-            <div class="proj-header"><span class="proj-cat violet">Anglais</span></div>
-            <h3>Présentation d'un territoire économique</h3>
-            <p>Présentation orale en anglais d'un territoire économique et culturel. Travail sur la recherche documentaire, la structuration d'un discours clair et la communication professionnelle en langue étrangère.</p>
+            <div class="proj-header"><span class="proj-cat orange">S1 · Entreprise</span></div>
+            <h3>Apprendre en situation la production de données en entreprise</h3>
+            <p>Apprentissage en situation réelle des flux de production de données dans un contexte professionnel : collecte terrain, saisie, contrôle qualité, structuration et stockage des informations métiers.</p>
             <div class="proj-tools">
-              <span class="tool"><i class="bi bi-mic"></i> Oral</span>
-              <span class="tool"><i class="bi bi-globe2"></i> Anglais</span>
+              <span class="tool"><i class="bi bi-database"></i> SQL</span>
+              <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
             </div>
           </div>
-          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 04 — Présentation en anglais">
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 04 — Production de données en entreprise">
             <img src="sae-4-1.jpg" alt="SAE 4" loading="lazy">
             <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- SAE 05 -->
+      <!-- SAE 05 - S1 -->
       <div class="project-row c1 reveal">
         <div class="project-row-inner">
           <div class="proj-num-col"><span class="proj-num">05</span><span class="proj-ghost">05</span></div>
           <div class="proj-content">
-            <div class="proj-header"><span class="proj-cat">Enquête</span></div>
-            <h3>Mise en œuvre d'une enquête statistique</h3>
+            <div class="proj-header"><span class="proj-cat violet">S1 · Anglais</span></div>
+            <h3>Présentation en anglais d'un territoire économique et culturel</h3>
+            <p>Présentation orale en anglais d'un territoire économique et culturel. Travail sur la recherche documentaire, la structuration d'un discours clair et la communication professionnelle en langue étrangère.</p>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-mic"></i> Oral</span>
+              <span class="tool"><i class="bi bi-globe2"></i> Anglais</span>
+            </div>
+          </div>
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 05 — Présentation en anglais">
+            <img src="sae-5-1.jpg" alt="SAE 5" loading="lazy">
+            <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SAE 06 - S1 -->
+      <div class="project-row c2 reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col"><span class="proj-num">06</span><span class="proj-ghost">06</span></div>
+          <div class="proj-content">
+            <div class="proj-header"><span class="proj-cat">S1 · Enquête</span></div>
+            <h3>Mise en œuvre d'une enquête</h3>
             <p>Conception du questionnaire, définition de la population cible et du plan de sondage, collecte sur le terrain, puis traitement statistique des réponses. Présentation des résultats sous forme d'un rapport synthétique illustré.</p>
             <div class="proj-tools">
               <span class="tool"><i class="bi bi-filetype-py"></i> Python</span>
@@ -444,19 +474,19 @@
               <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
             </div>
           </div>
-          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 05 — Enquête statistique">
-            <img src="sae-5-1.jpg" alt="SAE 5" loading="lazy">
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 06 — Mise en œuvre d'une enquête">
+            <img src="sae-6-1.jpg" alt="SAE 6" loading="lazy">
             <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- SAE 06 -->
-      <div class="project-row c2 reveal">
+      <!-- SAE 07 - S2 -->
+      <div class="project-row c3 reveal">
         <div class="project-row-inner">
-          <div class="proj-num-col"><span class="proj-num">06</span><span class="proj-ghost">06</span></div>
+          <div class="proj-num-col"><span class="proj-num">07</span><span class="proj-ghost">07</span></div>
           <div class="proj-content">
-            <div class="proj-header"><span class="proj-cat orange">Base de données</span></div>
+            <div class="proj-header"><span class="proj-cat orange">S2 · Base de données</span></div>
             <h3>Conception et implémentation d'une base de données</h3>
             <p>Modélisation d'une base relationnelle complète : rédaction du MCD et du MLD, création des tables en SQL, définition des contraintes d'intégrité (clés primaires, étrangères) et requêtage avancé sur données réelles.</p>
             <div class="proj-tools">
@@ -464,19 +494,19 @@
               <span class="tool"><i class="bi bi-diagram-2"></i> MCD / MLD</span>
             </div>
           </div>
-          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 06 — Base de données SQL">
-            <img src="sae-6-1.jpg" alt="SAE 6" loading="lazy">
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 07 — Base de données SQL">
+            <img src="sae-7-1.jpg" alt="SAE 7" loading="lazy">
             <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- SAE 07 -->
-      <div class="project-row c3 reveal">
+      <!-- SAE 08 - S2 -->
+      <div class="project-row c4 reveal">
         <div class="project-row-inner">
-          <div class="proj-num-col"><span class="proj-num">07</span><span class="proj-ghost">07</span></div>
+          <div class="proj-num-col"><span class="proj-num">08</span><span class="proj-ghost">08</span></div>
           <div class="proj-content">
-            <div class="proj-header"><span class="proj-cat violet">Statistiques</span></div>
+            <div class="proj-header"><span class="proj-cat violet">S2 · Statistiques</span></div>
             <h3>Estimation par échantillonnage</h3>
             <p>Application des méthodes d'échantillonnage probabiliste — aléatoire simple, stratifié, par grappes — pour produire des estimations fiables sur une population à partir d'un sous-ensemble de données collectées.</p>
             <div class="proj-tools">
@@ -484,19 +514,19 @@
               <span class="tool"><i class="bi bi-filetype-py"></i> Python</span>
             </div>
           </div>
-          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 07 — Échantillonnage statistique">
-            <img src="sae-7-1.jpg" alt="SAE 7" loading="lazy">
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 08 — Échantillonnage statistique">
+            <img src="sae-8-1.jpg" alt="SAE 8" loading="lazy">
             <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- SAE 08 -->
-      <div class="project-row c4 reveal">
+      <!-- SAE 09 - S2 -->
+      <div class="project-row c1 reveal">
         <div class="project-row-inner">
-          <div class="proj-num-col"><span class="proj-num">08</span><span class="proj-ghost">08</span></div>
+          <div class="proj-num-col"><span class="proj-num">09</span><span class="proj-ghost">09</span></div>
           <div class="proj-content">
-            <div class="proj-header"><span class="proj-cat">Modélisation</span></div>
+            <div class="proj-header"><span class="proj-cat">S2 · Modélisation</span></div>
             <h3>Régression sur des données réelles</h3>
             <p>Mise en œuvre de modèles de régression linéaire simple et multiple sur un jeu de données réel. Vérification des hypothèses, interprétation des coefficients, évaluation de la qualité prédictive et visualisation des résidus.</p>
             <div class="proj-detail blue">
@@ -514,112 +544,55 @@
               <span class="tool"><i class="bi bi-bar-chart-line"></i> Matplotlib</span>
             </div>
           </div>
-          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 08 — Régression linéaire">
-            <img src="sae-8-1.jpg" alt="SAE 8" loading="lazy">
-            <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SAE 09 — Journée Dataviz -->
-      <div class="project-row c5 reveal">
-        <div class="project-row-inner">
-          <div class="proj-num-col"><span class="proj-num">09</span><span class="proj-ghost">09</span></div>
-          <div class="proj-content">
-            <div class="proj-header">
-              <span class="proj-cat orange">Power BI · KPIs</span>
-              <span class="proj-cat violet">Journée Dataviz</span>
-            </div>
-            <h3>Construction d'indicateurs de performance (KPIs) — Journée Dataviz</h3>
-            <p>Sélection, calcul et mise en forme d'indicateurs clés pour piloter une activité. Création d'un tableau de bord Power BI interactif avec mesures DAX, graphiques dynamiques, filtres croisés et mise en page orientée décision.</p>
-            <div class="proj-detail orange">
-              <p class="detail-title">Journée Dataviz — Contexte</p>
-              <p>Dans le cadre d'une journée dédiée à la datavisualisation, j'ai travaillé sur la conception et la présentation d'un dashboard complet orienté métier, en mettant l'accent sur la lisibilité et l'impact visuel des données.</p>
-            </div>
-            <div class="proj-detail blue">
-              <p class="detail-title">Ce que j'ai réalisé</p>
-              <p>— Définition et calcul des KPIs pertinents via des mesures DAX</p>
-              <p>— Construction d'un tableau de bord Power BI interactif (filtres croisés, slicers)</p>
-              <p>— Choix des visualisations adaptées : courbes de tendance, histogrammes, jauges</p>
-              <p>— Mise en page orientée décision : hiérarchie visuelle, codes couleur, lisibilité</p>
-              <p>— Présentation et argumentation des choix de visualisation devant le groupe</p>
-            </div>
-            <div class="proj-tools">
-              <span class="tool"><i class="bi bi-bar-chart-line"></i> Power BI</span>
-              <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
-              <span class="tool"><i class="bi bi-calculator"></i> DAX</span>
-              <span class="tool"><i class="bi bi-palette"></i> Dataviz</span>
-            </div>
-          </div>
-          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 09 — Dashboard Power BI KPIs">
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 09 — Régression linéaire">
             <img src="sae-9-1.jpg" alt="SAE 9" loading="lazy">
             <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- SAE 10 -->
-      <div class="project-row c1 reveal">
+      <!-- SAE 10 - S2 -->
+      <div class="project-row c5 reveal">
         <div class="project-row-inner">
           <div class="proj-num-col"><span class="proj-num">10</span><span class="proj-ghost">10</span></div>
           <div class="proj-content">
-            <div class="proj-header"><span class="proj-cat violet">Datavisualisation</span></div>
-            <h3>Analyse, reporting et datavisualisation</h3>
-            <p>Projet intégrateur : exploration complète d'un dataset réel, nettoyage des données, analyse statistique descriptive, élaboration d'un rapport structuré et création de visualisations Power BI adaptées aux enjeux métiers.</p>
+            <div class="proj-header"><span class="proj-cat violet">S2 · Datavisualisation · Concours</span></div>
+            <h3>Dataviz — Concours</h3>
+            <p>Participation à un concours de datavisualisation organisé dans le cadre de la formation : création d'une visualisation percutante à partir d'un jeu de données, avec un objectif de clarté, d'impact visuel et de storytelling de données.</p>
+            <div class="proj-detail violet">
+              <p class="detail-title">Ce que j'ai réalisé</p>
+              <p>— Exploration du jeu de données et identification du message clé à transmettre</p>
+              <p>— Choix d'une représentation graphique originale et pertinente</p>
+              <p>— Travail sur la mise en page, les couleurs et la hiérarchie visuelle</p>
+              <p>— Présentation du visuel devant un jury</p>
+            </div>
             <div class="proj-tools">
-              <span class="tool"><i class="bi bi-filetype-py"></i> Python</span>
               <span class="tool"><i class="bi bi-bar-chart-line"></i> Power BI</span>
-              <span class="tool"><i class="bi bi-activity"></i> SAS</span>
+              <span class="tool"><i class="bi bi-palette"></i> Dataviz</span>
+              <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
             </div>
           </div>
-          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 10 — Datavisualisation & Reporting">
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 10 — Dataviz Concours">
             <img src="sae-10-1.jpg" alt="SAE 10" loading="lazy">
             <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- SAE 11 -->
+      <!-- SAE 11 - S2 -->
       <div class="project-row c2 reveal">
         <div class="project-row-inner">
           <div class="proj-num-col"><span class="proj-num">11</span><span class="proj-ghost">11</span></div>
           <div class="proj-content">
-            <div class="proj-header"><span class="proj-cat">Reporting</span></div>
-            <h3>Reporting avancé — 2ème année</h3>
-            <p>Approfondissement des techniques de reporting : indicateurs métiers plus complexes, automatisation des mises à jour et présentation structurée des résultats à des parties prenantes.</p>
-            <div class="proj-detail blue">
-              <p class="detail-title">Ce que j'ai réalisé</p>
-              <p>— Identification des KPIs adaptés à l'objectif métier</p>
-              <p>— Mise en forme d'un rapport structuré avec Excel et Power BI</p>
-              <p>— Choix des graphiques selon le type de données (évolution, comparaison, répartition)</p>
-              <p>— Présentation orale des résultats à un public non technique</p>
-            </div>
-            <div class="proj-tools">
-              <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
-              <span class="tool"><i class="bi bi-bar-chart-line"></i> Power BI</span>
-            </div>
-          </div>
-          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 11 — Reporting avancé">
-            <img src="sae-11-1.jpg" alt="SAE 11" loading="lazy">
-            <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SAE 12 -->
-      <div class="project-row c4 reveal">
-        <div class="project-row-inner">
-          <div class="proj-num-col"><span class="proj-num">12</span><span class="proj-ghost">12</span></div>
-          <div class="proj-content">
-            <div class="proj-header"><span class="proj-cat orange">Power BI · KPIs</span></div>
-            <h3>Construction d'indicateurs de performance (KPIs)</h3>
-            <p>Sélection, calcul et mise en forme d'indicateurs clés pour piloter une activité. Création d'un tableau de bord Power BI interactif avec mesures DAX, graphiques dynamiques et filtres croisés.</p>
+            <div class="proj-header"><span class="proj-cat orange">S2 · Power BI · KPIs</span></div>
+            <h3>Construction et présentation d'indicateurs de performance</h3>
+            <p>Sélection, calcul et mise en forme d'indicateurs clés pour piloter une activité. Création d'un tableau de bord Power BI interactif avec mesures DAX, graphiques dynamiques, filtres croisés et présentation orientée décision.</p>
             <div class="proj-detail orange">
               <p class="detail-title">Ce que j'ai réalisé</p>
               <p>— Définition et calcul des KPIs pertinents via des mesures DAX</p>
               <p>— Construction d'un tableau de bord Power BI interactif (filtres croisés, slicers)</p>
               <p>— Choix des visualisations adaptées : courbes de tendance, histogrammes, jauges</p>
-              <p>— Mise en page orientée décision : hiérarchie visuelle, codes couleur, lisibilité</p>
+              <p>— Présentation orale des indicateurs et des choix de mise en page</p>
             </div>
             <div class="proj-tools">
               <span class="tool"><i class="bi bi-bar-chart-line"></i> Power BI</span>
@@ -627,24 +600,24 @@
               <span class="tool"><i class="bi bi-file-spreadsheet"></i> Excel</span>
             </div>
           </div>
-          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 12 — KPIs Power BI">
-            <img src="sae-12-1.jpg" alt="SAE 12" loading="lazy">
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 11 — Indicateurs de performance">
+            <img src="sae-11-1.jpg" alt="SAE 11" loading="lazy">
             <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
         </div>
       </div>
 
-      <!-- SAE 13 -->
+      <!-- SAE 12 - S2 -->
       <div class="project-row c3 reveal">
         <div class="project-row-inner">
-          <div class="proj-num-col"><span class="proj-num">13</span><span class="proj-ghost">13</span></div>
+          <div class="proj-num-col"><span class="proj-num">12</span><span class="proj-ghost">12</span></div>
           <div class="proj-content">
             <div class="proj-header">
-              <span class="proj-cat violet">Reporting</span>
+              <span class="proj-cat">S2 · Reporting</span>
               <span class="proj-cat violet">Datavisualisation</span>
             </div>
-            <h3>Reporting &amp; Dataviz — Power BI</h3>
-            <p>Projet intégrateur combinant la production d'un reporting structuré et la création de visualisations Power BI percutantes. Exploration d'un dataset réel, analyse descriptive, mise en forme d'un rapport et conception d'un dashboard orienté métier.</p>
+            <h3>Analyse de données, reporting et datavisualisation</h3>
+            <p>Projet intégrateur combinant l'exploration d'un dataset réel, l'analyse statistique descriptive, l'élaboration d'un rapport structuré et la création de visualisations Power BI percutantes, orientées vers la prise de décision.</p>
             <div class="proj-detail violet">
               <p class="detail-title">Ce que j'ai réalisé</p>
               <p>— Exploration et nettoyage des données brutes</p>
@@ -660,7 +633,35 @@
               <span class="tool"><i class="bi bi-activity"></i> SAS</span>
             </div>
           </div>
-          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 13 — Reporting & Dataviz">
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 12 — Reporting & Dataviz">
+            <img src="sae-12-1.jpg" alt="SAE 12" loading="lazy">
+            <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SAE 13 - S2 -->
+      <div class="project-row c4 reveal">
+        <div class="project-row-inner">
+          <div class="proj-num-col"><span class="proj-num">13</span><span class="proj-ghost">13</span></div>
+          <div class="proj-content">
+            <div class="proj-header"><span class="proj-cat">S2 · Portfolio</span></div>
+            <h3>Portfolio numérique</h3>
+            <p>Conception et développement de ce portfolio personnel : structuration du contenu, présentation des compétences et des projets réalisés durant l'année, et création d'une interface web moderne, responsive et professionnelle.</p>
+            <div class="proj-detail blue">
+              <p class="detail-title">Ce que j'ai réalisé</p>
+              <p>— Structuration du contenu : compétences, projets, contact</p>
+              <p>— Conception d'une interface moderne avec HTML, CSS et JavaScript</p>
+              <p>— Mise en page responsive adaptée à tous les écrans</p>
+              <p>— Intégration d'animations et d'une navigation fluide entre les pages</p>
+            </div>
+            <div class="proj-tools">
+              <span class="tool"><i class="bi bi-filetype-html"></i> HTML</span>
+              <span class="tool"><i class="bi bi-filetype-css"></i> CSS</span>
+              <span class="tool"><i class="bi bi-filetype-js"></i> JavaScript</span>
+            </div>
+          </div>
+          <div class="proj-img-col" onclick="openLb(this)" data-caption="SAE 13 — Portfolio numérique">
             <img src="sae-13-1.jpg" alt="SAE 13" loading="lazy">
             <div class="img-overlay"><i class="bi bi-arrows-fullscreen"></i></div>
           </div>
@@ -686,6 +687,7 @@
   <footer>
     <p class="footer-copy">© 2026 — Portfolio de <span>Marouane Yoda</span></p>
     <div class="socials">
+      <a href="https://github.com/marouaneyoda" target="_blank"><i class="bi bi-github"></i></a>
       <a href="https://linkedin.com/in/marouane-yoda" target="_blank"><i class="bi bi-linkedin"></i></a>
       <a href="mailto:yoda.marouane@gmail.com"><i class="bi bi-envelope"></i></a>
     </div>
