@@ -3,232 +3,474 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mes Compétences - Marouane Yoda</title>
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
+  <title>Compétences BUT SD — Marouane Yoda</title>
+  <meta name="description" content="Les 3 compétences du BUT Science des Données acquises par Marouane Yoda en 1ère année.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
+    :root {
+      --bg: #f5f7ff; --card: rgba(255,255,255,0.82); --glass: rgba(255,255,255,0.95);
+      --primary: #1d4ed8; --accent: #0ea5e9; --violet: #7c3aed; --green: #059669; --amber: #d97706;
+      --text: #0c1128; --muted: #4b5683;
+      --border: rgba(29,78,216,0.10); --border-h: rgba(14,165,233,0.40);
+      --shadow: 0 4px 24px rgba(29,78,216,0.08); --shadow-lg: 0 16px 48px rgba(29,78,216,0.14);
+      --radius: 20px;
     }
-
-    body{
-      font-family:'Poppins',sans-serif;
-      background: radial-gradient(circle at top,#0f172a,#020617);
-      color:#fff;
-      overflow-x:hidden;
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
+    body { font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; line-height:1.65; }
+    body::before {
+      content:""; position:fixed; inset:0;
+      background-image: linear-gradient(rgba(29,78,216,0.045) 1px,transparent 1px), linear-gradient(90deg,rgba(29,78,216,0.045) 1px,transparent 1px);
+      background-size:72px 72px; z-index:0; pointer-events:none;
     }
+    .orb { position:fixed; border-radius:50%; filter:blur(160px); pointer-events:none; z-index:0; }
+    .orb-1 { width:700px; height:700px; background:var(--primary); opacity:0.11; top:-220px; left:-200px; }
+    .orb-2 { width:500px; height:500px; background:var(--accent); opacity:0.10; bottom:0; right:-150px; }
+    .orb-3 { width:380px; height:380px; background:var(--violet); opacity:0.08; top:42%; left:50%; transform:translate(-50%,-50%); }
 
-    /* NAV */
-    nav{
-      background:rgba(15,23,42,0.8);
-      backdrop-filter:blur(12px);
-      border-bottom:1px solid rgba(255,255,255,0.1);
+    /* NAVBAR */
+    .navbar {
+      width:100%; padding:0 8%; height:64px; position:fixed; top:0;
+      display:flex; justify-content:space-between; align-items:center;
+      backdrop-filter:blur(32px) saturate(180%); background:rgba(245,247,255,0.92);
+      border-bottom:1px solid var(--border); z-index:1000;
+      box-shadow:0 1px 0 rgba(29,78,216,0.06);
     }
+    .logo { font-size:1.15rem; font-weight:800; letter-spacing:-0.5px; color:var(--text); text-decoration:none; }
+    .logo span { color:var(--accent); }
+    .nav-links { display:flex; gap:2px; list-style:none; }
+    .nav-links a { color:var(--muted); text-decoration:none; font-size:0.875rem; font-weight:500; padding:6px 14px; border-radius:50px; transition:all 0.18s ease; }
+    .nav-links a:hover { color:var(--text); background:rgba(255,255,255,0.8); }
 
-    nav a{
-      color:#fff !important;
-      font-weight:600;
-      transition:0.3s;
-    }
-
-    nav a:hover{
-      color:#38bdf8 !important;
-    }
-
-    /* HEADER */
-    header{
-      text-align:center;
-      padding:120px 20px 70px;
-      position:relative;
-    }
-
-    header h1{
-      font-size:3.5rem;
-      font-weight:700;
-      background:linear-gradient(90deg,#38bdf8,#818cf8);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      animation:fadeUp 0.8s ease;
-    }
-
-    header p{
-      color:#cbd5e1;
-      max-width:600px;
-      margin:15px auto 0;
-    }
-
-    @keyframes fadeUp{
-      from{opacity:0; transform:translateY(20px);}
-      to{opacity:1; transform:translateY(0);}
-    }
+    /* HERO */
+    .page-hero { min-height:36vh; display:flex; align-items:center; padding:108px 8% 64px; position:relative; z-index:1; }
+    .page-hero-inner { max-width:700px; animation:fadeUp 0.7s ease both; }
+    .breadcrumb { display:inline-flex; align-items:center; gap:8px; font-size:0.78rem; color:var(--muted); margin-bottom:20px; }
+    .breadcrumb a { color:var(--accent); text-decoration:none; font-weight:600; }
+    .breadcrumb a:hover { text-decoration:underline; }
+    .page-hero h1 { font-size:clamp(2.4rem,5vw,3.8rem); font-weight:900; letter-spacing:-2px; line-height:1.05; margin-bottom:16px; }
+    .page-hero h1 .gradient { display:block; background:linear-gradient(105deg,var(--accent),var(--primary) 50%,var(--violet)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .page-hero p { color:var(--muted); font-size:1.02rem; line-height:1.85; max-width:560px; }
 
     /* SECTION */
-    .skills-section{
-      padding:60px 20px 100px;
-    }
+    .section { padding:72px 8%; position:relative; z-index:1; }
+    .section-label { display:inline-block; font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:2.8px; color:var(--accent); margin-bottom:12px; padding:5px 13px; border-radius:50px; background:rgba(14,165,233,0.07); border:1px solid rgba(14,165,233,0.14); }
+    .section-title { font-size:clamp(1.7rem,3vw,2.3rem); font-weight:800; letter-spacing:-1px; margin-bottom:12px; }
+    .section-title span { color:var(--accent); }
+    .section-desc { color:var(--muted); font-size:0.97rem; line-height:1.82; margin-bottom:44px; max-width:560px; }
 
-    .section-title{
-      text-align:center;
-      font-size:2.5rem;
-      font-weight:700;
-      margin-bottom:50px;
-      position:relative;
+    /* COMPÉTENCES CARDS — grandes */
+    .comp-grid { display:flex; flex-direction:column; gap:24px; }
+    .comp-card {
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+      padding:36px 36px 32px; position:relative; overflow:hidden;
+      box-shadow:var(--shadow); transition:all 0.28s ease;
     }
+    .comp-card::before { content:""; position:absolute; top:0; left:0; bottom:0; width:4px; border-radius:4px 0 0 4px; }
+    .comp-card.c1::before { background:linear-gradient(180deg,var(--primary),var(--accent)); }
+    .comp-card.c2::before { background:linear-gradient(180deg,var(--violet),var(--primary)); }
+    .comp-card.c3::before { background:linear-gradient(180deg,var(--green),var(--accent)); }
+    .comp-card:hover { transform:translateY(-4px); border-color:var(--border-h); box-shadow:var(--shadow-lg); background:var(--glass); }
 
-    .section-title::after{
-      content:'';
-      width:80px;
-      height:4px;
-      background:linear-gradient(90deg,#38bdf8,#818cf8);
-      position:absolute;
-      bottom:-12px;
-      left:50%;
-      transform:translateX(-50%);
-      border-radius:10px;
+    .comp-header { display:flex; align-items:flex-start; gap:18px; margin-bottom:20px; }
+    .comp-num {
+      width:54px; height:54px; border-radius:14px; display:flex; align-items:center; justify-content:center;
+      font-size:1.3rem; font-weight:900; flex-shrink:0; letter-spacing:-1px;
     }
+    .comp-card.c1 .comp-num { background:rgba(29,78,216,0.12); color:var(--primary); }
+    .comp-card.c2 .comp-num { background:rgba(124,58,237,0.12); color:var(--violet); }
+    .comp-card.c3 .comp-num { background:rgba(5,150,105,0.12); color:var(--green); }
+    .comp-ue {
+      font-size:0.67rem; font-weight:700; text-transform:uppercase; letter-spacing:2px;
+      margin-bottom:5px;
+    }
+    .comp-card.c1 .comp-ue { color:var(--primary); }
+    .comp-card.c2 .comp-ue { color:var(--violet); }
+    .comp-card.c3 .comp-ue { color:var(--green); }
+    .comp-header h2 { font-size:1.18rem; font-weight:800; line-height:1.3; color:var(--text); }
+    .comp-desc { color:var(--muted); font-size:0.93rem; line-height:1.82; margin-bottom:26px; }
 
-    /* CARD */
-    .card{
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(255,255,255,0.08);
-      backdrop-filter:blur(15px);
-      border-radius:20px;
-      padding:30px 20px;
-      text-align:center;
-      transition:0.3s ease;
-      height:100%;
+    /* Semestres à l'intérieur d'une compétence */
+    .sem-split { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .sem-block {
+      background:rgba(255,255,255,0.6); border:1px solid var(--border); border-radius:13px;
+      padding:18px 18px 16px;
     }
+    .sem-title { display:flex; align-items:center; gap:8px; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:1.8px; color:var(--muted); margin-bottom:12px; }
+    .sem-title i { font-size:0.85rem; }
+    .comp-card.c1 .sem-title i { color:var(--primary); }
+    .comp-card.c2 .sem-title i { color:var(--violet); }
+    .comp-card.c3 .sem-title i { color:var(--green); }
+    .res-list { display:flex; flex-direction:column; gap:7px; }
+    .res-item { display:flex; align-items:flex-start; gap:9px; font-size:0.84rem; color:var(--text); }
+    .res-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; margin-top:7px; }
+    .comp-card.c1 .res-dot { background:var(--primary); }
+    .comp-card.c2 .res-dot { background:var(--violet); }
+    .comp-card.c3 .res-dot { background:var(--green); }
+    .res-name { font-weight:600; }
+    .res-sub { font-size:0.76rem; color:var(--muted); margin-top:1px; line-height:1.4; }
 
-    .card:hover{
-      transform:translateY(-10px);
-      border-color:#38bdf8;
-      box-shadow:0 10px 30px rgba(56,189,248,0.15);
+    /* SAE tags */
+    .sae-tags { display:flex; flex-wrap:wrap; gap:7px; margin-top:22px; }
+    .sae-tag {
+      font-size:0.69rem; font-weight:700; padding:4px 11px; border-radius:50px;
+      text-transform:uppercase; letter-spacing:0.8px;
     }
+    .comp-card.c1 .sae-tag { background:rgba(29,78,216,0.08); border:1px solid rgba(29,78,216,0.15); color:var(--primary); }
+    .comp-card.c2 .sae-tag { background:rgba(124,58,237,0.08); border:1px solid rgba(124,58,237,0.15); color:var(--violet); }
+    .comp-card.c3 .sae-tag { background:rgba(5,150,105,0.08); border:1px solid rgba(5,150,105,0.15); color:var(--green); }
 
-    .card i{
-      font-size:2.5rem;
-      margin-bottom:15px;
-      color:#38bdf8;
-      transition:0.3s;
+    /* OUTILS */
+    .tools-section { margin-top:80px; }
+    .tools-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:13px; }
+    .tool-item {
+      background:var(--card); border:1px solid var(--border); border-radius:16px;
+      padding:20px 16px; display:flex; flex-direction:column; gap:8px;
+      transition:all 0.22s ease; box-shadow:var(--shadow);
     }
+    .tool-item:hover { border-color:var(--border-h); transform:translateY(-5px); box-shadow:var(--shadow-lg); }
+    .tool-icon { font-size:1.5rem; color:var(--accent); }
+    .tool-name { font-weight:700; font-size:0.9rem; }
+    .tool-desc { font-size:0.74rem; color:var(--muted); line-height:1.5; }
 
-    .card:hover i{
-      transform:scale(1.15);
-    }
-
-    .card h5{
-      font-weight:600;
-      margin-bottom:10px;
-    }
-
-    .card p{
-      font-size:0.95rem;
-      color:#cbd5e1;
-    }
-
-    /* GRID FIX */
-    .row{
-      row-gap:25px;
-    }
+    /* BTN */
+    .btn { padding:11px 22px; border-radius:11px; border:none; cursor:pointer; font-weight:600; font-size:0.875rem; text-decoration:none; transition:all 0.22s ease; display:inline-flex; align-items:center; gap:7px; font-family:'Outfit',sans-serif; }
+    .btn-primary { background:linear-gradient(135deg,#2563eb,#1e40af); color:white; box-shadow:0 6px 24px rgba(37,99,235,0.32); }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(37,99,235,0.42); }
+    .btn-secondary { background:var(--card); border:1px solid var(--border); color:var(--text); box-shadow:var(--shadow); }
+    .btn-secondary:hover { transform:translateY(-2px); border-color:var(--border-h); background:var(--glass); }
 
     /* FOOTER */
-    footer{
-      text-align:center;
-      padding:25px;
-      border-top:1px solid rgba(255,255,255,0.1);
-      color:#94a3b8;
-      margin-top:40px;
-    }
+    .divider { width:calc(100% - 16%); margin:0 8%; height:1px; background:var(--border); }
+    footer { padding:34px 8%; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; position:relative; z-index:1; }
+    .footer-copy { color:var(--muted); font-size:0.82rem; }
+    .footer-copy span { color:var(--accent); font-weight:600; }
+    .socials { display:flex; gap:8px; }
+    .socials a { width:38px; height:38px; display:flex; align-items:center; justify-content:center; border-radius:10px; text-decoration:none; color:var(--muted); background:var(--card); border:1px solid var(--border); transition:all 0.22s ease; }
+    .socials a:hover { color:var(--text); border-color:var(--border-h); transform:translateY(-2px); }
 
-    /* RESPONSIVE */
-    @media(max-width:768px){
-      header h1{
-        font-size:2.5rem;
-      }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    .reveal { opacity:0; transform:translateY(22px); transition:opacity 0.58s ease,transform 0.58s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    @media (max-width:860px) {
+      .sem-split { grid-template-columns:1fr; }
+    }
+    @media (max-width:600px) {
+      .navbar { padding:0 5%; }
+      .nav-links a { padding:5px 9px; font-size:0.8rem; }
+      .section { padding:60px 5%; }
+      .page-hero { padding:100px 5% 52px; }
+      .comp-card { padding:26px 20px 22px; }
+      footer { flex-direction:column; align-items:center; }
     }
   </style>
 </head>
-
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark">
-  <div class="container">
-    <a class="navbar-brand" href="index.html">← Retour au Portfolio</a>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <nav class="navbar">
+    <a href="index.html" class="logo">Marouane <span>Yoda</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">À propos</a></li>
+      <li><a href="index.html#skills">Compétences</a></li>
+      <li><a href="index.html#projects">Projets</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumb">
+        <a href="index.html"><i class="bi bi-house-fill"></i> Portfolio</a>
+        <i class="bi bi-chevron-right"></i>
+        <span>Compétences BUT SD</span>
+      </div>
+      <h1>Compétences<br><span class="gradient">BUT Science des Données</span></h1>
+      <p>Les 3 blocs de compétences du programme national BUT SD développés en 1ère année — S1 et S2 — à l'IUT de Poitiers, campus de Niort.</p>
+    </div>
   </div>
-</nav>
 
-<header>
-  <h1>Mes Compétences</h1>
-  <p>Voici mes compétences techniques en développement, data et technologies modernes.</p>
-</header>
+  <section class="section" style="padding-top:0;">
+    <div class="reveal" style="margin-bottom:44px;">
+      <span class="section-label">Programme national 2022</span>
+      <h2 class="section-title">3 blocs de <span>compétences</span></h2>
+      <p class="section-desc">En 1ère année, les 3 compétences communes aux deux parcours (VCOD et EMS) sont travaillées à travers des ressources disciplinaires et des SAÉ concrètes sur les deux semestres.</p>
+    </div>
 
-<section class="container skills-section">
-  <h2 class="section-title">Compétences techniques</h2>
+    <div class="comp-grid">
 
-  <div class="row">
+      <!-- COMPÉTENCE 1 -->
+      <div class="comp-card c1 reveal">
+        <div class="comp-header">
+          <div class="comp-num">C1</div>
+          <div>
+            <div class="comp-ue">UE 1 · Compétence 1</div>
+            <h2>Traiter des données à des fins décisionnelles</h2>
+          </div>
+        </div>
+        <p class="comp-desc">
+          Collecter, stocker, préparer et exploiter des données structurées pour produire des informations utiles à la prise de décision. Maîtriser les outils de reporting, les bases de données relationnelles et la programmation pour automatiser et fiabiliser le traitement des données.
+        </p>
 
-    <div class="col-md-4">
-      <div class="card">
-        <i class="fab fa-python"></i>
-        <h5>Python</h5>
-        <p>Analyse de données, scripts et automatisation.</p>
+        <div class="sem-split">
+          <div class="sem-block">
+            <div class="sem-title"><i class="bi bi-1-circle-fill"></i> Semestre 1</div>
+            <div class="res-list">
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Tableur et reporting</div><div class="res-sub">Excel / VBA, mise en forme, KPIs</div></div>
+              </div>
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Bases de données relationnelles 1</div><div class="res-sub">Modèle relationnel, SQL, requêtage</div></div>
+              </div>
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Bases de la programmation 1</div><div class="res-sub">Python — variables, boucles, fonctions</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="sem-block">
+            <div class="sem-title"><i class="bi bi-2-circle-fill"></i> Semestre 2</div>
+            <div class="res-list">
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Reporting et Datavisualisation</div><div class="res-sub">Power BI, DAX, dashboards interactifs</div></div>
+              </div>
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Bases de données relationnelles 2</div><div class="res-sub">MCD/MLD, contraintes, jointures avancées</div></div>
+              </div>
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Bases de la programmation 2</div><div class="res-sub">Python — structures, fichiers, modules</div></div>
+              </div>
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Programmation statistique</div><div class="res-sub">SAS — data step, proc, analyse</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sae-tags">
+          <span class="sae-tag">SAÉ 1.01 — Reporting</span>
+          <span class="sae-tag">SAÉ 1.02 — Fichiers de données</span>
+          <span class="sae-tag">SAÉ 2.01 — Base de données</span>
+          <span class="sae-tag">SAÉ 2.04 — Datavisualisation</span>
+          <span class="sae-tag">SAÉ 2.05 — Indicateurs de perf.</span>
+          <span class="sae-tag">SAÉ 2.06 — Analyse & reporting</span>
+        </div>
+      </div>
+
+      <!-- COMPÉTENCE 2 -->
+      <div class="comp-card c2 reveal">
+        <div class="comp-header">
+          <div class="comp-num">C2</div>
+          <div>
+            <div class="comp-ue">UE 2 · Compétence 2</div>
+            <h2>Analyser statistiquement les données</h2>
+          </div>
+        </div>
+        <p class="comp-desc">
+          Mobiliser les outils mathématiques et statistiques pour décrire, modéliser et interpréter des données. De la statistique descriptive univariée aux premiers modèles de régression et d'inférence, acquérir une démarche rigoureuse face aux données réelles.
+        </p>
+
+        <div class="sem-split">
+          <div class="sem-block">
+            <div class="sem-title"><i class="bi bi-1-circle-fill"></i> Semestre 1</div>
+            <div class="res-list">
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Statistique descriptive 1</div><div class="res-sub">Indicateurs de tendance, dispersion, représentations graphiques</div></div>
+              </div>
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Probabilités 1</div><div class="res-sub">Lois usuelles, dénombrement, calcul de probabilités</div></div>
+              </div>
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Mathématiques — Analyse</div><div class="res-sub">Fonctions, dérivées, suites</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="sem-block">
+            <div class="sem-title"><i class="bi bi-2-circle-fill"></i> Semestre 2</div>
+            <div class="res-list">
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Statistique descriptive 2</div><div class="res-sub">Analyse bivariée, corrélation, tableaux croisés</div></div>
+              </div>
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Probabilités 2</div><div class="res-sub">Lois continues, espérance, variance</div></div>
+              </div>
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Statistique inférentielle</div><div class="res-sub">Estimation, intervalles de confiance, tests</div></div>
+              </div>
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Bases de l'algèbre</div><div class="res-sub">Vecteurs, matrices, systèmes linéaires</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sae-tags">
+          <span class="sae-tag">SAÉ 1.03 — Analyse exploratoire</span>
+          <span class="sae-tag">SAÉ 1.06 — Enquête statistique</span>
+          <span class="sae-tag">SAÉ 2.02 — Échantillonnage</span>
+          <span class="sae-tag">SAÉ 2.03 — Régression</span>
+        </div>
+      </div>
+
+      <!-- COMPÉTENCE 3 -->
+      <div class="comp-card c3 reveal">
+        <div class="comp-header">
+          <div class="comp-num">C3</div>
+          <div>
+            <div class="comp-ue">UE 3 · Compétence 3</div>
+            <h2>Valoriser une production dans un contexte professionnel</h2>
+          </div>
+        </div>
+        <p class="comp-desc">
+          Communiquer efficacement des résultats de données à un public professionnel, en français et en anglais. Comprendre le contexte économique dans lequel les données s'inscrivent et savoir adapter sa restitution à son interlocuteur.
+        </p>
+
+        <div class="sem-split">
+          <div class="sem-block">
+            <div class="sem-title"><i class="bi bi-1-circle-fill"></i> Semestre 1</div>
+            <div class="res-list">
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Anglais de spécialité 1</div><div class="res-sub">Vocabulaire data, expression orale professionnelle</div></div>
+              </div>
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Communication professionnelle</div><div class="res-sub">Recherche documentaire, structuration de l'information</div></div>
+              </div>
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Données entreprise & économie</div><div class="res-sub">Environnement économique, données métiers</div></div>
+              </div>
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">PPP 1</div><div class="res-sub">Projet Personnel et Professionnel</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="sem-block">
+            <div class="sem-title"><i class="bi bi-2-circle-fill"></i> Semestre 2</div>
+            <div class="res-list">
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Anglais de spécialité 2</div><div class="res-sub">Approfondissement, compréhension écrite/orale</div></div>
+              </div>
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Communication & sémiologie</div><div class="res-sub">Design de l'information, hiérarchie visuelle</div></div>
+              </div>
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">Environnement entrepreneurial</div><div class="res-sub">Analyse d'entreprise, données de gestion</div></div>
+              </div>
+              <div class="res-item">
+                <div class="res-dot"></div>
+                <div><div class="res-name">PPP 2</div><div class="res-sub">Projet Personnel et Professionnel</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sae-tags">
+          <span class="sae-tag">SAÉ 1.04 — Production en entreprise</span>
+          <span class="sae-tag">SAÉ 1.05 — Présentation en anglais</span>
+          <span class="sae-tag">SAÉ 2.06 — Reporting complet</span>
+          <span class="sae-tag">Portfolio — Démarche réflexive</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- OUTILS -->
+    <div class="tools-section reveal">
+      <div style="margin-bottom:28px;">
+        <span class="section-label">Stack technique</span>
+        <h2 class="section-title">Outils <span>mobilisés</span></h2>
+        <p class="section-desc" style="margin-bottom:0;">Les technologies utilisées au fil des ressources et des SAÉ de 1ère année.</p>
+      </div>
+      <div class="tools-grid">
+        <div class="tool-item reveal">
+          <div class="tool-icon"><i class="bi bi-filetype-py"></i></div>
+          <div class="tool-name">Python</div>
+          <div class="tool-desc">Pandas, NumPy, Matplotlib, Scikit-learn</div>
+        </div>
+        <div class="tool-item reveal">
+          <div class="tool-icon"><i class="bi bi-database"></i></div>
+          <div class="tool-name">SQL</div>
+          <div class="tool-desc">Requêtes, jointures, agrégations, MCD/MLD</div>
+        </div>
+        <div class="tool-item reveal">
+          <div class="tool-icon"><i class="bi bi-bar-chart-line-fill"></i></div>
+          <div class="tool-name">Power BI</div>
+          <div class="tool-desc">DAX, dashboards, KPIs</div>
+        </div>
+        <div class="tool-item reveal">
+          <div class="tool-icon"><i class="bi bi-file-spreadsheet-fill"></i></div>
+          <div class="tool-name">Excel / VBA</div>
+          <div class="tool-desc">Macros, TCD, automatisation</div>
+        </div>
+        <div class="tool-item reveal">
+          <div class="tool-icon"><i class="bi bi-activity"></i></div>
+          <div class="tool-name">SAS</div>
+          <div class="tool-desc">Prog. statistique, data step</div>
+        </div>
+        <div class="tool-item reveal">
+          <div class="tool-icon"><i class="bi bi-git"></i></div>
+          <div class="tool-name">GitHub</div>
+          <div class="tool-desc">Versioning, collaboration</div>
+        </div>
+        <div class="tool-item reveal">
+          <div class="tool-icon"><i class="bi bi-code-slash"></i></div>
+          <div class="tool-name">HTML / CSS / JS</div>
+          <div class="tool-desc">Interfaces responsive, portfolio</div>
+        </div>
       </div>
     </div>
 
-    <div class="col-md-4">
-      <div class="card">
-        <i class="fas fa-file-excel"></i>
-        <h5>Excel / VBA</h5>
-        <p>Automatisation et analyse avancée de données.</p>
-      </div>
+    <div style="margin-top:52px; display:flex; gap:10px; flex-wrap:wrap;" class="reveal">
+      <a href="mes-projets-detailles.html" class="btn btn-primary"><i class="bi bi-journal-code"></i> Voir les SAÉ en détail</a>
+      <a href="index.html" class="btn btn-secondary"><i class="bi bi-arrow-left-circle"></i> Retour au portfolio</a>
     </div>
+  </section>
 
-    <div class="col-md-4">
-      <div class="card">
-        <i class="fas fa-chart-bar"></i>
-        <h5>Statistiques</h5>
-        <p>Analyse et interprétation de données.</p>
-      </div>
+  <div class="divider"></div>
+  <footer>
+    <p class="footer-copy">© 2026 — Portfolio de <span>Marouane Yoda</span></p>
+    <div class="socials">
+      <a href="https://linkedin.com/in/marouane-yoda" target="_blank"><i class="bi bi-linkedin"></i></a>
+      <a href="mailto:yoda.marouane@gmail.com"><i class="bi bi-envelope"></i></a>
     </div>
+  </footer>
 
-    <div class="col-md-4">
-      <div class="card">
-        <i class="fab fa-html5"></i>
-        <h5>HTML / CSS / </h5>
-        <p> Innovation de sites web ,</p>
-      </div>
-    </div>
-
-   
-
-    <div class="col-md-4">
-      <div class="card">
-        <i class="fas fa-database"></i>
-        <h5>SQL</h5>
-        <p>Gestion et requêtes de bases de données.</p>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="card">
-        <i class="fab fa-github"></i>
-        <h5>Git & GitHub</h5>
-        <p>Gestion de version et collaboration.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<footer>
-  © 2025 Marouane Yoda - Tous droits réservés
-</footer>
-
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 70);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
