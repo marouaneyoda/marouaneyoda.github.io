@@ -30,10 +30,12 @@
     .orb-1 { width:700px; height:700px; background:var(--primary); opacity:0.11; top:-220px; left:-200px; }
     .orb-2 { width:500px; height:500px; background:var(--accent); opacity:0.10; bottom:0; right:-150px; }
     .orb-3 { width:380px; height:380px; background:var(--violet); opacity:0.08; top:42%; left:50%; transform:translate(-50%,-50%); }
+
+    /* NAVBAR */
     .navbar {
       width:100%; padding:0 8%; height:64px; position:fixed; top:0;
       display:flex; justify-content:space-between; align-items:center;
-      backdrop-filter:blur(32px) saturate(180%); background:rgba(245,247,255,0.88);
+      backdrop-filter:blur(32px) saturate(180%); background:rgba(245,247,255,0.92);
       border-bottom:1px solid var(--border); z-index:1000;
       box-shadow:0 1px 0 rgba(29,78,216,0.06);
     }
@@ -41,7 +43,9 @@
     .logo span { color:var(--accent); }
     .nav-links { display:flex; gap:2px; list-style:none; }
     .nav-links a { color:var(--muted); text-decoration:none; font-size:0.875rem; font-weight:500; padding:6px 14px; border-radius:50px; transition:all 0.18s ease; }
-    .nav-links a:hover { color:var(--text); background:rgba(255,255,255,0.8); }
+    .nav-links a:hover, .nav-links a.active { color:var(--text); background:rgba(255,255,255,0.8); }
+
+    /* HERO */
     .hero { min-height:100vh; display:flex; align-items:center; padding:100px 8% 72px; gap:72px; flex-wrap:wrap; position:relative; z-index:1; }
     .hero-text { flex:1; min-width:300px; }
     .hero-text h1 { font-size:clamp(2.5rem,5.2vw,4.2rem); font-weight:900; line-height:1.05; letter-spacing:-2px; margin-bottom:20px; animation:fadeUp 0.7s 0.08s ease both; }
@@ -72,12 +76,16 @@
     .stat-card .value { font-size:0.88rem; font-weight:700; color:var(--text); }
     .stat-1 { top:22px; left:-88px; animation:floating 5.5s ease-in-out infinite; }
     .stat-2 { bottom:52px; right:-88px; animation:floating 5.5s 2.75s ease-in-out infinite; }
+
+    /* SECTIONS */
     .section { padding:108px 8%; position:relative; z-index:1; }
     .section-header { margin-bottom:58px; }
     .section-label { display:inline-block; font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:2.8px; color:var(--accent); margin-bottom:12px; padding:5px 13px; border-radius:50px; background:rgba(14,165,233,0.07); border:1px solid rgba(14,165,233,0.14); }
     .section-title { font-size:clamp(1.85rem,3.2vw,2.5rem); font-weight:800; letter-spacing:-1px; line-height:1.08; margin-bottom:14px; }
     .section-title span { color:var(--accent); }
     .section-desc { color:var(--muted); max-width:520px; font-size:0.97rem; line-height:1.82; }
+
+    /* ABOUT */
     .about-split { display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:start; }
     .about-bio { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:36px 32px; position:relative; overflow:hidden; box-shadow:var(--shadow); }
     .about-bio::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--accent),var(--violet)); border-radius:3px 3px 0 0; }
@@ -93,16 +101,22 @@
     .passion-card .p-icon.data { background:rgba(14,165,233,0.09); color:var(--accent); }
     .passion-card h4 { font-weight:700; font-size:0.98rem; margin-bottom:4px; }
     .passion-card p { color:var(--muted); font-size:0.84rem; line-height:1.62; }
+
+    /* SKILLS */
     .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(152px,1fr)); gap:13px; }
     .skill-item { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:22px 17px; display:flex; flex-direction:column; gap:9px; transition:all 0.22s ease; box-shadow:var(--shadow); }
     .skill-item:hover { border-color:var(--border-h); transform:translateY(-5px); box-shadow:var(--shadow-lg); }
     .skill-item .skill-icon { font-size:1.55rem; color:var(--accent); }
     .skill-item .skill-name { font-weight:700; font-size:0.92rem; }
     .skill-item .skill-desc { font-size:0.75rem; color:var(--muted); line-height:1.5; }
+
+    /* SAE INTRO BANNER */
     .sae-intro { background:linear-gradient(135deg,rgba(29,78,216,0.08),rgba(14,165,233,0.06)); border:1px solid rgba(14,165,233,0.16); border-radius:20px; padding:26px 30px; margin-bottom:52px; display:flex; align-items:center; gap:22px; flex-wrap:wrap; }
     .sae-intro-icon { font-size:2.3rem; color:var(--accent); flex-shrink:0; }
     .sae-intro p { color:var(--muted); font-size:0.94rem; line-height:1.8; flex:1; min-width:200px; }
     .sae-intro p strong { color:var(--text); }
+
+    /* SAE GRID */
     .sae-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(295px,1fr)); gap:18px; }
     .sae-card { background:var(--card); border:1px solid var(--border); border-radius:18px; padding:26px 24px; transition:all 0.28s ease; position:relative; overflow:hidden; box-shadow:var(--shadow); }
     .sae-card::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; opacity:0; transition:opacity 0.28s; border-radius:3px 3px 0 0; }
@@ -126,7 +140,26 @@
     .sae-tag.violet { color:var(--violet); }
     .sae-card h3 { font-weight:700; font-size:0.94rem; line-height:1.4; color:var(--text); }
     .sae-card p { color:var(--muted); font-size:0.84rem; line-height:1.75; }
-    .sae-badge-special { display:inline-flex; align-items:center; gap:5px; background:rgba(217,119,6,0.09); border:1px solid rgba(217,119,6,0.25); border-radius:50px; padding:3px 10px; font-size:0.65rem; font-weight:700; color:var(--amber); text-transform:uppercase; letter-spacing:0.8px; margin-top:6px; margin-bottom:10px; }
+
+    /* Sub-section label (Projets perso / SAE) */
+    .proj-section-label {
+      display:flex; align-items:center; gap:14px;
+      font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:2.5px;
+      color:var(--primary); margin-bottom:22px;
+    }
+    .proj-section-label::before { content:""; width:22px; height:3px; background:var(--accent); border-radius:2px; flex-shrink:0; }
+    .proj-section-label::after { content:""; flex:1; height:1px; background:var(--border); }
+
+    /* SAE Semester divider */
+    .sae-semester-label {
+      grid-column: 1 / -1;
+      display:flex; align-items:center; gap:14px;
+      font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:2px;
+      color:var(--muted); margin-top:10px;
+    }
+    .sae-semester-label::after { content:""; flex:1; height:1px; background:var(--border); }
+
+    /* PROJECT CARDS */
     .projects-highlight { display:grid; grid-template-columns:repeat(auto-fit,minmax(275px,1fr)); gap:20px; margin-top:52px; }
     .project-card { background:var(--card); border:1px solid var(--border); border-radius:20px; overflow:hidden; transition:all 0.28s ease; box-shadow:var(--shadow); }
     .project-card:hover { transform:translateY(-6px); border-color:var(--border-h); box-shadow:var(--shadow-lg); }
@@ -139,12 +172,33 @@
     .project-tag { font-size:0.69rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--accent); margin-bottom:7px; display:block; }
     .project-content h3 { font-weight:700; font-size:1.05rem; margin-bottom:9px; }
     .project-content p { color:var(--muted); font-size:0.85rem; line-height:1.75; margin-bottom:18px; }
+
+    /* STATS BAND */
+    .stats-band {
+      display:flex; gap:0; background:var(--card); border:1px solid var(--border);
+      border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+      margin-bottom:52px;
+    }
+    .stat-band-item {
+      flex:1; padding:28px 24px; text-align:center;
+      border-right:1px solid var(--border); transition:background 0.2s;
+    }
+    .stat-band-item:last-child { border-right:none; }
+    .stat-band-item:hover { background:var(--glass); }
+    .stat-band-num { font-size:2.1rem; font-weight:900; color:var(--primary); letter-spacing:-1px; line-height:1; margin-bottom:6px; }
+    .stat-band-num.accent { color:var(--accent); }
+    .stat-band-num.violet { color:var(--violet); }
+    .stat-band-lbl { font-size:0.78rem; color:var(--muted); font-weight:500; }
+
+    /* CONTACT */
     .contact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(205px,1fr)); gap:16px; }
     .contact-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:26px 22px; transition:all 0.25s ease; text-decoration:none; color:var(--text); display:block; box-shadow:var(--shadow); }
     .contact-card:hover { transform:translateY(-4px); border-color:var(--border-h); background:var(--glass); box-shadow:var(--shadow-lg); }
     .contact-card i { font-size:1.65rem; color:var(--accent); margin-bottom:13px; display:block; }
     .contact-card h3 { font-weight:700; font-size:0.97rem; margin-bottom:5px; }
     .contact-card p { color:var(--muted); font-size:0.82rem; }
+
+    /* FOOTER */
     .divider { width:calc(100% - 16%); margin:0 8%; height:1px; background:var(--border); }
     footer { padding:34px 8%; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; position:relative; z-index:1; }
     .footer-copy { color:var(--muted); font-size:0.82rem; }
@@ -152,11 +206,14 @@
     .socials { display:flex; gap:8px; }
     .socials a { width:38px; height:38px; display:flex; align-items:center; justify-content:center; border-radius:10px; text-decoration:none; color:var(--muted); background:var(--card); border:1px solid var(--border); transition:all 0.22s ease; }
     .socials a:hover { color:var(--text); border-color:var(--border-h); transform:translateY(-2px); }
+
+    /* ANIMATIONS */
     @keyframes floating { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-11px)} }
     @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.45;transform:scale(0.78)} }
     .reveal { opacity:0; transform:translateY(22px); transition:opacity 0.58s ease,transform 0.58s ease; }
     .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* RESPONSIVE */
     @media (max-width:960px) {
       .about-split { grid-template-columns:1fr; }
       .hero { flex-direction:column; text-align:center; padding-top:108px; }
@@ -165,6 +222,9 @@
       .hero-tags { justify-content:center; }
       .stat-1,.stat-2 { display:none; }
       footer { flex-direction:column; align-items:center; }
+      .stats-band { flex-wrap:wrap; }
+      .stat-band-item { border-right:none; border-bottom:1px solid var(--border); }
+      .stat-band-item:last-child { border-bottom:none; }
     }
     @media (max-width:600px) {
       .navbar { padding:0 5%; }
@@ -267,16 +327,39 @@
       <div class="skill-item reveal"><div class="skill-icon"><i class="bi bi-activity"></i></div><div class="skill-name">SAS</div><div class="skill-desc">Analyse statistique, data management</div></div>
       <div class="skill-item reveal"><div class="skill-icon"><i class="bi bi-git"></i></div><div class="skill-name">GitHub</div><div class="skill-desc">Versioning, collaboration, gestion projets</div></div>
       <div class="skill-item reveal"><div class="skill-icon"><i class="bi bi-code-slash"></i></div><div class="skill-name">HTML / CSS / JS</div><div class="skill-desc">Interfaces responsive, animations, UI</div></div>
+    </div>
   </section>
 
   <!-- PROJECTS -->
   <section class="section" id="projects">
     <div class="section-header reveal">
       <span class="section-label">Projets</span>
-      <h2 class="section-title">Mes <span>réalisations</span></h2>
-      <p class="section-desc">Projets personnels et SAE académiques — une vue complète de mon parcours.</p>
+      <h2 class="section-title">Mes <span>projets</span></h2>
+      <p class="section-desc">Projets personnels et 12 SAE académiques — tout mon parcours en un seul endroit.</p>
     </div>
 
+    <!-- Stats band -->
+    <div class="stats-band reveal">
+        <div class="stat-band-item">
+          <div class="stat-band-num">12</div>
+          <div class="stat-band-lbl">Projets SAE</div>
+        </div>
+        <div class="stat-band-item">
+          <div class="stat-band-num accent">2</div>
+          <div class="stat-band-lbl">Semestres</div>
+        </div>
+        <div class="stat-band-item">
+          <div class="stat-band-num violet">7</div>
+          <div class="stat-band-lbl">Technologies</div>
+        </div>
+        <div class="stat-band-item">
+          <div class="stat-band-num">BUT</div>
+          <div class="stat-band-lbl">Science des Données</div>
+        </div>
+      </div>
+
+    <!-- Projets personnels -->
+    <div class="proj-section-label reveal">Projets personnels</div>
     <div class="projects-highlight">
       <div class="project-card reveal">
         <div class="project-thumb t1"><i class="bi bi-laptop"></i></div>
@@ -316,23 +399,18 @@
       </div>
     </div>
 
-    <!-- SAE -->
-    <div style="margin-top:80px;">
-      <div class="section-header reveal">
-        <span class="section-label">Académique</span>
-        <h2 class="section-title">Projets <span>SAE</span></h2>
-        <p class="section-desc">13 Situations d'Apprentissage et d'Évaluation réalisées durant mon cursus BUT SD </p>
-      </div>
+    <!-- SAE académiques -->
+    <div class="proj-section-label reveal" style="margin-top:56px;">
+      SAE académiques
+      <a href="mes-projets-detailles.html" class="btn btn-accent" style="margin-left:auto;font-size:0.8rem;padding:7px 16px;">
+        <i class="bi bi-arrow-right-circle-fill"></i> Voir en détail
+      </a>
+    </div>
 
-      <div class="sae-intro reveal">
-        <div class="sae-intro-icon"><i class="bi bi-journal-code"></i></div>
-        <p>Les SAE sont des projets pratiques au cœur de ma formation. Chacun m'a permis de confronter les savoirs théoriques à des <strong>cas concrets</strong> issus du monde professionnel de la data. <strong>13 projets</strong> couvrant l'analyse, la modélisation, la visualisation, le web et les bases de données.</p>
-        <a href="mes-projets-detailles.html" class="btn btn-accent" style="flex-shrink:0;">
-          <i class="bi bi-arrow-right-circle-fill"></i> Voir en détail
-        </a>
-      </div>
+    <div class="sae-grid">
 
-      <div class="sae-grid">
+        <!-- Semestre 1 -->
+        <div class="sae-semester-label">Semestre 1</div>
 
         <!-- SAE 01 -->
         <div class="sae-card c1 reveal">
@@ -343,7 +421,7 @@
               <h3>Création d'un reporting</h3>
             </div>
           </div>
-          <p>Conception d'un rapport de données structuré et orienté prise de décision — sélection des KPIs, mise en forme professionnelle et présentation à un public non technique.</p>
+          <p>Conception d'un rapport structuré et orienté prise de décision — sélection des KPIs, mise en forme professionnelle et présentation à un public non technique.</p>
         </div>
 
         <!-- SAE 02 -->
@@ -363,6 +441,18 @@
           <div class="sae-card-header">
             <div class="sae-num">03</div>
             <div class="sae-card-meta">
+              <div class="sae-tag">Analyse</div>
+              <h3>Exploration et analyse de données</h3>
+            </div>
+          </div>
+          <p>Analyse exploratoire d'un jeu de données réel : statistiques descriptives, visualisations synthétiques et identification des tendances clés.</p>
+        </div>
+
+        <!-- SAE 04 -->
+        <div class="sae-card c4 reveal">
+          <div class="sae-card-header">
+            <div class="sae-num">04</div>
+            <div class="sae-card-meta">
               <div class="sae-tag">Entreprise</div>
               <h3>Production de données en entreprise</h3>
             </div>
@@ -370,10 +460,10 @@
           <p>Apprentissage des flux de production de données en situation réelle : collecte terrain, saisie, contrôle qualité, structuration et stockage des informations métiers.</p>
         </div>
 
-        <!-- SAE 04 -->
-        <div class="sae-card c4 reveal">
+        <!-- SAE 05 -->
+        <div class="sae-card c1 reveal">
           <div class="sae-card-header">
-            <div class="sae-num">04</div>
+            <div class="sae-num">05</div>
             <div class="sae-card-meta">
               <div class="sae-tag">Anglais</div>
               <h3>Présentation d'un territoire économique</h3>
@@ -382,39 +472,102 @@
           <p>Présentation orale en anglais d'un territoire économique et culturel — structuration d'un discours clair et communication professionnelle en langue étrangère.</p>
         </div>
 
-        <!-- SAE 05 -->
-        <div class="sae-card c1 reveal">
-          <div class="sae-card-header">
-            <div class="sae-num">05</div>
-            <div class="sae-card-meta">
-              <div class="sae-tag">Statistiques</div>
-              <h3>Mise en œuvre d'une enquête statistique</h3>
-            </div>
-          </div>
-          <p>Conception du questionnaire, définition du plan de sondage, collecte terrain, traitement statistique des réponses et restitution sous forme de rapport illustré.</p>
-        </div>
-
         <!-- SAE 06 -->
         <div class="sae-card c2 reveal">
           <div class="sae-card-header">
             <div class="sae-num">06</div>
             <div class="sae-card-meta">
+              <div class="sae-tag">Statistiques</div>
+              <h3>Mise en œuvre d'une enquête statistique</h3>
+            </div>
+          </div>
+          <p>Conception du questionnaire, plan de sondage, collecte terrain, traitement statistique des réponses et restitution sous forme de rapport illustré.</p>
+        </div>
+
+        <!-- Semestre 2 -->
+        <div class="sae-semester-label">Semestre 2</div>
+
+        <!-- SAE 07 -->
+        <div class="sae-card c3 reveal">
+          <div class="sae-card-header">
+            <div class="sae-num">07</div>
+            <div class="sae-card-meta">
               <div class="sae-tag">Base de données</div>
               <h3>Conception d'une base de données</h3>
             </div>
           </div>
-          <p>Modélisation relationnelle (MCD/MLD), création des tables SQL, définition des contraintes d'intégrité et requêtage avancé sur des données réelles.</p>
+          <p>Modélisation relationnelle (MCD/MLD), création des tables SQL, définition des contraintes d'intégrité (clés primaires, étrangères) et requêtage avancé sur données réelles.</p>
         </div>
 
-      </div>
+        <!-- SAE 08 -->
+        <div class="sae-card c4 reveal">
+          <div class="sae-card-header">
+            <div class="sae-num">08</div>
+            <div class="sae-card-meta">
+              <div class="sae-tag violet">Statistiques</div>
+              <h3>Estimation par échantillonnage</h3>
+            </div>
+          </div>
+          <p>Application des méthodes d'échantillonnage probabiliste — aléatoire simple, stratifié, par grappes — pour produire des estimations fiables sur une population.</p>
+        </div>
 
-      
+        <!-- SAE 09 -->
+        <div class="sae-card c1 reveal">
+          <div class="sae-card-header">
+            <div class="sae-num">09</div>
+            <div class="sae-card-meta">
+              <div class="sae-tag">Modélisation</div>
+              <h3>Régression sur des données réelles</h3>
+            </div>
+          </div>
+          <p>Mise en œuvre de modèles de régression linéaire simple et multiple sur un jeu de données réel — vérification des hypothèses, interprétation des coefficients et visualisation des résidus.</p>
+        </div>
+
+        <!-- SAE 10 -->
+        <div class="sae-card c5 reveal">
+          <div class="sae-card-header">
+            <div class="sae-num">10</div>
+            <div class="sae-card-meta">
+              <div class="sae-tag violet">Datavisualisation · Concours</div>
+              <h3>Dataviz — Concours</h3>
+            </div>
+          </div>
+          <p>Participation à un concours de datavisualisation : création d'une visualisation percutante à partir d'un jeu de données, avec un objectif de clarté, d'impact visuel et de storytelling.</p>
+        </div>
+
+        <!-- SAE 11 -->
+        <div class="sae-card c2 reveal">
+          <div class="sae-card-header">
+            <div class="sae-num">11</div>
+            <div class="sae-card-meta">
+              <div class="sae-tag orange">Power BI · KPIs</div>
+              <h3>Construction et présentation d'indicateurs de performance</h3>
+            </div>
+          </div>
+          <p>Sélection, calcul et mise en forme d'indicateurs clés pour piloter une activité. Dashboard Power BI interactif avec mesures DAX, graphiques dynamiques et présentation orientée décision.</p>
+        </div>
+
+        <!-- SAE 12 -->
+        <div class="sae-card c3 reveal">
+          <div class="sae-card-header">
+            <div class="sae-num">12</div>
+            <div class="sae-card-meta">
+              <div class="sae-tag violet">Reporting · Dataviz</div>
+              <h3>Analyse, reporting et datavisualisation</h3>
+            </div>
+          </div>
+          <p>Projet intégrateur combinant exploration de données réelles, analyse statistique descriptive, rapport structuré et visualisations Power BI orientées vers la prise de décision.</p>
+        </div>
+
+    </div>
+  </section>
 
   <!-- CONTACT -->
   <section class="section" id="contact">
     <div class="section-header reveal">
       <span class="section-label">Contact</span>
       <h2 class="section-title">Travaillons <span>ensemble</span></h2>
+      <p class="section-desc">Une question, une collaboration, un projet ? N'hésitez pas à me contacter.</p>
     </div>
     <div class="contact-grid">
       <a href="mailto:yoda.marouane@gmail.com" class="contact-card reveal">
@@ -440,6 +593,7 @@
   </footer>
 
   <script>
+    // Reveal on scroll
     const revealEls = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
@@ -451,6 +605,7 @@
     }, { threshold: 0.1 });
     revealEls.forEach(el => observer.observe(el));
 
+    // Active nav link on scroll
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
     window.addEventListener('scroll', () => {
@@ -458,6 +613,7 @@
       sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
       navLinks.forEach(a => {
         a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--accent)' : '';
+        a.style.background = a.getAttribute('href') === `#${current}` ? 'rgba(255,255,255,0.8)' : '';
       });
     });
   </script>
